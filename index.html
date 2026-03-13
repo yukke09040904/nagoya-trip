@@ -62,13 +62,11 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .day1 .timeline::before{background:var(--day1-light)}
 .day2 .timeline::before{background:var(--day2-light)}
 .day3 .timeline::before{background:var(--day3-light)}
-
 .tl-item{position:relative;margin-bottom:24px}
 .tl-item::before{content:'';position:absolute;left:-24px;top:16px;width:11px;height:11px;border-radius:50%;border:3px solid;background:var(--card)}
 .day1 .tl-item::before{border-color:var(--day1)}
 .day2 .tl-item::before{border-color:var(--day2)}
 .day3 .tl-item::before{border-color:var(--day3)}
-
 .tl-time{font-size:.8rem;font-weight:700;margin-bottom:4px}
 .day1 .tl-time{color:var(--day1)}
 .day2 .tl-time{color:var(--day2)}
@@ -93,6 +91,32 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .highlight.success{background:#E8F5E9;border-left:4px solid #4CAF50}
 .highlight.info{background:#E3F2FD;border-left:4px solid #2196F3}
 
+/* Link Buttons */
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.link-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none;transition:all .15s;border:1.5px solid}
+.link-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.link-btn.primary{background:#667eea;color:#fff;border-color:#667eea}
+.link-btn.primary:hover{background:#5a6fd6}
+.link-btn.rakuten{background:#fff;color:#BF0000;border-color:#BF0000}
+.link-btn.rakuten:hover{background:#FFF5F5}
+.link-btn.jalan{background:#fff;color:#FF6600;border-color:#FF6600}
+.link-btn.jalan:hover{background:#FFF8F0}
+.link-btn.tabelog{background:#fff;color:#D4520C;border-color:#D4520C}
+.link-btn.tabelog:hover{background:#FFF6F0}
+.link-btn.hotpepper{background:#fff;color:#E60012;border-color:#E60012}
+.link-btn.hotpepper:hover{background:#FFF5F5}
+.link-btn.official{background:#fff;color:#333;border-color:#333}
+.link-btn.official:hover{background:#F5F5F5}
+.link-btn.transport{background:#fff;color:#1976D2;border-color:#1976D2}
+.link-btn.transport:hover{background:#F0F7FF}
+
+/* Restaurant Grid */
+.resto-grid{display:grid;gap:10px;margin:12px 0}
+.resto-card{padding:14px;background:var(--bg);border-radius:10px}
+.resto-card .resto-name{font-weight:700;font-size:.9rem;margin-bottom:2px}
+.resto-card .resto-desc{font-size:.78rem;color:var(--text-light);margin-bottom:8px}
+.resto-card .links{margin-top:6px}
+
 /* Comparison Table */
 .compare{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:.82rem;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
 .compare th{background:var(--bg);padding:10px 12px;font-weight:700;text-align:left;border-bottom:1px solid rgba(0,0,0,.08)}
@@ -115,6 +139,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .tag-dolphin{background:#E3F2FD;color:#1565C0}
 .tag-orca{background:#F3E5F5;color:#7B1FA2}
 
+/* Hotel Card */
+.hotel-card{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:10px}
+.hotel-card .hotel-name{font-weight:700;font-size:.9rem}
+.hotel-card .hotel-meta{font-size:.78rem;color:var(--text-light);margin:2px 0 8px}
+.hotel-card.recommended{border:2px solid #4CAF50;background:#F1F8E9}
+
 /* Checklist */
 .checklist{list-style:none;padding:0;margin:12px 0}
 .checklist li{padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.85rem;display:flex;align-items:center;gap:8px}
@@ -132,6 +162,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   .container{padding:0 16px}
   .attr-grid{grid-template-columns:1fr 1fr}
   .card{padding:16px}
+  .links{gap:4px}
+  .link-btn{padding:5px 10px;font-size:.7rem}
 }
 </style>
 </head>
@@ -148,30 +180,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 <div class="budget-banner">
   <h2>予算サマリー（1人あたり）</h2>
   <div class="budget-grid">
-    <div class="budget-item">
-      <div class="label">新幹線往復</div>
-      <div class="value">21,120円</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">ホテル2泊</div>
-      <div class="value">~7,750円</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">スパーランド</div>
-      <div class="value">6,000円</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">水族館</div>
-      <div class="value">1,830円</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">現地移動</div>
-      <div class="value">~4,750円</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">食事・観光</div>
-      <div class="value">~10,000円</div>
-    </div>
+    <div class="budget-item"><div class="label">新幹線往復</div><div class="value">21,120円</div></div>
+    <div class="budget-item"><div class="label">ホテル2泊</div><div class="value">~7,750円</div></div>
+    <div class="budget-item"><div class="label">スパーランド</div><div class="value">6,000円</div></div>
+    <div class="budget-item"><div class="label">水族館</div><div class="value">1,830円</div></div>
+    <div class="budget-item"><div class="label">現地移動</div><div class="value">~4,750円</div></div>
+    <div class="budget-item"><div class="label">食事・観光</div><div class="value">~10,000円</div></div>
   </div>
   <div class="budget-total">
     <div class="label">合計目安</div>
@@ -197,7 +211,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>品川 → 名古屋 → 桑名 → ジャズドリーム長島</p>
     </div>
   </div>
-
   <div class="timeline">
 
     <!-- 新幹線 -->
@@ -210,6 +223,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">料金（自由席）</span><span class="value">10,560円/人</span></div>
         <div class="info-row"><span class="label">スマートEX指定席</span><span class="value">11,100円/人</span></div>
         <div class="highlight tip">月曜午前は混雑少なく自由席で座れる可能性大。自由席がコスパ最強。</div>
+        <div class="links">
+          <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
+        </div>
       </div>
     </div>
 
@@ -217,10 +233,35 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <div class="tl-item">
       <div class="tl-time">11:40 - 12:40</div>
       <div class="card">
-        <h3><span class="icon">🍽️</span> 名古屋駅ランチ</h3>
-        <p><strong>矢場とん</strong>（エスカ地下街）</p>
-        <p>味噌カツの名店。新幹線口（太閤通口）直結で迷わない。</p>
-        <div class="info-row"><span class="label">予算</span><span class="value">1,300〜1,800円/人</span></div>
+        <h3><span class="icon">🍽️</span> 名古屋駅ランチ（エスカ地下街）</h3>
+        <p>新幹線口（太閤通口）直結のエスカ地下街で名古屋めし。</p>
+        <div class="resto-grid">
+          <div class="resto-card">
+            <div class="resto-name">矢場とん エスカ店（味噌カツ）</div>
+            <div class="resto-desc">名古屋名物味噌カツの名店。1,300〜1,800円/人。待ち30分目安。</div>
+            <div class="links">
+              <a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://www.hotpepper.jp/strJ000022402/" target="_blank" class="link-btn hotpepper">ホットペッパー</a>
+              <a href="https://www.yabaton.com/" target="_blank" class="link-btn official">公式サイト</a>
+            </div>
+          </div>
+          <div class="resto-card">
+            <div class="resto-name">しら河 名駅店（ひつまぶし）</div>
+            <div class="resto-desc">ひつまぶし2,800円〜。まぶし丼やミニも。エスカ地下街。</div>
+            <div class="links">
+              <a href="https://hitsumabushi.jp/tenpo/meiekiten" target="_blank" class="link-btn official">公式サイト</a>
+              <a href="https://www.hotpepper.jp/strJ001189956/" target="_blank" class="link-btn hotpepper">ホットペッパー</a>
+            </div>
+          </div>
+          <div class="resto-card">
+            <div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div>
+            <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
+            <div class="links">
+              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://www.esca-sc.com/shop_guide/120/" target="_blank" class="link-btn official">エスカ店舗情報</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -232,6 +273,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">到着</span><span class="value">13:10 桑名着</span></div>
         <div class="info-row"><span class="label">所要時間</span><span class="value">約20分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">530円/人</span></div>
+        <div class="links">
+          <a href="https://www.kintetsu.co.jp/tetsudo/jikoku/" target="_blank" class="link-btn transport">近鉄 時刻表検索</a>
+        </div>
       </div>
     </div>
 
@@ -259,6 +303,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           直通バス: 1,400円 + 荷物持ち歩き<br>
           → 桑名経由が安い＋荷物なし＝最適解
         </div>
+        <div class="links">
+          <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス運賃・時刻表</a>
+          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
+        </div>
       </div>
     </div>
 
@@ -268,22 +316,14 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="card">
         <h3><span class="icon">🛍️</span> 三井アウトレットパーク ジャズドリーム長島</h3>
         <div class="attr-grid">
-          <div class="attr-card">
-            <div class="num">~300</div>
-            <div class="desc">店舗（国内最大級）</div>
-          </div>
-          <div class="attr-card">
-            <div class="num">無料</div>
-            <div class="desc">入場料</div>
-          </div>
-          <div class="attr-card">
-            <div class="num">~4h</div>
-            <div class="desc">滞在時間</div>
-          </div>
-          <div class="attr-card">
-            <div class="num">~20:00</div>
-            <div class="desc">営業時間</div>
-          </div>
+          <div class="attr-card"><div class="num">~300</div><div class="desc">店舗（国内最大級）</div></div>
+          <div class="attr-card"><div class="num">無料</div><div class="desc">入場料</div></div>
+          <div class="attr-card"><div class="num">~4h</div><div class="desc">滞在時間</div></div>
+          <div class="attr-card"><div class="num">~20:00</div><div class="desc">営業時間</div></div>
+        </div>
+        <div class="links">
+          <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn primary">公式サイト</a>
+          <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">アクセス</a>
         </div>
       </div>
     </div>
@@ -302,13 +342,24 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="tl-time">19:30頃</div>
       <div class="card">
         <h3><span class="icon">🏨</span> 桑名ホテル チェックイン</h3>
-        <table class="compare">
-          <tr><th>ホテル</th><th>2名1室</th><th>特徴</th></tr>
-          <tr><td>桑名グリーンホテル</td><td>~6,000円</td><td>駅徒歩1分・最安</td></tr>
-          <tr class="winner"><td><strong>スーパーホテル桑名</strong></td><td>~7,000円</td><td>無料朝食+ウェルカムバー</td></tr>
-          <tr><td>ステーションホテル桑名</td><td>~8,000円</td><td>大浴場・サウナ付</td></tr>
-        </table>
-        <div class="highlight tip">スーパーホテルおすすめ。無料ウェルカムバー（17〜21時）でビールも飲める。翌朝の朝食も無料！</div>
+        <div class="hotel-card recommended">
+          <div class="hotel-name">スーパーホテル桑名駅前（おすすめ）</div>
+          <div class="hotel-meta">駅徒歩3分 / 2名1室 ~7,000円 / 無料朝食+ウェルカムバー（17〜21時）</div>
+          <div class="links">
+            <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank" class="link-btn rakuten">楽天トラベル</a>
+            <a href="https://www.jalan.net/yad336392/" target="_blank" class="link-btn jalan">じゃらん</a>
+            <a href="https://www.superhotel.co.jp/s_hotels/kuwanaekimae/" target="_blank" class="link-btn official">公式</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-name">桑名グリーンホテル（最安）</div>
+          <div class="hotel-meta">駅徒歩1分 / 2名1室 ~6,000円</div>
+          <div class="links">
+            <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten">楽天トラベル</a>
+            <a href="https://www.jalan.net/yad312216/" target="_blank" class="link-btn jalan">じゃらん</a>
+            <a href="https://www.greens.co.jp/kuwanagh/" target="_blank" class="link-btn official">公式</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -317,9 +368,31 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="tl-time">20:00頃</div>
       <div class="card">
         <h3><span class="icon">🍖</span> 桑名名物 焼きはまぐり</h3>
-        <p><strong>はまぐり料理 日の出</strong>（桑名駅から徒歩圏内）</p>
         <p>「その手は桑名の焼きはまぐり」の本場！</p>
-        <div class="info-row"><span class="label">予算</span><span class="value">3,000〜5,000円/人</span></div>
+        <div class="resto-grid">
+          <div class="resto-card">
+            <div class="resto-name">日の出（老舗料亭）</div>
+            <div class="resto-desc">創業約100年。はまぐり鍋コース10,000円〜。漫画「美味しんぼ」にも登場。</div>
+            <div class="links">
+              <a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://ishi98.wixsite.com/hinode987" target="_blank" class="link-btn official">公式サイト</a>
+            </div>
+          </div>
+          <div class="resto-card">
+            <div class="resto-name">魚のてっぺん（居酒屋・手頃）</div>
+            <div class="resto-desc">駅徒歩3分。焼きはまぐり1個から注文OK。三重産鮮魚も。3,000〜5,000円/人。</div>
+            <div class="links">
+              <a href="https://tabelog.com/matome/21937/" target="_blank" class="link-btn tabelog">桑名はまぐり店まとめ</a>
+            </div>
+          </div>
+          <div class="resto-card">
+            <div class="resto-name">蛤一択（完全予約制）</div>
+            <div class="resto-desc">駅徒歩4分。厳選桑名産天然蛤。全席掘りごたつ個室。</div>
+            <div class="links">
+              <a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official">公式サイト</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -335,7 +408,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>桑名 → スパーランド → 名古屋</p>
     </div>
   </div>
-
   <div class="timeline">
 
     <!-- 朝バス -->
@@ -355,14 +427,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="card">
         <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
         <div class="attr-grid">
-          <div class="attr-card">
-            <div class="num" style="color:var(--day2)">6,000</div>
-            <div class="desc">円/人 パスポート</div>
-          </div>
-          <div class="attr-card">
-            <div class="num" style="color:var(--day2)">~17:00</div>
-            <div class="desc">営業（春休みダイヤ）</div>
-          </div>
+          <div class="attr-card"><div class="num" style="color:var(--day2)">6,000</div><div class="desc">円/人 パスポート</div></div>
+          <div class="attr-card"><div class="num" style="color:var(--day2)">~17:00</div><div class="desc">営業（春休みダイヤ）</div></div>
         </div>
 
         <h4 style="margin:16px 0 8px;font-size:.9rem">攻略順（重要！）</h4>
@@ -375,6 +441,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <tr><td><strong>4</strong></td><td>嵐</td><td>~20分</td><td>4Dスピン</td></tr>
         </table>
         <div class="highlight tip">開園9:30にゲートイン → 白鯨に直行！これで1時間以上の時間節約。</div>
+        <div class="links">
+          <a href="https://www.nagashima-onsen.co.jp/spaland/" target="_blank" class="link-btn primary">公式サイト</a>
+          <a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank" class="link-btn official">料金・営業時間</a>
+        </div>
       </div>
     </div>
 
@@ -387,6 +457,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">所要時間</span><span class="value">約55分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
         <div class="highlight info">Day2は桑名に戻る必要なし。チェックアウト時に荷物を持ち出して名古屋へ直行。</div>
+        <div class="links">
+          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
+        </div>
       </div>
     </div>
 
@@ -395,11 +468,15 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="tl-time">18:00頃</div>
       <div class="card">
         <h3><span class="icon">🏨</span> 名古屋ホテル チェックイン</h3>
-        <table class="compare">
-          <tr><th>ホテル</th><th>2名1室</th><th>特徴</th></tr>
-          <tr class="winner"><td><strong>ヴィアイン名古屋新幹線口</strong></td><td>~5,840円</td><td>最安・名古屋めし朝食</td></tr>
-          <tr><td>名鉄イン名古屋駅前</td><td>~7,500円</td><td>朝食付き充実</td></tr>
-        </table>
+        <div class="hotel-card recommended">
+          <div class="hotel-name">ヴィアイン名古屋新幹線口（おすすめ）</div>
+          <div class="hotel-meta">名古屋駅 徒歩4分 / 2名1室 ~5,840円 / 無料朝食（名古屋めし）</div>
+          <div class="links">
+            <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/141916" target="_blank" class="link-btn rakuten">楽天トラベル</a>
+            <a href="https://www.jalan.net/yad367046/" target="_blank" class="link-btn jalan">じゃらん</a>
+            <a href="https://www.viainn.com/nagoya/" target="_blank" class="link-btn official">公式</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -408,22 +485,46 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="tl-time">18:30頃</div>
       <div class="card">
         <h3><span class="icon">🍽️</span> 名古屋めしディナー</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-          <div style="padding:10px;background:var(--bg);border-radius:8px;font-size:.82rem;text-align:center">
-            <div style="font-weight:700">ひつまぶし</div>
-            <div style="color:var(--text-light);font-size:.75rem">あつた蓬莱軒 / しら河</div>
+        <div class="resto-grid">
+          <div class="resto-card">
+            <div class="resto-name">ひつまぶし しら河 名駅店</div>
+            <div class="resto-desc">ひつまぶし2,800円〜。エスカから徒歩すぐ。</div>
+            <div class="links">
+              <a href="https://hitsumabushi.jp/tenpo/meiekiten" target="_blank" class="link-btn official">公式サイト</a>
+              <a href="https://www.hotpepper.jp/strJ001189956/" target="_blank" class="link-btn hotpepper">ホットペッパー</a>
+            </div>
           </div>
-          <div style="padding:10px;background:var(--bg);border-radius:8px;font-size:.82rem;text-align:center">
-            <div style="font-weight:700">手羽先</div>
-            <div style="color:var(--text-light);font-size:.75rem">世界の山ちゃん / 風来坊</div>
+          <div class="resto-card">
+            <div class="resto-name">ひつまぶし 備長 エスカ店</div>
+            <div class="resto-desc">エスカ地下街直結。こちらもひつまぶしの人気店。</div>
+            <div class="links">
+              <a href="https://hitsumabushi.co.jp/storeslist/esca/" target="_blank" class="link-btn official">公式サイト</a>
+              <a href="https://www.hotpepper.jp/strJ000725563/" target="_blank" class="link-btn hotpepper">ホットペッパー</a>
+            </div>
           </div>
-          <div style="padding:10px;background:var(--bg);border-radius:8px;font-size:.82rem;text-align:center">
-            <div style="font-weight:700">味噌煮込みうどん</div>
-            <div style="color:var(--text-light);font-size:.75rem">山本屋本店（エスカ）</div>
+          <div class="resto-card">
+            <div class="resto-name">世界の山ちゃん 名駅新幹線口店（手羽先）</div>
+            <div class="resto-desc">名古屋名物「幻のコショウ」手羽先。飲み放題コースも。</div>
+            <div class="links">
+              <a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://www.yamachan.co.jp/shop/aichi/meinishi.php" target="_blank" class="link-btn official">店舗一覧</a>
+            </div>
           </div>
-          <div style="padding:10px;background:var(--bg);border-radius:8px;font-size:.82rem;text-align:center">
-            <div style="font-weight:700">味噌カツ</div>
-            <div style="color:var(--text-light);font-size:.75rem">矢場とん（Day1と別で）</div>
+          <div class="resto-card">
+            <div class="resto-name">風来坊 名駅5丁目店（元祖手羽先唐揚）</div>
+            <div class="resto-desc">元祖手羽先唐揚。山ちゃんと食べ比べも。</div>
+            <div class="links">
+              <a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://furaibou.com/" target="_blank" class="link-btn official">公式サイト</a>
+            </div>
+          </div>
+          <div class="resto-card">
+            <div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div>
+            <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
+            <div class="links">
+              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog">食べログ</a>
+              <a href="https://www.esca-sc.com/shop_guide/120/" target="_blank" class="link-btn official">エスカ店舗情報</a>
+            </div>
           </div>
         </div>
       </div>
@@ -441,7 +542,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>名古屋港水族館 → 大須商店街 → 品川</p>
     </div>
   </div>
-
   <div class="timeline">
 
     <!-- 移動 -->
@@ -453,6 +553,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">所要時間</span><span class="value">約30分</span></div>
         <div class="info-row"><span class="label">地下鉄一日乗車券</span><span class="value">870円/人</span></div>
         <div class="highlight success">一日乗車券で水族館200円引き + 1日乗り放題。元が取れる！</div>
+        <div class="links">
+          <a href="https://www.kotsu.city.nagoya.jp/jp/pc/ticket/" target="_blank" class="link-btn transport">名古屋市交通局 乗車券</a>
+        </div>
       </div>
     </div>
 
@@ -462,14 +565,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="card">
         <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
         <div class="attr-grid">
-          <div class="attr-card">
-            <div class="num" style="color:var(--day3)">1,830</div>
-            <div class="desc">円/人（割引後）</div>
-          </div>
-          <div class="attr-card">
-            <div class="num" style="color:var(--day3)">~17:30</div>
-            <div class="desc">営業（春休み）</div>
-          </div>
+          <div class="attr-card"><div class="num" style="color:var(--day3)">1,830</div><div class="desc">円/人（割引後）</div></div>
+          <div class="attr-card"><div class="num" style="color:var(--day3)">~17:30</div><div class="desc">営業（春休み）</div></div>
         </div>
 
         <h4 style="margin:16px 0 8px;font-size:.9rem">3/25 イベントスケジュール</h4>
@@ -507,6 +604,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <tr><td>13:00-14:00</td><td>残りの展示・お土産</td></tr>
         </table>
         <div class="highlight tip">イルカショーは30分前に席取りしないと正面席が取れない。10:30には着席！</div>
+        <div class="links">
+          <a href="https://nagoyaaqua.jp/" target="_blank" class="link-btn primary">公式サイト</a>
+          <a href="https://nagoyaaqua.jp/fee/" target="_blank" class="link-btn official">料金・チケット</a>
+        </div>
       </div>
     </div>
 
@@ -538,6 +639,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <tr><td>のぞみ188号</td><td>20:05</td><td>21:35</td></tr>
         </table>
         <div class="highlight info">16〜20時台は約10分間隔でのぞみ運行。時間に柔軟に対応可能。</div>
+        <div class="links">
+          <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
+        </div>
       </div>
     </div>
 
@@ -550,14 +654,14 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <h3><span class="icon">✅</span> 出発前チェックリスト</h3>
     <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">予約するもの</h4>
     <ul class="checklist">
-      <li>新幹線チケット（スマートEX登録推奨）</li>
-      <li>桑名ホテル（楽天トラベル or じゃらん）</li>
-      <li>名古屋ホテル（楽天トラベル or じゃらん）</li>
-      <li>ナガシマパスポート（セブンチケット or ファミマで事前購入 → 行列回避）</li>
+      <li>新幹線チケット（<a href="https://smart-ex.jp/top.php" target="_blank">スマートEX</a>で登録・予約）</li>
+      <li>桑名ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad336392/" target="_blank">じゃらん</a>）</li>
+      <li>名古屋ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/141916" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad367046/" target="_blank">じゃらん</a>）</li>
+      <li>ナガシマパスポート（<a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank">セブンチケット or ファミマ</a>で事前購入 → 行列回避）</li>
     </ul>
     <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">当日の節約テク</h4>
     <ul class="checklist">
-      <li>Day3に地下鉄一日乗車券（870円）を購入</li>
+      <li>Day3に<a href="https://www.kotsu.city.nagoya.jp/jp/pc/ticket/" target="_blank">地下鉄一日乗車券</a>（870円）を購入</li>
       <li>水族館窓口で一日乗車券を提示 → 200円引き</li>
     </ul>
   </div>
@@ -570,7 +674,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 </footer>
 
 <script>
-// Smooth scroll for nav
 document.querySelectorAll('.day-nav a').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
