@@ -9,199 +9,195 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --day1:#FF6B35;--day1-bg:#FFF4EE;--day1-light:#FFE8D6;
-  --day2:#2196F3;--day2-bg:#EEF6FF;--day2-light:#D6EAFF;
-  --day3:#4CAF50;--day3-bg:#EEFBEE;--day3-light:#D6F5D6;
-  --text:#1a1a2e;--text-light:#555;--bg:#f8f9fa;--card:#fff;
-  --shadow:0 2px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 30px rgba(0,0,0,.12);
-  --accent:#667eea;
+  --day1:#D4764E;--day1-bg:#FDF0E8;--day1-light:#F5D6C3;
+  --day2:#2B6777;--day2-bg:#E8F4F7;--day2-light:#C5DFE5;
+  --day3:#52796F;--day3-bg:#EAF2EF;--day3-light:#C8DAD4;
+  --text:#3D405B;--text-light:#6B6E7B;--bg:#FDF8F0;--card:#FFFDF9;
+  --shadow:0 2px 16px rgba(61,64,91,.06);
+  --shadow-lg:0 6px 24px rgba(61,64,91,.1);
+  --accent:#3D405B;--accent-warm:#E07A5F;
 }
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
 .container{max-width:800px;margin:0 auto;padding:0 20px}
 
-/* Hero */
-.hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:60px 20px 50px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 60%);animation:shimmer 8s infinite}
-@keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
-.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;letter-spacing:.02em;margin-bottom:8px;position:relative}
-.hero .subtitle{font-size:1rem;opacity:.9;margin-bottom:20px;position:relative}
-.hero .dates{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);padding:10px 24px;border-radius:50px;font-size:.95rem;font-weight:500;position:relative}
+/* Hero - Travel Style */
+.hero{background:linear-gradient(135deg,#E07A5F 0%,#F2CC8F 60%,#F4E8C1 100%);color:#fff;padding:60px 20px 55px;text-align:center;position:relative}
+.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;letter-spacing:.02em;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hero .subtitle{font-size:.95rem;opacity:.95;margin-bottom:18px;text-shadow:0 1px 4px rgba(0,0,0,.1)}
+.hero .dates{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.25);backdrop-filter:blur(10px);padding:10px 24px;border-radius:50px;font-size:.95rem;font-weight:500}
 
 /* Budget Banner */
-.budget-banner{background:var(--card);margin:-30px 20px 30px;border-radius:16px;padding:24px 28px;box-shadow:var(--shadow-lg);position:relative;z-index:2;max-width:800px;margin-left:auto;margin-right:auto}
+.budget-banner{background:var(--card);margin:-28px 20px 30px;border-radius:18px;padding:24px 28px;box-shadow:var(--shadow-lg);position:relative;z-index:2;max-width:800px;margin-left:auto;margin-right:auto;border:1px solid rgba(61,64,91,.06)}
 .budget-banner h2{font-size:1rem;color:var(--text-light);margin-bottom:4px;font-weight:500}
 .budget-banner .budget-note{font-size:.72rem;color:#999;margin-bottom:12px}
 .budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-.budget-item{text-align:center;padding:12px 8px;border-radius:12px;background:var(--bg);transition:background .3s}
+.budget-item{text-align:center;padding:12px 8px;border-radius:14px;background:var(--bg);transition:background .3s}
 .budget-item .label{font-size:.75rem;color:var(--text-light);margin-bottom:4px}
 .budget-item .value{font-size:1.1rem;font-weight:700;color:var(--text)}
 .budget-item .value.empty{color:#ccc;font-size:.85rem}
-.budget-total{margin-top:16px;text-align:center;padding:16px;border-radius:12px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
+.budget-total{margin-top:16px;text-align:center;padding:16px;border-radius:14px;background:linear-gradient(135deg,#E07A5F,#D4764E);color:#fff}
 .budget-total .label{font-size:.85rem;opacity:.9}
 .budget-total .value{font-size:1.5rem;font-weight:900}
 
 /* Day Nav */
-.day-nav{display:flex;gap:8px;justify-content:center;padding:20px;position:sticky;top:0;background:var(--bg);z-index:10;border-bottom:1px solid rgba(0,0,0,.05)}
+.day-nav{display:flex;gap:8px;justify-content:center;padding:16px 20px;position:sticky;top:0;background:rgba(253,248,240,.95);backdrop-filter:blur(8px);z-index:10;border-bottom:1px solid rgba(61,64,91,.06)}
 .day-nav a{padding:10px 20px;border-radius:50px;font-weight:700;font-size:.85rem;text-decoration:none;transition:all .2s;border:2px solid transparent}
 .day-nav a:nth-child(1){background:var(--day1-bg);color:var(--day1);border-color:var(--day1)}
 .day-nav a:nth-child(2){background:var(--day2-bg);color:var(--day2);border-color:var(--day2)}
 .day-nav a:nth-child(3){background:var(--day3-bg);color:var(--day3);border-color:var(--day3)}
-.day-nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.day-nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
 
 /* Day Section */
 .day-section{padding:40px 0 20px}
 .day-header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
-.day-badge{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#fff;flex-shrink:0}
+.day-badge{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#fff;flex-shrink:0;position:relative;transform:rotate(-2deg)}
 .day1 .day-badge{background:var(--day1)}
 .day2 .day-badge{background:var(--day2)}
 .day3 .day-badge{background:var(--day3)}
 .day-header-text h2{font-size:1.3rem;font-weight:900}
 .day-header-text p{font-size:.85rem;color:var(--text-light)}
 
-/* Timeline */
+/* Timeline - Travel Route Style */
 .timeline{position:relative;padding-left:28px}
-.timeline::before{content:'';position:absolute;left:8px;top:12px;bottom:12px;width:3px;border-radius:2px}
-.day1 .timeline::before{background:var(--day1-light)}
-.day2 .timeline::before{background:var(--day2-light)}
-.day3 .timeline::before{background:var(--day3-light)}
-.tl-item{position:relative;margin-bottom:24px;transition:opacity .3s,max-height .4s}
-.tl-item::before{content:'';position:absolute;left:-24px;top:16px;width:11px;height:11px;border-radius:50%;border:3px solid;background:var(--card)}
-.day1 .tl-item::before{border-color:var(--day1)}
-.day2 .tl-item::before{border-color:var(--day2)}
-.day3 .tl-item::before{border-color:var(--day3)}
+.timeline::before{content:'';position:absolute;left:8px;top:12px;bottom:12px;width:3px;border-radius:2px;border-left:3px dashed}
+.day1 .timeline::before{border-color:var(--day1-light)}
+.day2 .timeline::before{border-color:var(--day2-light)}
+.day3 .timeline::before{border-color:var(--day3-light)}
+.tl-item{position:relative;margin-bottom:24px;transition:opacity .3s,transform .2s}
+.tl-item::before{content:'';position:absolute;left:-24px;top:16px;width:13px;height:13px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:none}
+.day1 .tl-item::before{background:var(--day1)}
+.day2 .tl-item::before{background:var(--day2)}
+.day3 .tl-item::before{background:var(--day3)}
 .tl-time{font-size:.8rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .day1 .tl-time{color:var(--day1)}
 .day2 .tl-time{color:var(--day2)}
 .day3 .tl-time{color:var(--day3)}
 
-/* Puzzle toggle */
-.tl-item.disabled{opacity:.35;pointer-events:none}
-.tl-item.disabled .card{display:none}
-.puzzle-toggle{width:28px;height:28px;border:none;border-radius:6px;background:var(--bg);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;color:var(--text-light)}
-.puzzle-toggle:hover{background:#eee}
-.tl-item.disabled .puzzle-toggle{background:#fee;color:#e53935}
+/* Drag Handle */
+.drag-handle{width:28px;height:28px;border:none;border-radius:6px;background:transparent;cursor:grab;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#bbb;transition:all .2s;user-select:none}
+.drag-handle:hover{background:var(--bg);color:var(--text-light)}
+.drag-handle:active{cursor:grabbing}
 
-/* Card */
-.card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);transition:transform .2s}
+/* Puzzle remove */
+.puzzle-remove{width:24px;height:24px;border:none;border-radius:50%;background:transparent;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#ccc;transition:all .2s}
+.puzzle-remove:hover{background:#fee;color:#e53935}
+
+/* Drag states */
+.tl-item.dragging{opacity:.4;transform:scale(.98)}
+.tl-item.drag-over{border-top:3px solid var(--accent-warm);padding-top:4px}
+.tl-item.disabled{opacity:.3;pointer-events:none}
+.tl-item.disabled .card{display:none}
+
+/* Card - Travel Style */
+.card{background:var(--card);border-radius:16px;padding:20px;box-shadow:var(--shadow);transition:transform .2s;border:1px solid rgba(61,64,91,.04)}
 .card:hover{transform:translateY(-2px)}
 .card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .card h3 .icon{font-size:1.2rem}
 .card p{font-size:.88rem;color:var(--text-light);margin-bottom:8px}
 
 /* Info Row */
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.85rem}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(61,64,91,.05);font-size:.85rem}
 .info-row:last-child{border-bottom:none}
 .info-row .label{color:var(--text-light)}
 .info-row .value{font-weight:700;text-align:right}
 
 /* Highlight Box */
-.highlight{padding:14px 18px;border-radius:10px;font-size:.85rem;margin:12px 0}
-.highlight.tip{background:#FFF8E1;border-left:4px solid #FFB300}
-.highlight.success{background:#E8F5E9;border-left:4px solid #4CAF50}
-.highlight.info{background:#E3F2FD;border-left:4px solid #2196F3}
+.highlight{padding:14px 18px;border-radius:12px;font-size:.85rem;margin:12px 0}
+.highlight.tip{background:#FFF8E1;border-left:4px solid #F2CC8F}
+.highlight.success{background:#EAF2EF;border-left:4px solid var(--day3)}
+.highlight.info{background:var(--day2-bg);border-left:4px solid var(--day2)}
 
 /* Link Buttons */
 .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.link-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none;transition:all .15s;border:1.5px solid}
-.link-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.link-btn.primary{background:#667eea;color:#fff;border-color:#667eea}
-.link-btn.primary:hover{background:#5a6fd6}
+.link-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:10px;font-size:.75rem;font-weight:600;text-decoration:none;transition:all .15s;border:1.5px solid}
+.link-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.link-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.link-btn.primary:hover{background:#2d2f45}
 .link-btn.rakuten{background:#fff;color:#BF0000;border-color:#BF0000}
-.link-btn.rakuten:hover{background:#FFF5F5}
 .link-btn.jalan{background:#fff;color:#FF6600;border-color:#FF6600}
-.link-btn.jalan:hover{background:#FFF8F0}
 .link-btn.tabelog{background:#fff;color:#D4520C;border-color:#D4520C}
-.link-btn.tabelog:hover{background:#FFF6F0}
-.link-btn.hotpepper{background:#fff;color:#E60012;border-color:#E60012}
-.link-btn.hotpepper:hover{background:#FFF5F5}
-.link-btn.official{background:#fff;color:#333;border-color:#333}
-.link-btn.official:hover{background:#F5F5F5}
+.link-btn.official{background:#fff;color:var(--accent);border-color:var(--accent)}
 .link-btn.transport{background:#fff;color:#1976D2;border-color:#1976D2}
-.link-btn.transport:hover{background:#F0F7FF}
 .link-btn.gmap{background:#fff;color:#34A853;border-color:#34A853}
-.link-btn.gmap:hover{background:#F0FFF4}
 .link-btn.agoda{background:#fff;color:#5392F9;border-color:#5392F9}
-.link-btn.agoda:hover{background:#F0F5FF}
 
 /* Restaurant Grid */
 .resto-grid{display:grid;gap:10px;margin:12px 0}
-.resto-card{padding:14px;background:var(--bg);border-radius:10px;position:relative;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.resto-card{padding:14px;background:var(--bg);border-radius:12px;position:relative;cursor:pointer;border:2px solid transparent;transition:all .2s}
 .resto-card:hover{border-color:#ddd}
-.resto-card.selected{border-color:var(--accent);background:#F3F0FF}
+.resto-card.selected{border-color:var(--accent-warm);background:#FDF0E8}
 .resto-card .resto-header{display:flex;align-items:center;gap:8px}
 .resto-card .resto-radio{width:18px;height:18px;border:2px solid #ccc;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.resto-card.selected .resto-radio{border-color:var(--accent);background:var(--accent)}
+.resto-card.selected .resto-radio{border-color:var(--accent-warm);background:var(--accent-warm)}
 .resto-card.selected .resto-radio::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%}
 .resto-card .resto-name{font-weight:700;font-size:.9rem}
 .resto-card .resto-desc{font-size:.78rem;color:var(--text-light);margin:4px 0 0 26px}
 .resto-card .links{margin:6px 0 0 26px}
 
 /* Memo Area */
-.memo-area{margin-top:12px;padding:14px;background:#FAFAFA;border-radius:10px;border:1px dashed #ddd}
+.memo-area{margin-top:12px;padding:14px;background:var(--bg);border-radius:12px;border:1px dashed rgba(61,64,91,.15)}
 .memo-area .memo-title{font-size:.78rem;font-weight:700;color:var(--text-light);margin-bottom:8px}
 .memo-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
 .memo-row label{font-size:.78rem;color:var(--text-light);min-width:60px}
-.memo-row input{flex:1;min-width:100px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:.82rem;font-family:inherit}
-.memo-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(102,126,234,.15)}
+.memo-row input{flex:1;min-width:100px;padding:6px 10px;border:1px solid rgba(61,64,91,.12);border-radius:8px;font-size:.82rem;font-family:inherit;background:#fff}
+.memo-row input:focus{outline:none;border-color:var(--accent-warm);box-shadow:0 0 0 2px rgba(224,122,95,.15)}
 .memo-row input[type=number]{max-width:120px}
 
 /* Hotel Card */
-.hotel-card{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
+.hotel-card{padding:14px;background:var(--bg);border-radius:12px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:all .2s}
 .hotel-card:hover{border-color:#ddd}
-.hotel-card.selected{border-color:var(--accent);background:#F3F0FF}
-.hotel-card.recommended{border:2px solid #4CAF50;background:#F1F8E9}
-.hotel-card.recommended.selected{border-color:var(--accent);background:#F3F0FF}
+.hotel-card.selected{border-color:var(--accent-warm);background:#FDF0E8}
+.hotel-card.recommended{border:2px solid var(--day3);background:var(--day3-bg)}
+.hotel-card.recommended.selected{border-color:var(--accent-warm);background:#FDF0E8}
 .hotel-card .hotel-header{display:flex;align-items:center;gap:8px}
 .hotel-card .hotel-radio{width:18px;height:18px;border:2px solid #ccc;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.hotel-card.selected .hotel-radio{border-color:var(--accent);background:var(--accent)}
+.hotel-card.selected .hotel-radio{border-color:var(--accent-warm);background:var(--accent-warm)}
 .hotel-card.selected .hotel-radio::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%}
 .hotel-card .hotel-name{font-weight:700;font-size:.9rem}
 .hotel-card .hotel-meta{font-size:.78rem;color:var(--text-light);margin:2px 0 8px 26px}
 .hotel-card .links{margin-left:26px}
 
 /* Compare Table */
-.compare{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:.82rem;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
-.compare th{background:var(--bg);padding:10px 12px;font-weight:700;text-align:left;border-bottom:1px solid rgba(0,0,0,.08)}
-.compare td{padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.04)}
+.compare{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:.82rem;border-radius:12px;overflow:hidden;border:1px solid rgba(61,64,91,.08)}
+.compare th{background:var(--bg);padding:10px 12px;font-weight:700;text-align:left;border-bottom:1px solid rgba(61,64,91,.08)}
+.compare td{padding:10px 12px;border-bottom:1px solid rgba(61,64,91,.04)}
 .compare tr:last-child td{border-bottom:none}
-.compare .winner{background:#E8F5E9;font-weight:700;color:#2E7D32}
 
 /* Attraction Grid */
 .attr-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.attr-card{padding:12px;border-radius:10px;background:var(--bg);text-align:center}
+.attr-card{padding:12px;border-radius:12px;background:var(--bg);text-align:center}
 .attr-card .num{font-size:1.8rem;font-weight:900;line-height:1}
 .attr-card .desc{font-size:.75rem;color:var(--text-light);margin-top:4px}
 
 /* Event Schedule */
-.event{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.05);align-items:center}
+.event{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(61,64,91,.05);align-items:center}
 .event:last-child{border-bottom:none}
 .event-time{font-size:.85rem;font-weight:700;min-width:50px;flex-shrink:0}
 .event-name{font-size:.85rem;flex:1}
 .event-tag{font-size:.7rem;padding:3px 8px;border-radius:50px;font-weight:700;white-space:nowrap}
-.tag-dolphin{background:#E3F2FD;color:#1565C0}
+.tag-dolphin{background:var(--day2-bg);color:var(--day2)}
 .tag-orca{background:#F3E5F5;color:#7B1FA2}
 
 /* Checklist */
 .checklist{list-style:none;padding:0;margin:12px 0}
-.checklist li{padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.85rem;display:flex;align-items:center;gap:8px}
+.checklist li{padding:8px 0;border-bottom:1px solid rgba(61,64,91,.04);font-size:.85rem;display:flex;align-items:center;gap:8px}
 .checklist li::before{content:'';width:18px;height:18px;border:2px solid #ccc;border-radius:4px;flex-shrink:0}
 
 /* Footer */
-.footer{text-align:center;padding:40px 20px;font-size:.8rem;color:var(--text-light);border-top:1px solid rgba(0,0,0,.06);margin-top:40px}
+.footer{text-align:center;padding:40px 20px;font-size:.8rem;color:var(--text-light);border-top:1px solid rgba(61,64,91,.06);margin-top:40px}
 
 /* Time Shift Input */
-.time-shift-input{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 6px;border:1.5px solid #ddd;border-radius:6px;font-family:inherit;background:#fff;cursor:pointer;transition:border-color .2s;width:80px}
-.time-shift-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(102,126,234,.15)}
+.time-shift-input{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 6px;border:1.5px solid rgba(61,64,91,.12);border-radius:8px;font-family:inherit;background:#fff;cursor:pointer;transition:border-color .2s;width:80px}
+.time-shift-input:focus{outline:none;border-color:var(--accent-warm);box-shadow:0 0 0 2px rgba(224,122,95,.15)}
 .day1 .time-shift-input{color:var(--day1)}
 .day2 .time-shift-input{color:var(--day2)}
 .day3 .time-shift-input{color:var(--day3)}
 
 /* Hilton Info Card */
-.hilton-info{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;border-radius:14px;padding:24px;margin:16px 0;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.hilton-info{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;border-radius:16px;padding:24px;margin:16px 0;box-shadow:0 8px 30px rgba(0,0,0,.3)}
 .hilton-info h4{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:#e2b857}
 .hilton-info .hilton-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hilton-info .hilton-item{padding:10px;border-radius:8px;background:rgba(255,255,255,.08)}
+.hilton-info .hilton-item{padding:10px;border-radius:10px;background:rgba(255,255,255,.08)}
 .hilton-info .hilton-item .hi-label{font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:2px}
 .hilton-info .hilton-item .hi-value{font-size:.85rem;font-weight:700}
 .hilton-info .hilton-schedule{margin-top:12px}
@@ -210,24 +206,39 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .hilton-info .hilton-schedule td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.08)}
 
 /* Alt Plan Toggle */
-.alt-plan{margin:20px 0;border:2px dashed var(--day1-light);border-radius:14px;overflow:hidden}
+.alt-plan{margin:20px 0;border:2px dashed var(--day1-light);border-radius:16px;overflow:hidden}
 .alt-plan summary{padding:14px 18px;cursor:pointer;font-weight:700;font-size:.9rem;color:var(--day1);background:var(--day1-bg);list-style:none;display:flex;align-items:center;gap:8px}
 .alt-plan summary::-webkit-details-marker{display:none}
 .alt-plan summary::before{content:'▶';font-size:.7rem;transition:transform .2s}
 .alt-plan[open] summary::before{transform:rotate(90deg)}
-.alt-plan .alt-content{padding:16px 18px;background:#fff}
+.alt-plan .alt-content{padding:16px 18px;background:var(--card)}
 
 /* Backup Section */
 .backup-section{margin:40px 0;padding:30px 0}
-.backup-section h2{font-size:1.2rem;font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.backup-section .backup-note{font-size:.82rem;color:var(--text-light);margin-bottom:20px}
 .backup-cat{margin-bottom:24px}
-.backup-cat h3{font-size:.95rem;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
-.backup-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.85rem}
+.backup-cat h3{font-size:.95rem;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent-warm)}
+.backup-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(61,64,91,.04);font-size:.85rem;border-radius:8px;transition:background .2s}
+.backup-item:hover{background:var(--bg)}
 .backup-item:last-child{border-bottom:none}
+.backup-item .bi-info{flex:1}
 .backup-item .bi-name{font-weight:700}
 .backup-item .bi-desc{font-size:.78rem;color:var(--text-light)}
-.backup-item .links{margin:0;gap:4px}
+.backup-item .bi-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;position:relative}
+.backup-item.added{opacity:.4}
+.backup-item.added .add-btn{display:none}
+
+/* Add to timeline button */
+.add-btn{width:28px;height:28px;border:2px solid var(--accent-warm);border-radius:50%;background:#fff;color:var(--accent-warm);font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.add-btn:hover{background:var(--accent-warm);color:#fff}
+
+/* Day picker popup */
+.day-picker{display:none;position:absolute;right:0;top:100%;background:var(--card);border-radius:12px;box-shadow:var(--shadow-lg);padding:8px;z-index:20;border:1px solid rgba(61,64,91,.08)}
+.day-picker.show{display:flex;gap:4px}
+.day-picker button{padding:6px 12px;border:none;border-radius:8px;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s}
+.day-picker button:nth-child(1){background:var(--day1-bg);color:var(--day1)}
+.day-picker button:nth-child(2){background:var(--day2-bg);color:var(--day2)}
+.day-picker button:nth-child(3){background:var(--day3-bg);color:var(--day3)}
+.day-picker button:hover{transform:scale(1.05)}
 
 /* Responsive */
 @media(max-width:600px){
@@ -236,7 +247,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   .budget-grid{grid-template-columns:repeat(2,1fr)}
   .day-nav a{padding:8px 14px;font-size:.78rem}
   .container{padding:0 16px}
-  .attr-grid{grid-template-columns:1fr 1fr}
   .card{padding:16px}
   .links{gap:4px}
   .link-btn{padding:5px 10px;font-size:.7rem}
@@ -250,7 +260,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 
 <!-- Hero -->
 <header class="hero">
-  <h1>名古屋・長島 2泊3日</h1>
+  <h1>✈️ 名古屋・長島 2泊3日</h1>
   <p class="subtitle">大須商店街 / スパーランド / ヒルトン / 水族館</p>
   <div class="dates">2026.3.23 Mon - 3.25 Wed / 2名</div>
 </header>
@@ -291,33 +301,34 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>品川 → 名古屋 → 大須商店街 → 桑名（はまぐり）</p>
     </div>
   </div>
-  <div class="timeline">
+  <div class="timeline" data-day="day1">
 
-    <!-- 新幹線 -->
-    <div class="tl-item" data-chain="day1" data-base-time="10:01" data-idx="0">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="10:01" data-idx="0">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle" title="ドラッグで並べ替え">☰</span>
         <input type="time" class="time-shift-input" value="10:01" onchange="onTimeChange(this)">
         <span class="tl-label">品川発</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ327号 → 名古屋</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">11:33 名古屋着</span></div>
         <div class="info-row"><span class="label">所要時間</span><span class="value">約1時間30分</span></div>
         <div class="info-row"><span class="label">料金（自由席）</span><span class="value">10,560円/人</span></div>
-        <div class="highlight tip">月曜午前は混雑少なく自由席で座れる可能性大。自由席がコスパ最強。</div>
+        <div class="highlight tip">月曜午前は混雑少なく自由席で座れる可能性大。</div>
         <div class="links">
           <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
+          <a href="https://www.google.com/maps/dir/%E5%93%81%E5%B7%9D%E9%A7%85/%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <!-- ランチ -->
-    <div class="tl-item" data-chain="day1" data-base-time="11:40" data-idx="1">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="11:40" data-idx="1">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="11:40" onchange="onTimeChange(this)">
         <span class="tl-label">- 12:30</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🍽️</span> 名古屋駅ランチ（エスカ地下街）</h3>
@@ -326,29 +337,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <div class="resto-card" data-name="矢場とん エスカ店" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）</div></div>
             <div class="resto-desc">名古屋名物味噌カツの名店。わらじとんかつ定食 1,650円。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.yabaton.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="しら河 名駅店" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）</div></div>
             <div class="resto-desc">ひつまぶし2,800円〜。エスカ地下街。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://hitsumabushi.jp/tenpo/meiekiten" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="山本屋本店 エスカ店" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div></div>
             <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.esca-sc.com/shop_guide/120/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
         </div>
         <div class="memo-area">
@@ -359,27 +358,28 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- 地下鉄で大須へ -->
-    <div class="tl-item" data-chain="day1" data-base-time="13:00" data-idx="2">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="13:00" data-idx="2">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
         <span class="tl-label">地下鉄で大須へ</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🚇</span> 名古屋駅 → 大須観音</h3>
         <div class="info-row"><span class="label">ルート</span><span class="value">東山線→鶴舞線 乗換1回</span></div>
         <div class="info-row"><span class="label">所要時間</span><span class="value">約15分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">240円/人</span></div>
+        <div class="links"><a href="https://www.google.com/maps/dir/%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85/%E5%A4%A7%E9%A0%88%E8%A6%B3%E9%9F%B3%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a></div>
       </div>
     </div>
 
-    <!-- 大須商店街 -->
-    <div class="tl-item" data-chain="day1" data-base-time="13:30" data-idx="3">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="13:30" data-idx="3">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="13:30" onchange="onTimeChange(this)">
         <span class="tl-label">- 15:30</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🏯</span> 大須商店街</h3>
@@ -398,12 +398,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- 近鉄で桑名 -->
-    <div class="tl-item" data-chain="day1" data-base-time="16:00" data-idx="4">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="16:00" data-idx="4">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
         <span class="tl-label">名古屋→桑名</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🚃</span> 近鉄急行 → 桑名</h3>
@@ -411,16 +411,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">料金</span><span class="value">530円/人</span></div>
         <div class="links">
           <a href="https://www.kintetsu.co.jp/tetsudo/jikoku/" target="_blank" class="link-btn transport">近鉄 時刻表</a>
+          <a href="https://www.google.com/maps/dir/%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85/%E6%A1%91%E5%90%8D%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <!-- 桑名ホテル -->
-    <div class="tl-item" data-chain="day1" data-base-time="17:00" data-idx="5">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="17:00" data-idx="5">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
         <span class="tl-label">桑名ホテルCI</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🏨</span> 桑名ホテル チェックイン</h3>
@@ -428,35 +429,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <div class="hotel-card recommended" data-name="スーパーホテル桑名駅前" data-price="3500" onclick="selectHotel(this)">
             <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">スーパーホテル桑名駅前（おすすめ）</div></div>
             <div class="hotel-meta">駅徒歩3分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食+ウェルカムバー</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad336392/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/super-hotel-kuwana-ekimae/hotel/hatasho-cho-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-            </div>
+            <div class="links"><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a><a href="https://www.jalan.net/yad336392/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a></div>
           </div>
           <div class="hotel-card" data-name="三交イン桑名駅前" data-price="3500" onclick="selectHotel(this)">
             <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">三交イン桑名駅前（駅近+無料朝食）</div></div>
-            <div class="hotel-meta">駅徒歩2分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食・無料駐車場</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/17776" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad383853/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-            </div>
+            <div class="hotel-meta">駅徒歩2分 / 2名1室 ~7,000円（3,500円/人）</div>
+            <div class="links"><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/17776" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a></div>
           </div>
           <div class="hotel-card" data-name="ステーションホテル桑名" data-price="4000" onclick="selectHotel(this)">
             <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">ステーションホテル桑名（大浴場・サウナ）</div></div>
             <div class="hotel-meta">駅徒歩3分 / 2名1室 ~8,000円（4,000円/人）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/5601" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad316522/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-            </div>
+            <div class="links"><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/5601" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a></div>
           </div>
           <div class="hotel-card" data-name="桑名グリーンホテル" data-price="3000" onclick="selectHotel(this)">
             <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">桑名グリーンホテル（最安）</div></div>
             <div class="hotel-meta">駅徒歩1分 / 2名1室 ~6,000円（3,000円/人）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad312216/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-            </div>
+            <div class="links"><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a></div>
           </div>
         </div>
         <div class="memo-area">
@@ -467,12 +455,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- はまぐりディナー -->
-    <div class="tl-item" data-chain="day1" data-base-time="19:00" data-idx="6">
+    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="19:00" data-idx="6">
       <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <span class="drag-handle">☰</span>
         <input type="time" class="time-shift-input" value="19:00" onchange="onTimeChange(this)">
         <span class="tl-label">はまぐりディナー</span>
+        <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
       </div>
       <div class="card">
         <h3><span class="icon">🍖</span> 桑名名物 焼きはまぐり</h3>
@@ -481,26 +469,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <div class="resto-card" data-name="日の出" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">日の出（老舗料亭）</div></div>
             <div class="resto-desc">創業約100年。はまぐり鍋コース10,000円〜。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E3%81%AE%E5%87%BA+%E6%A1%91%E5%90%8D+%E3%81%AF%E3%81%BE%E3%81%90%E3%82%8A" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E3%81%AE%E5%87%BA+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="魚のてっぺん" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">魚のてっぺん（居酒屋・手頃）</div></div>
             <div class="resto-desc">駅徒歩3分。焼きはまぐり1個からOK。3,000〜5,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24010803/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24010803/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="蛤一択" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">蛤一択（完全予約制）</div></div>
             <div class="resto-desc">駅徒歩4分。厳選桑名産天然蛤。全席掘りごたつ個室。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24019568/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
+            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24019568/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a></div>
           </div>
         </div>
         <div class="memo-area">
@@ -513,11 +492,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 
   </div>
 
-  <!-- アウトレット代替プラン -->
   <details class="alt-plan">
     <summary>🛍️ Plan B: 大須の代わりにアウトレットへ</summary>
     <div class="alt-content">
-      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:12px">大須を飽きた場合 or スキップしたい場合の代替ルート。ランチ後に桑名経由でアウトレットへ。</p>
+      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:12px">大須を飽きた場合の代替ルート。ランチ後に桑名経由でアウトレットへ。</p>
       <table class="compare">
         <tr><th>時刻</th><th>内容</th></tr>
         <tr><td>14:00</td><td>近鉄急行 → 桑名（20分, 530円）</td></tr>
@@ -529,8 +507,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </table>
       <div class="links" style="margin-top:12px">
         <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn primary">アウトレット公式</a>
-        <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%95%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88%E3%83%91%E3%83%BC%E3%82%AF+%E3%82%B8%E3%83%A3%E3%82%BA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E9%95%B7%E5%B3%B6" target="_blank" class="link-btn gmap">Googleマップ</a>
-        <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス時刻表</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B8%E3%83%A3%E3%82%BA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E9%95%B7%E5%B3%B6" target="_blank" class="link-btn gmap">Googleマップ</a>
       </div>
     </div>
   </details>
@@ -545,28 +522,18 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>桑名 → ナガシマスパーランド → ヒルトン名古屋</p>
     </div>
   </div>
-  <div class="timeline">
+  <div class="timeline" data-day="day2">
 
-    <!-- 桑名CO -->
-    <div class="tl-item" data-chain="day2" data-base-time="08:00" data-idx="0">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)">
-        <span class="tl-label">桑名ホテルC/O</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="08:00" data-idx="0">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">桑名ホテルC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🧳</span> 桑名ホテル チェックアウト</h3>
         <p>荷物を持ってバス停へ。大須で買ったパン等で朝食。</p>
       </div>
     </div>
 
-    <!-- バスで長島 -->
-    <div class="tl-item" data-chain="day2" data-base-time="09:05" data-idx="1">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)">
-        <span class="tl-label">桑名駅前発</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="09:05" data-idx="1">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)"><span class="tl-label">桑名駅前発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">9:25 長島温泉着</span></div>
@@ -574,17 +541,13 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="highlight success">開園9:30に間に合う！朝イチが最も空いている。</div>
         <div class="links">
           <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス時刻表</a>
+          <a href="https://www.google.com/maps/dir/%E6%A1%91%E5%90%8D%E9%A7%85/%E9%95%B7%E5%B3%B6%E6%B8%A9%E6%B3%89" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <!-- スパーランド -->
-    <div class="tl-item" data-chain="day2" data-base-time="09:30" data-idx="2">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)">
-        <span class="tl-label">- 17:00</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="09:30" data-idx="2">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)"><span class="tl-label">- 17:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
         <div class="attr-grid">
@@ -592,7 +555,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <div class="attr-card"><div class="num" style="color:var(--day2)">~17:00</div><div class="desc">営業（春休み）</div></div>
         </div>
         <h4 style="margin:16px 0 8px;font-size:.9rem">攻略順（重要！）</h4>
-        <p style="font-size:.82rem;color:var(--day2);font-weight:700;margin-bottom:8px">3/24は春休み平日火曜 = 週で最も空く曜日</p>
         <table class="compare">
           <tr><th>#</th><th>アトラクション</th><th>待ち</th><th>ポイント</th></tr>
           <tr><td><strong>1</strong></td><td>白鯨</td><td>30-50分</td><td>開園直後が最短！</td></tr>
@@ -600,41 +562,30 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <tr><td><strong>3</strong></td><td>アクロバット</td><td>20-30分</td><td>うつ伏せフライング</td></tr>
           <tr><td><strong>4</strong></td><td>嵐</td><td>~20分</td><td>4Dスピン</td></tr>
         </table>
-        <div class="highlight tip">開園9:30にゲートイン → 白鯨に直行！これで1時間以上の時間節約。</div>
+        <div class="highlight tip">開園9:30にゲートイン → 白鯨に直行！</div>
         <div class="links">
           <a href="https://www.nagashima-onsen.co.jp/spaland/" target="_blank" class="link-btn primary">公式サイト</a>
           <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%8A%E3%82%AC%E3%82%B7%E3%83%9E%E3%82%B9%E3%83%91%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank" class="link-btn official">料金・営業時間</a>
           <a href="https://7ticket.jp/s/113972/p/20260629/1" target="_blank" class="link-btn official">セブンチケット</a>
         </div>
       </div>
     </div>
 
-    <!-- 名古屋へ -->
-    <div class="tl-item" data-chain="day2" data-base-time="17:00" data-idx="3">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
-        <span class="tl-label">長島温泉発</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="17:00" data-idx="3">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)"><span class="tl-label">長島温泉発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 名鉄バス → 名古屋直行</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">17:55頃 名鉄バスセンター着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約55分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
         <div class="links">
           <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
+          <a href="https://www.google.com/maps/dir/%E9%95%B7%E5%B3%B6%E6%B8%A9%E6%B3%89/%E5%90%8D%E9%89%84%E3%83%90%E3%82%B9%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <!-- ヒルトンCI -->
-    <div class="tl-item" data-chain="day2" data-base-time="18:00" data-idx="4">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)">
-        <span class="tl-label">ヒルトン名古屋CI</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="18:00" data-idx="4">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトン名古屋CI</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏨</span> ヒルトン名古屋 チェックイン</h3>
         <p>名古屋駅 →（地下鉄東山線）→ 伏見駅 徒歩3分</p>
@@ -654,8 +605,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="links">
           <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank" class="link-btn rakuten">楽天トラベル</a>
           <a href="https://www.jalan.net/yad337680/" target="_blank" class="link-btn jalan">じゃらん</a>
-          <a href="https://www.agoda.com/ja-jp/hilton-nagoya_6/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda">Agoda</a>
           <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank" class="link-btn official">公式</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%92%E3%83%AB%E3%83%88%E3%83%B3%E5%90%8D%E5%8F%A4%E5%B1%8B" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
         <div class="memo-area">
           <div class="memo-title">📝 メモ</div>
@@ -665,13 +616,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- プール -->
-    <div class="tl-item" data-chain="day2" data-base-time="18:30" data-idx="5">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)">
-        <span class="tl-label">プール＆サウナ</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="18:30" data-idx="5">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)"><span class="tl-label">プール＆サウナ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏊</span> プール(15m温水) + 大浴場 + サウナ</h3>
         <p>7F フィットネスエリア。温水プール＆ジャグジーでスパーランドの疲れをリセット。</p>
@@ -679,13 +625,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- カクテルタイム -->
-    <div class="tl-item" data-chain="day2" data-base-time="19:30" data-idx="6">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)">
-        <span class="tl-label">- 20:00</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="19:30" data-idx="6">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)"><span class="tl-label">- 20:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🍸</span> エグゼクティブラウンジ カクテルタイム</h3>
         <p>2F ラウンジ。アルコール飲み放題＆前菜ビュッフェ。夕食代わりにもなるボリューム。</p>
@@ -693,13 +634,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- ナイト大浴場 -->
-    <div class="tl-item" data-chain="day2" data-base-time="21:00" data-idx="7">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)">
-        <span class="tl-label">大浴場ナイト</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="21:00" data-idx="7">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)"><span class="tl-label">大浴場ナイト</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">♨️</span> 大浴場＆サウナ（ナイト）</h3>
         <p>7F 最終受付21:30 / 閉場22:00。カクテルタイム後のサウナは最高。</p>
@@ -718,84 +654,40 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <p>ヒルトン名古屋 → 名古屋港水族館 → 名古屋駅 → 品川</p>
     </div>
   </div>
-  <div class="timeline">
+  <div class="timeline" data-day="day3">
 
-    <!-- 朝食 -->
-    <div class="tl-item" data-chain="day3" data-base-time="06:30" data-idx="0">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)">
-        <span class="tl-label">朝食</span>
-      </div>
-      <div class="card">
-        <h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3>
-        <p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p>
-        <div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="06:30" data-idx="0">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)"><span class="tl-label">朝食</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+      <div class="card"><h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3><p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p><div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div></div>
     </div>
 
-    <!-- プール朝 -->
-    <div class="tl-item" data-chain="day3" data-base-time="08:00" data-idx="1">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)">
-        <span class="tl-label">プール/ジム</span>
-      </div>
-      <div class="card">
-        <h3><span class="icon">🏊</span> プール / ジム / サウナ</h3>
-        <p>7F フィットネス。朝イチで空いてる。チェックアウトまでゆっくり。</p>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="08:00" data-idx="1">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">プール/ジム</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+      <div class="card"><h3><span class="icon">🏊</span> プール / ジム / サウナ</h3><p>7F フィットネス。朝イチで空いてる。</p></div>
     </div>
 
-    <!-- ラウンジ -->
-    <div class="tl-item" data-chain="day3" data-base-time="10:00" data-idx="2">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)">
-        <span class="tl-label">ラウンジ</span>
-      </div>
-      <div class="card">
-        <h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3>
-        <p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。</p>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="10:00" data-idx="2">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)"><span class="tl-label">ラウンジ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+      <div class="card"><h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3><p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。</p></div>
     </div>
 
-    <!-- ヒルトンCO -->
-    <div class="tl-item" data-chain="day3" data-base-time="12:00" data-idx="3">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)">
-        <span class="tl-label">ヒルトンC/O</span>
-      </div>
-      <div class="card">
-        <h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3>
-        <p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="12:00" data-idx="3">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトンC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+      <div class="card"><h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3><p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p></div>
     </div>
 
-    <!-- 地下鉄で水族館 -->
-    <div class="tl-item" data-chain="day3" data-base-time="12:30" data-idx="4">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)">
-        <span class="tl-label">地下鉄で名古屋港へ</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="12:30" data-idx="4">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)"><span class="tl-label">地下鉄で名古屋港へ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚇</span> 伏見 → 名古屋港</h3>
-        <div class="info-row"><span class="label">ルート</span><span class="value">東山線→名港線 乗換1回</span></div>
         <div class="info-row"><span class="label">所要時間</span><span class="value">約25分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">270円/人</span></div>
-        <div class="highlight tip">名古屋港駅3番出口が水族館最寄り。徒歩5分。</div>
+        <div class="links"><a href="https://www.google.com/maps/dir/%E4%BC%8F%E8%A6%8B%E9%A7%85/%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a></div>
       </div>
     </div>
 
-    <!-- 水族館 -->
-    <div class="tl-item" data-chain="day3" data-base-time="13:00" data-idx="5">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
-        <span class="tl-label">- 15:30</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="13:00" data-idx="5">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)"><span class="tl-label">- 15:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
         <div class="attr-grid">
@@ -803,35 +695,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
           <div class="attr-card"><div class="num" style="color:var(--day3)">~2.5h</div><div class="desc">滞在時間</div></div>
         </div>
         <h4 style="margin:16px 0 8px;font-size:.9rem">ショースケジュール（目安）</h4>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">13:00</div>
-          <div class="event-name">イルカパフォーマンス BLUE ECHO</div>
-          <div class="event-tag tag-dolphin">イルカ</div>
-        </div>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">14:30</div>
-          <div class="event-name">シャチ公開トレーニング</div>
-          <div class="event-tag tag-orca">シャチ</div>
-        </div>
+        <div class="event"><div class="event-time" style="color:var(--day3)">13:00</div><div class="event-name">イルカパフォーマンス BLUE ECHO</div><div class="event-tag tag-dolphin">イルカ</div></div>
+        <div class="event"><div class="event-time" style="color:var(--day3)">14:30</div><div class="event-name">シャチ公開トレーニング</div><div class="event-tag tag-orca">シャチ</div></div>
         <div class="highlight tip">イルカショーは15分前に席取り推奨。北館3Fメインプール正面が最高の席。</div>
         <div class="links">
           <a href="https://nagoyaaqua.jp/" target="_blank" class="link-btn primary">公式サイト</a>
           <a href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://nagoyaaqua.jp/fee/" target="_blank" class="link-btn official">料金・チケット</a>
         </div>
       </div>
     </div>
 
-    <!-- 名古屋駅周辺 -->
-    <div class="tl-item" data-chain="day3" data-base-time="16:00" data-idx="6">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
-        <span class="tl-label">- 17:30</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="16:00" data-idx="6">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)"><span class="tl-label">- 17:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏙️</span> 名古屋駅周辺（お土産・最後の名古屋めし）</h3>
         <p>名古屋港駅 →（地下鉄）→ 名古屋駅。エスカ・名鉄百貨店でお土産。</p>
+        <div class="links"><a href="https://www.google.com/maps/dir/%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E9%A7%85/%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a></div>
         <div class="memo-area">
           <div class="memo-title">📝 メモ</div>
           <div class="memo-row"><label>内容</label><input type="text" placeholder="例: お土産、台湾まぜそば" data-memo="d3-station" oninput="saveMemo(this)"></div>
@@ -840,13 +719,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <!-- 帰り新幹線 -->
-    <div class="tl-item" data-chain="day3" data-base-time="18:06" data-idx="7">
-      <div class="tl-time">
-        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
-        <input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)">
-        <span class="tl-label">名古屋発</span>
-      </div>
+    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="18:06" data-idx="7">
+      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)"><span class="tl-label">名古屋発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ → 品川</h3>
         <table class="compare">
@@ -857,6 +731,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         </table>
         <div class="links">
           <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
+          <a href="https://www.google.com/maps/dir/%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85/%E5%93%81%E5%B7%9D%E9%A7%85" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
@@ -866,15 +741,15 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 
 <!-- Checklist -->
 <section style="padding:30px 0">
-  <div class="card" style="border:2px solid #764ba2">
+  <div class="card" style="border:2px solid var(--accent-warm)">
     <h3><span class="icon">✅</span> 出発前チェックリスト</h3>
     <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">予約するもの</h4>
     <ul class="checklist">
-      <li>新幹線チケット（<a href="https://smart-ex.jp/top.php" target="_blank">スマートEX</a>で登録・予約）</li>
+      <li>新幹線チケット（<a href="https://smart-ex.jp/top.php" target="_blank">スマートEX</a>）</li>
       <li>桑名ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad336392/" target="_blank">じゃらん</a>）</li>
-      <li>ヒルトン名古屋（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad337680/" target="_blank">じゃらん</a> / <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank">公式</a>）</li>
-      <li>ナガシマパスポート（<a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank">セブンチケット or ファミマ</a>で事前購入 → 行列回避）</li>
-      <li>名古屋港水族館チケット（<a href="https://nagoyaaqua.jp/fee/" target="_blank">公式サイト</a>で事前購入可）</li>
+      <li>ヒルトン名古屋（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank">楽天</a> / <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank">公式</a>）</li>
+      <li>ナガシマパスポート（<a href="https://7ticket.jp/s/113972/p/20260629/1" target="_blank">セブンチケット</a>で事前購入）</li>
+      <li>水族館チケット（<a href="https://nagoyaaqua.jp/fee/" target="_blank">公式サイト</a>）</li>
     </ul>
     <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">持ち物</h4>
     <ul class="checklist">
@@ -888,96 +763,31 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 <section class="backup-section">
   <div class="card">
     <h3 style="font-size:1.1rem;margin-bottom:4px">🔄 保険リスト（代替候補）</h3>
-    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px">予定変更時のバックアップ。食べログ評価の高い名古屋めし＆遊びスポット。</p>
+    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px">予定変更時のバックアップ。「＋」ボタンでタイムラインに追加できます。</p>
 
     <div class="backup-cat">
       <h3>🍽️ ランチ・軽食</h3>
-      <div class="backup-item">
-        <div><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）</div><div class="bi-desc">ひつまぶし発祥の名店。4,600円〜。行列覚悟だが最高の味。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">ひつまぶし 備長 エスカ店</div><div class="bi-desc">エスカ直結。ひつまぶし人気店。3,000円〜。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230101/23003773/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">味仙 矢場店（台湾ラーメン）</div><div class="bi-desc">名古屋発祥の激辛台湾ラーメン。800〜1,500円。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230103/23003870/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">スガキヤ（名古屋ラーメン）</div><div class="bi-desc">名古屋ソウルフード。ラーメン390円。エスカ・大須等に店舗多数。</div></div>
-        <div class="links">
-          <a href="https://www.sugakico.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">コンパル 大須本店（エビフライサンド）</div><div class="bi-desc">名古屋名物エビフライサンド。テイクアウトOK。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230103/23001506/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
+      <div class="backup-item" data-backup-id="atsuta"><div class="bi-info"><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）</div><div class="bi-desc">ひつまぶし発祥の名店。4,600円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)" title="タイムラインに追加">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="bincho"><div class="bi-info"><div class="bi-name">ひつまぶし 備長 エスカ店</div><div class="bi-desc">エスカ直結。3,000円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23003773/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="misen"><div class="bi-info"><div class="bi-name">味仙 矢場店（台湾ラーメン）</div><div class="bi-desc">名古屋発祥の激辛台湾ラーメン。800〜1,500円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23003870/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="sugakiya"><div class="bi-info"><div class="bi-name">スガキヤ（名古屋ラーメン）</div><div class="bi-desc">名古屋ソウルフード。ラーメン390円。</div></div><div class="bi-actions"><div class="links"><a href="https://www.sugakico.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="konparu"><div class="bi-info"><div class="bi-name">コンパル 大須本店（エビフライサンド）</div><div class="bi-desc">名古屋名物エビフライサンド。テイクアウトOK。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23001506/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
     </div>
 
     <div class="backup-cat">
       <h3>🍺 ディナー・居酒屋</h3>
-      <div class="backup-item">
-        <div><div class="bi-name">世界の山ちゃん（手羽先）</div><div class="bi-desc">名古屋名物「幻のコショウ」手羽先。3,000〜5,000円/人。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">風来坊（元祖手羽先唐揚）</div><div class="bi-desc">元祖手羽先。山ちゃんと双璧。3,000〜5,000円/人。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">矢場とん 矢場町本店（味噌カツ）</div><div class="bi-desc">本店ならではの雰囲気。1,650円〜。</div></div>
-        <div class="links">
-          <a href="https://tabelog.com/aichi/A2301/A230103/23000125/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
-        </div>
-      </div>
+      <div class="backup-item" data-backup-id="yamachan"><div class="bi-info"><div class="bi-name">世界の山ちゃん（手羽先）</div><div class="bi-desc">名古屋名物「幻のコショウ」手羽先。3,000〜5,000円/人。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="furaibo"><div class="bi-info"><div class="bi-name">風来坊（元祖手羽先唐揚）</div><div class="bi-desc">元祖手羽先。山ちゃんと双璧。3,000〜5,000円/人。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yabaton-hon"><div class="bi-info"><div class="bi-name">矢場とん 矢場町本店（味噌カツ）</div><div class="bi-desc">本店ならではの雰囲気。1,650円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000125/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
     </div>
 
     <div class="backup-cat">
       <h3>🎯 遊びスポット</h3>
-      <div class="backup-item">
-        <div><div class="bi-name">ジャズドリーム長島（アウトレット）</div><div class="bi-desc">国内最大級~300店舗。スパーランド隣接。無料入場。</div></div>
-        <div class="links">
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">名古屋城 + 本丸御殿</div><div class="bi-desc">入城500円。本丸御殿は必見。入城16:00まで。</div></div>
-        <div class="links">
-          <a href="https://www.nagoyajo.city.nagoya.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">栄・オアシス21</div><div class="bi-desc">名古屋の中心繁華街。テレビ塔＋オアシス21のフォトスポット。</div></div>
-        <div class="links">
-          <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B921+%E6%A0%84" target="_blank" class="link-btn gmap" style="font-size:.7rem">Googleマップ</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">熱田神宮</div><div class="bi-desc">三種の神器の一つ草薙剣を祀る。名古屋駅から名鉄5分。無料。</div></div>
-        <div class="links">
-          <a href="https://www.atsutajingu.or.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
-        </div>
-      </div>
-      <div class="backup-item">
-        <div><div class="bi-name">リニア・鉄道館</div><div class="bi-desc">名古屋港近く。鉄道好きなら必見。1,000円。</div></div>
-        <div class="links">
-          <a href="https://museum.jr-central.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
-        </div>
-      </div>
+      <div class="backup-item" data-backup-id="outlet"><div class="bi-info"><div class="bi-name">ジャズドリーム長島（アウトレット）</div><div class="bi-desc">国内最大級~300店舗。無料入場。</div></div><div class="bi-actions"><div class="links"><a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="castle"><div class="bi-info"><div class="bi-name">名古屋城 + 本丸御殿</div><div class="bi-desc">入城500円。本丸御殿は必見。</div></div><div class="bi-actions"><div class="links"><a href="https://www.nagoyajo.city.nagoya.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="oasis"><div class="bi-info"><div class="bi-name">栄・オアシス21</div><div class="bi-desc">テレビ塔＋オアシス21のフォトスポット。</div></div><div class="bi-actions"><div class="links"><a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B921+%E6%A0%84" target="_blank" class="link-btn gmap" style="font-size:.7rem">マップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="atsuta-shrine"><div class="bi-info"><div class="bi-name">熱田神宮</div><div class="bi-desc">三種の神器の一つ草薙剣を祀る。無料。</div></div><div class="bi-actions"><div class="links"><a href="https://www.atsutajingu.or.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="linear"><div class="bi-info"><div class="bi-name">リニア・鉄道館</div><div class="bi-desc">名古屋港近く。鉄道好きなら必見。1,000円。</div></div><div class="bi-actions"><div class="links"><a href="https://museum.jr-central.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
     </div>
   </div>
 </section>
@@ -998,30 +808,23 @@ const BUDGET_CONFIG = {
 };
 
 // ===== State =====
-const state = {
-  selections: {},
-  memos: {},
-  budgets: {},
-  timeShifts: {},  // chain -> { idx: delta }
-  disabled: {}     // "chain-idx" -> true
-};
+const state = { selections: {}, memos: {}, budgets: {}, timeShifts: {}, disabled: {}, addedItems: [] };
 
 // ===== Helpers =====
 function fmt(n) { return n.toLocaleString() + '円'; }
+function smoothScroll(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
 // ===== State Persistence =====
 function loadState() {
   try {
-    const saved = localStorage.getItem('nagoya-trip-v2');
+    const saved = localStorage.getItem('nagoya-trip-v3');
     if (!saved) { updateBudget(); return; }
-    const parsed = JSON.parse(saved);
-    Object.assign(state, parsed);
+    Object.assign(state, JSON.parse(saved));
     restoreUI();
   } catch(e) { console.log('State load error:', e); updateBudget(); }
 }
 
 function restoreUI() {
-  // Selections
   Object.entries(state.selections).forEach(([group, name]) => {
     const g = document.querySelector(`[data-group="${group}"]`);
     if (!g) return;
@@ -1029,20 +832,14 @@ function restoreUI() {
       if (card.dataset.name === name) card.classList.add('selected');
     });
   });
-
-  // Memos
   Object.entries(state.memos).forEach(([key, val]) => {
     const input = document.querySelector(`[data-memo="${key}"]`);
     if (input) input.value = val;
   });
-
-  // Budgets
   Object.entries(state.budgets).forEach(([key, val]) => {
     const input = document.querySelector(`[data-budget="${key}"]`);
     if (input) input.value = val;
   });
-
-  // Time shifts
   Object.entries(state.timeShifts).forEach(([chain, shifts]) => {
     Object.entries(shifts).forEach(([idx, delta]) => {
       if (delta === 0) return;
@@ -1052,119 +849,63 @@ function restoreUI() {
       if (input) input.value = shiftTimeStr(item.dataset.baseTime, delta);
     });
   });
-
-  // Disabled items
   Object.entries(state.disabled).forEach(([key, val]) => {
     if (!val) return;
-    const [chain, idx] = key.split('-');
-    const fullChain = 'day' + chain;
-    // key format: "1-3" means day1, idx 3
-    const item = document.querySelector(`[data-chain="day${chain}"][data-idx="${idx}"]`);
+    const [dayNum, idx] = key.split('-');
+    const item = document.querySelector(`[data-chain="day${dayNum}"][data-idx="${idx}"]`);
     if (item) item.classList.add('disabled');
   });
-
+  // Restore added items
+  state.addedItems.forEach(a => {
+    const backup = document.querySelector(`[data-backup-id="${a.id}"]`);
+    if (backup) backup.classList.add('added');
+  });
   updateBudget();
 }
 
 function saveState() {
-  try { localStorage.setItem('nagoya-trip-v2', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('nagoya-trip-v3', JSON.stringify(state)); } catch(e) {}
 }
 
-// ===== Smooth Scroll =====
-function smoothScroll(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ===== Restaurant Selection =====
+// ===== Restaurant / Hotel / Memo =====
 function selectResto(card) {
   const group = card.closest('[data-group]');
   if (!group) return;
   const groupName = group.dataset.group;
-  if (card.classList.contains('selected')) {
-    card.classList.remove('selected');
-    delete state.selections[groupName];
-  } else {
-    group.querySelectorAll('.resto-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    state.selections[groupName] = card.dataset.name;
-  }
+  if (card.classList.contains('selected')) { card.classList.remove('selected'); delete state.selections[groupName]; }
+  else { group.querySelectorAll('.resto-card').forEach(c => c.classList.remove('selected')); card.classList.add('selected'); state.selections[groupName] = card.dataset.name; }
   saveState();
 }
-
-// ===== Hotel Selection =====
 function selectHotel(card) {
   const group = card.closest('[data-group]');
   if (!group) return;
   const groupName = group.dataset.group;
-  if (card.classList.contains('selected')) {
-    card.classList.remove('selected');
-    delete state.selections[groupName];
-  } else {
+  if (card.classList.contains('selected')) { card.classList.remove('selected'); delete state.selections[groupName]; }
+  else {
     group.querySelectorAll('.hotel-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    state.selections[groupName] = card.dataset.name;
-    if (card.dataset.price) {
-      const budgetInput = card.closest('.card').querySelector('[data-budget$="hotel"]');
-      if (budgetInput && !budgetInput.value) {
-        budgetInput.value = card.dataset.price;
-        state.budgets[budgetInput.dataset.budget] = parseInt(card.dataset.price);
-      }
-    }
+    card.classList.add('selected'); state.selections[groupName] = card.dataset.name;
+    if (card.dataset.price) { const bi = card.closest('.card')?.querySelector('[data-budget$="hotel"]'); if (bi && !bi.value) { bi.value = card.dataset.price; state.budgets[bi.dataset.budget] = parseInt(card.dataset.price); } }
   }
-  saveState();
-  updateBudget();
+  saveState(); updateBudget();
 }
+function saveMemo(input) { state.memos[input.dataset.memo] = input.value; saveState(); }
 
-// ===== Memo =====
-function saveMemo(input) {
-  state.memos[input.dataset.memo] = input.value;
-  saveState();
-}
-
-// ===== Budget Calculation =====
+// ===== Budget =====
 function updateBudget() {
-  const config = BUDGET_CONFIG;
-
-  // Gather budget inputs
+  const c = BUDGET_CONFIG;
   document.querySelectorAll('[data-budget]').forEach(input => {
     const val = parseInt(input.value);
-    if (!isNaN(val) && val > 0) {
-      state.budgets[input.dataset.budget] = val;
-    } else {
-      delete state.budgets[input.dataset.budget];
-    }
+    if (!isNaN(val) && val > 0) state.budgets[input.dataset.budget] = val;
+    else delete state.budgets[input.dataset.budget];
   });
-
-  // Hotel total
-  let hotelTotal = 0;
-  config.hotelKeys.forEach(k => { hotelTotal += state.budgets[k] || 0; });
-
-  // Food total
-  let foodTotal = 0, foodCnt = 0;
-  config.foodKeys.forEach(k => {
-    if (state.budgets[k]) { foodTotal += state.budgets[k]; foodCnt++; }
-  });
-
-  // Update display
-  const disp = (attr, html) => {
-    const el = document.querySelector(`[data-budget-display="${attr}"]`);
-    if (el) el.innerHTML = html;
-  };
-  disp('train', fmt(config.fixed.train));
-  disp('hotel', hotelTotal > 0 ? fmt(hotelTotal) : '<span class="empty">未選択</span>');
-  disp('spa', fmt(config.fixed.spa));
-  disp('aqua', fmt(config.fixed.aqua));
-  disp('transport', '~' + fmt(config.fixed.transport));
-  disp('food', foodTotal > 0
-    ? fmt(foodTotal) + (foodCnt < config.foodCount ? '<span style="font-size:.7rem;color:#999"> (' + foodCnt + '/' + config.foodCount + '食入力済)</span>' : '')
-    : '<span class="empty">未入力</span>');
-
-  const fixedTotal = Object.values(config.fixed).reduce((a, b) => a + b, 0);
-  const variableTotal = hotelTotal + foodTotal;
-  disp('total', variableTotal > 0
-    ? '約 ' + (fixedTotal + variableTotal).toLocaleString() + ' 円 /人'
-    : '---');
+  let hotelTotal = 0; c.hotelKeys.forEach(k => { hotelTotal += state.budgets[k] || 0; });
+  let foodTotal = 0, foodCnt = 0; c.foodKeys.forEach(k => { if (state.budgets[k]) { foodTotal += state.budgets[k]; foodCnt++; } });
+  const disp = (attr, html) => { const el = document.querySelector(`[data-budget-display="${attr}"]`); if (el) el.innerHTML = html; };
+  disp('train', fmt(c.fixed.train)); disp('hotel', hotelTotal > 0 ? fmt(hotelTotal) : '<span class="empty">未選択</span>');
+  disp('spa', fmt(c.fixed.spa)); disp('aqua', fmt(c.fixed.aqua)); disp('transport', '~' + fmt(c.fixed.transport));
+  disp('food', foodTotal > 0 ? fmt(foodTotal) + (foodCnt < c.foodCount ? '<span style="font-size:.7rem;color:#999"> (' + foodCnt + '/' + c.foodCount + '食)</span>' : '') : '<span class="empty">未入力</span>');
+  const fixedTotal = Object.values(c.fixed).reduce((a, b) => a + b, 0);
+  disp('total', hotelTotal + foodTotal > 0 ? '約 ' + (fixedTotal + hotelTotal + foodTotal).toLocaleString() + ' 円 /人' : '---');
   saveState();
 }
 
@@ -1175,66 +916,119 @@ function shiftTimeStr(timeStr, deltaMinutes) {
   total = ((total % 1440) + 1440) % 1440;
   return String(Math.floor(total / 60)).padStart(2, '0') + ':' + String(total % 60).padStart(2, '0');
 }
-
 function onTimeChange(input) {
   const item = input.closest('.tl-item');
-  const chain = item.dataset.chain;
-  const idx = parseInt(item.dataset.idx);
-  const baseTime = item.dataset.baseTime;
-  const newTime = input.value;
-
-  const [bh, bm] = baseTime.split(':').map(Number);
-  const [nh, nm] = newTime.split(':').map(Number);
+  const chain = item.dataset.chain, idx = parseInt(item.dataset.idx), baseTime = item.dataset.baseTime;
+  const [bh, bm] = baseTime.split(':').map(Number), [nh, nm] = input.value.split(':').map(Number);
   const delta = (nh * 60 + nm) - (bh * 60 + bm);
-
-  // Store this item's delta
   if (!state.timeShifts[chain]) state.timeShifts[chain] = {};
   state.timeShifts[chain][idx] = delta;
-
-  // Shift all subsequent items in same chain
-  const items = document.querySelectorAll(`[data-chain="${chain}"]`);
-  items.forEach(el => {
-    const elIdx = parseInt(el.dataset.idx);
-    if (elIdx <= idx) return;
+  document.querySelectorAll(`[data-chain="${chain}"]`).forEach(el => {
+    const elIdx = parseInt(el.dataset.idx); if (elIdx <= idx) return;
     const elInput = el.querySelector('.time-shift-input');
-    if (!elInput) return;
-    const shifted = shiftTimeStr(el.dataset.baseTime, delta);
-    elInput.value = shifted;
-    // Update label times too
-    const label = el.querySelector('.tl-label');
-    if (label && label.dataset.originalHtml === undefined) {
-      label.dataset.originalHtml = label.innerHTML;
-    }
-    if (label && label.dataset.originalHtml) {
-      let html = label.dataset.originalHtml;
-      if (delta !== 0) {
-        html = html.replace(/(\d{1,2}):(\d{2})/g, (match, h2, m2) => {
-          let t = parseInt(h2) * 60 + parseInt(m2) + delta;
-          t = ((t % 1440) + 1440) % 1440;
-          return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
-        });
-      }
-      label.innerHTML = html;
-    }
+    if (elInput) elInput.value = shiftTimeStr(el.dataset.baseTime, delta);
     if (!state.timeShifts[chain]) state.timeShifts[chain] = {};
     state.timeShifts[chain][elIdx] = delta;
   });
-
   saveState();
 }
 
-// ===== Puzzle Toggle =====
-function toggleItem(btn) {
+// ===== Remove Item =====
+function removeItem(btn) {
   const item = btn.closest('.tl-item');
-  const chain = item.dataset.chain;
-  const idx = item.dataset.idx;
+  const chain = item.dataset.chain, idx = item.dataset.idx;
   const dayNum = chain.replace('day', '');
-  const key = dayNum + '-' + idx;
-
-  item.classList.toggle('disabled');
-  state.disabled[key] = item.classList.contains('disabled');
+  item.classList.add('disabled');
+  state.disabled[dayNum + '-' + idx] = true;
   saveState();
 }
+
+// ===== Drag and Drop =====
+let draggedItem = null;
+document.addEventListener('dragstart', e => {
+  const item = e.target.closest('.tl-item');
+  if (!item) return;
+  draggedItem = item;
+  item.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+});
+document.addEventListener('dragend', e => {
+  if (draggedItem) draggedItem.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  draggedItem = null;
+});
+document.addEventListener('dragover', e => {
+  e.preventDefault();
+  const item = e.target.closest('.tl-item');
+  if (!item || item === draggedItem) return;
+  if (draggedItem && item.dataset.chain === draggedItem.dataset.chain) {
+    e.dataTransfer.dropEffect = 'move';
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    item.classList.add('drag-over');
+  }
+});
+document.addEventListener('drop', e => {
+  e.preventDefault();
+  const target = e.target.closest('.tl-item');
+  if (!target || !draggedItem || target === draggedItem) return;
+  if (target.dataset.chain !== draggedItem.dataset.chain) return;
+  const timeline = target.closest('.timeline');
+  const items = [...timeline.querySelectorAll('.tl-item')];
+  const dragIdx = items.indexOf(draggedItem);
+  const targetIdx = items.indexOf(target);
+  if (dragIdx < targetIdx) target.after(draggedItem);
+  else target.before(draggedItem);
+  // Reindex
+  timeline.querySelectorAll('.tl-item').forEach((item, i) => { item.dataset.idx = i; });
+  target.classList.remove('drag-over');
+  saveState();
+});
+
+// ===== Backup → Timeline =====
+function showDayPicker(btn) {
+  const picker = btn.nextElementSibling;
+  document.querySelectorAll('.day-picker.show').forEach(p => { if (p !== picker) p.classList.remove('show'); });
+  picker.classList.toggle('show');
+}
+function addToTimeline(btn, dayId) {
+  const backupItem = btn.closest('.backup-item');
+  const name = backupItem.querySelector('.bi-name').textContent;
+  const desc = backupItem.querySelector('.bi-desc').textContent;
+  const backupId = backupItem.dataset.backupId;
+  const timeline = document.querySelector(`.timeline[data-day="${dayId}"]`);
+  const existingItems = timeline.querySelectorAll('.tl-item');
+  const newIdx = existingItems.length;
+  const newItem = document.createElement('div');
+  newItem.className = 'tl-item';
+  newItem.draggable = true;
+  newItem.dataset.chain = dayId;
+  newItem.dataset.baseTime = '00:00';
+  newItem.dataset.idx = newIdx;
+  newItem.dataset.addedFrom = backupId;
+  newItem.innerHTML = `
+    <div class="tl-time">
+      <span class="drag-handle">☰</span>
+      <input type="time" class="time-shift-input" value="00:00" onchange="onTimeChange(this)">
+      <span class="tl-label">${name}</span>
+      <button class="puzzle-remove" onclick="removeItem(this)">✕</button>
+    </div>
+    <div class="card">
+      <h3><span class="icon">📌</span> ${name}</h3>
+      <p>${desc}</p>
+    </div>`;
+  timeline.appendChild(newItem);
+  backupItem.classList.add('added');
+  btn.closest('.day-picker').classList.remove('show');
+  state.addedItems.push({ id: backupId, day: dayId });
+  saveState();
+  newItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+// Close day pickers on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('.bi-actions')) {
+    document.querySelectorAll('.day-picker.show').forEach(p => p.classList.remove('show'));
+  }
+});
 
 // ===== Init =====
 loadState();
