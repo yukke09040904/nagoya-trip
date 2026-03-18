@@ -65,15 +65,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .day1 .timeline::before{background:var(--day1-light)}
 .day2 .timeline::before{background:var(--day2-light)}
 .day3 .timeline::before{background:var(--day3-light)}
-.tl-item{position:relative;margin-bottom:24px}
+.tl-item{position:relative;margin-bottom:24px;transition:opacity .3s,max-height .4s}
 .tl-item::before{content:'';position:absolute;left:-24px;top:16px;width:11px;height:11px;border-radius:50%;border:3px solid;background:var(--card)}
 .day1 .tl-item::before{border-color:var(--day1)}
 .day2 .tl-item::before{border-color:var(--day2)}
 .day3 .tl-item::before{border-color:var(--day3)}
-.tl-time{font-size:.8rem;font-weight:700;margin-bottom:4px}
+.tl-time{font-size:.8rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .day1 .tl-time{color:var(--day1)}
 .day2 .tl-time{color:var(--day2)}
 .day3 .tl-time{color:var(--day3)}
+
+/* Puzzle toggle */
+.tl-item.disabled{opacity:.35;pointer-events:none}
+.tl-item.disabled .card{display:none}
+.puzzle-toggle{width:28px;height:28px;border:none;border-radius:6px;background:var(--bg);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;color:var(--text-light)}
+.puzzle-toggle:hover{background:#eee}
+.tl-item.disabled .puzzle-toggle{background:#fee;color:#e53935}
 
 /* Card */
 .card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);transition:transform .2s}
@@ -117,7 +124,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .link-btn.agoda{background:#fff;color:#5392F9;border-color:#5392F9}
 .link-btn.agoda:hover{background:#F0F5FF}
 
-/* Restaurant Grid - selectable */
+/* Restaurant Grid */
 .resto-grid{display:grid;gap:10px;margin:12px 0}
 .resto-card{padding:14px;background:var(--bg);border-radius:10px;position:relative;cursor:pointer;border:2px solid transparent;transition:all .2s}
 .resto-card:hover{border-color:#ddd}
@@ -139,7 +146,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .memo-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(102,126,234,.15)}
 .memo-row input[type=number]{max-width:120px}
 
-/* Hotel Card - selectable */
+/* Hotel Card */
 .hotel-card{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
 .hotel-card:hover{border-color:#ddd}
 .hotel-card.selected{border-color:var(--accent);background:#F3F0FF}
@@ -153,7 +160,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .hotel-card .hotel-meta{font-size:.78rem;color:var(--text-light);margin:2px 0 8px 26px}
 .hotel-card .links{margin-left:26px}
 
-/* Comparison Table */
+/* Compare Table */
 .compare{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:.82rem;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
 .compare th{background:var(--bg);padding:10px 12px;font-weight:700;text-align:left;border-bottom:1px solid rgba(0,0,0,.08)}
 .compare td{padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.04)}
@@ -183,33 +190,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 /* Footer */
 .footer{text-align:center;padding:40px 20px;font-size:.8rem;color:var(--text-light);border-top:1px solid rgba(0,0,0,.06);margin-top:40px}
 
-/* Responsive */
-@media(max-width:600px){
-  .hero{padding:40px 16px 40px}
-  .hero h1{font-size:1.4rem}
-  .budget-grid{grid-template-columns:repeat(2,1fr)}
-  .day-nav a{padding:8px 14px;font-size:.78rem}
-  .container{padding:0 16px}
-  .attr-grid{grid-template-columns:1fr 1fr}
-  .card{padding:16px}
-  .links{gap:4px}
-  .link-btn{padding:5px 10px;font-size:.7rem}
-  .memo-row{flex-direction:column;align-items:stretch}
-  .memo-row input[type=number]{max-width:100%}
-}
-
-/* Plan Tabs */
-.plan-tabs{display:flex;gap:0;justify-content:center;margin:-30px auto 0;max-width:560px;position:relative;z-index:3;padding:0 20px}
-.plan-tab{flex:1;padding:14px 20px;text-align:center;font-weight:700;font-size:.9rem;cursor:pointer;border:none;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);transition:all .25s;color:var(--text-light);border-bottom:3px solid transparent}
-.plan-tab:first-child{border-radius:12px 0 0 12px}
-.plan-tab:last-child{border-radius:0 12px 12px 0}
-.plan-tab.active{background:#fff;color:var(--accent);border-bottom-color:var(--accent);box-shadow:var(--shadow)}
-.plan-tab:hover:not(.active){background:rgba(255,255,255,.9)}
-.plan-tab .tab-icon{font-size:1.1rem;margin-right:6px}
-.plan-container{display:none}
-.plan-container.active{display:block}
-
-/* Time Shift */
+/* Time Shift Input */
 .time-shift-input{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 6px;border:1.5px solid #ddd;border-radius:6px;font-family:inherit;background:#fff;cursor:pointer;transition:border-color .2s;width:80px}
 .time-shift-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(102,126,234,.15)}
 .day1 .time-shift-input{color:var(--day1)}
@@ -227,9 +208,40 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .hilton-info .hilton-schedule table{width:100%;border-collapse:collapse;font-size:.82rem}
 .hilton-info .hilton-schedule th{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.15);color:#e2b857;font-size:.75rem}
 .hilton-info .hilton-schedule td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.08)}
+
+/* Alt Plan Toggle */
+.alt-plan{margin:20px 0;border:2px dashed var(--day1-light);border-radius:14px;overflow:hidden}
+.alt-plan summary{padding:14px 18px;cursor:pointer;font-weight:700;font-size:.9rem;color:var(--day1);background:var(--day1-bg);list-style:none;display:flex;align-items:center;gap:8px}
+.alt-plan summary::-webkit-details-marker{display:none}
+.alt-plan summary::before{content:'▶';font-size:.7rem;transition:transform .2s}
+.alt-plan[open] summary::before{transform:rotate(90deg)}
+.alt-plan .alt-content{padding:16px 18px;background:#fff}
+
+/* Backup Section */
+.backup-section{margin:40px 0;padding:30px 0}
+.backup-section h2{font-size:1.2rem;font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.backup-section .backup-note{font-size:.82rem;color:var(--text-light);margin-bottom:20px}
+.backup-cat{margin-bottom:24px}
+.backup-cat h3{font-size:.95rem;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.backup-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.85rem}
+.backup-item:last-child{border-bottom:none}
+.backup-item .bi-name{font-weight:700}
+.backup-item .bi-desc{font-size:.78rem;color:var(--text-light)}
+.backup-item .links{margin:0;gap:4px}
+
+/* Responsive */
 @media(max-width:600px){
-  .plan-tabs{margin:-20px 10px 0}
-  .plan-tab{padding:10px 12px;font-size:.78rem}
+  .hero{padding:40px 16px 40px}
+  .hero h1{font-size:1.4rem}
+  .budget-grid{grid-template-columns:repeat(2,1fr)}
+  .day-nav a{padding:8px 14px;font-size:.78rem}
+  .container{padding:0 16px}
+  .attr-grid{grid-template-columns:1fr 1fr}
+  .card{padding:16px}
+  .links{gap:4px}
+  .link-btn{padding:5px 10px;font-size:.7rem}
+  .memo-row{flex-direction:column;align-items:stretch}
+  .memo-row input[type=number]{max-width:100%}
   .hilton-info .hilton-grid{grid-template-columns:1fr}
 }
 </style>
@@ -239,18 +251,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 <!-- Hero -->
 <header class="hero">
   <h1>名古屋・長島 2泊3日</h1>
-  <p class="subtitle">アウトレット / スパーランド / 水族館</p>
+  <p class="subtitle">大須商店街 / スパーランド / ヒルトン / 水族館</p>
   <div class="dates">2026.3.23 Mon - 3.25 Wed / 2名</div>
 </header>
-
-<!-- Plan Tabs -->
-<div class="plan-tabs">
-  <button class="plan-tab active" onclick="switchPlan('planA')"><span class="tab-icon">🛍️</span>プランA: アウトレット先行</button>
-  <button class="plan-tab" onclick="switchPlan('planB')"><span class="tab-icon">🐬</span>プランB: 水族館＋ヒルトン</button>
-</div>
-
-<!-- ========== PLAN A ========== -->
-<div id="planA" class="plan-container active">
 
 <!-- Budget -->
 <div class="budget-banner">
@@ -260,713 +263,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <div class="budget-item"><div class="label">新幹線往復</div><div class="value" data-budget-display="train">21,120円</div></div>
     <div class="budget-item"><div class="label">ホテル2泊</div><div class="value" data-budget-display="hotel"><span class="empty">未選択</span></div></div>
     <div class="budget-item"><div class="label">スパーランド</div><div class="value" data-budget-display="spa">6,000円</div></div>
-    <div class="budget-item"><div class="label">水族館</div><div class="value" data-budget-display="aqua">1,830円</div></div>
-    <div class="budget-item"><div class="label">現地移動</div><div class="value" data-budget-display="transport">~4,750円</div></div>
-    <div class="budget-item"><div class="label">食事</div><div class="value" data-budget-display="food"><span class="empty">未入力</span></div></div>
-  </div>
-  <div class="budget-total">
-    <div class="label">合計目安（1人あたり）</div>
-    <div class="value" data-budget-display="total">---</div>
-  </div>
-</div>
-
-<!-- Day Nav -->
-<nav class="day-nav">
-  <a href="#a-day1" onclick="smoothScroll('a-day1');return false">Day 1 アウトレット</a>
-  <a href="#a-day2" onclick="smoothScroll('a-day2');return false">Day 2 スパーランド</a>
-  <a href="#a-day3" onclick="smoothScroll('a-day3');return false">Day 3 水族館</a>
-</nav>
-
-<div class="container">
-
-<!-- ==================== DAY 1 ==================== -->
-<section id="a-day1" class="day-section day1">
-  <div class="day-header">
-    <div class="day-badge">D1</div>
-    <div class="day-header-text">
-      <h2>3/23（月）東京 → アウトレット</h2>
-      <p>品川 → 名古屋 → 桑名 → ジャズドリーム長島</p>
-    </div>
-  </div>
-  <div class="timeline">
-
-    <!-- 新幹線 -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="10:01" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="10:01" onchange="onAnchorChange(this)"> 品川発</div>
-      <div class="card">
-        <h3><span class="icon">🚅</span> のぞみ327号 → 名古屋</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">11:33 名古屋着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約1時間30分</span></div>
-        <div class="info-row"><span class="label">料金（自由席）</span><span class="value">10,560円/人</span></div>
-        <div class="info-row"><span class="label">スマートEX指定席</span><span class="value">11,100円/人</span></div>
-        <div class="highlight tip">月曜午前は混雑少なく自由席で座れる可能性大。自由席がコスパ最強。</div>
-        <div class="links">
-          <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
-          <a href="https://expy.jp/top.php" target="_blank" class="link-btn official">EX予約</a>
-          <a href="https://travel.jr-central.co.jp/plan/tokushu/shinkansen/nagoya-tokyo/" target="_blank" class="link-btn official">JR東海ツアーズ</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ランチ -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="11:40">
-      <div class="tl-time">11:40 - 12:40</div>
-      <div class="card">
-        <h3><span class="icon">🍽️</span> 名古屋駅ランチ（エスカ地下街）</h3>
-        <p>新幹線口（太閤通口）直結のエスカ地下街で名古屋めし。</p>
-        <div class="resto-grid" data-group="a-d1-lunch">
-          <div class="resto-card" data-name="矢場とん エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）</div></div>
-            <div class="resto-desc">名古屋名物味噌カツの名店。わらじとんかつ定食 1,650円。待ち30分目安。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.yabaton.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="しら河 名駅店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）</div></div>
-            <div class="resto-desc">ひつまぶし2,800円〜。まぶし丼やミニも。エスカ地下街。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://hitsumabushi.jp/tenpo/meiekiten" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="山本屋本店 エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div></div>
-            <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.esca-sc.com/shop_guide/120/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ（選んだメニュー・金額など）</div>
-          <div class="memo-row">
-            <label>メニュー</label>
-            <input type="text" placeholder="例: わらじとんかつ定食" data-memo="a-d1-lunch-menu" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="1650" data-budget="a-d1-lunch" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 桑名移動 -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="14:00">
-      <div class="tl-time">14:00頃 名古屋発</div>
-      <div class="card">
-        <h3><span class="icon">🚃</span> 近鉄急行 → 桑名</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">14:20頃 桑名着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約20分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">530円/人</span></div>
-        <div class="highlight tip">ランチ後に名古屋駅周辺で買い物・散策OK。近鉄は約15分間隔で運行。</div>
-        <div class="links">
-          <a href="https://www.kintetsu.co.jp/tetsudo/jikoku/" target="_blank" class="link-btn transport">近鉄 時刻表検索</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ホテル荷物 -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="14:25">
-      <div class="tl-time">14:25 - 14:40</div>
-      <div class="card">
-        <h3><span class="icon">🏨</span> ホテルに荷物を預ける</h3>
-        <p>桑名駅前のホテルに荷物を預けて身軽に。</p>
-        <div class="highlight success">先にホテルに寄ることで、荷物なしで快適にショッピングできる！</div>
-      </div>
-    </div>
-
-    <!-- バスでアウトレット -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="15:00">
-      <div class="tl-time">15:00頃 桑名駅前発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">15:25頃 長島温泉着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約25分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">650円/人</span></div>
-        <div class="highlight info">
-          <strong>桑名経由 vs 名古屋直通バス</strong><br>
-          桑名経由: 1,180円 + 荷物預けOK<br>
-          直通バス: 1,400円 + 荷物持ち歩き<br>
-          → 桑名経由が安い＋荷物なし＝最適解
-        </div>
-        <div class="links">
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス運賃・時刻表</a>
-          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- アウトレット -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="15:30">
-      <div class="tl-time">15:30 - 18:30</div>
-      <div class="card">
-        <h3><span class="icon">🛍️</span> 三井アウトレットパーク ジャズドリーム長島</h3>
-        <div class="attr-grid">
-          <div class="attr-card"><div class="num">~300</div><div class="desc">店舗（国内最大級）</div></div>
-          <div class="attr-card"><div class="num">無料</div><div class="desc">入場料</div></div>
-          <div class="attr-card"><div class="num">~3h</div><div class="desc">滞在時間</div></div>
-          <div class="attr-card"><div class="num">~20:00</div><div class="desc">営業時間</div></div>
-        </div>
-        <div class="links">
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn primary">公式サイト</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%95%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88%E3%83%91%E3%83%BC%E3%82%AF+%E3%82%B8%E3%83%A3%E3%82%BA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E9%95%B7%E5%B3%B6" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">アクセス</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 帰りバス -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="18:30">
-      <div class="tl-time">18:30頃 長島温泉発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> バスで桑名駅へ</h3>
-        <p>18:00 / 18:30 / 19:00発の便あり。650円/人、約20分。</p>
-      </div>
-    </div>
-
-    <!-- ホテルチェックイン -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="19:00">
-      <div class="tl-time">19:00頃</div>
-      <div class="card">
-        <h3><span class="icon">🏨</span> 桑名ホテル チェックイン</h3>
-        <div data-group="a-d1-hotel">
-          <div class="hotel-card recommended" data-name="スーパーホテル桑名駅前" data-price="3500" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">スーパーホテル桑名駅前（おすすめ）</div></div>
-            <div class="hotel-meta">駅徒歩3分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食+ウェルカムバー（17〜21時）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad336392/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/super-hotel-kuwana-ekimae/hotel/hatasho-cho-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%9B%E3%83%86%E3%83%AB%E6%A1%91%E5%90%8D%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="桑名グリーンホテル" data-price="3000" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">桑名グリーンホテル（最安）</div></div>
-            <div class="hotel-meta">駅徒歩1分 / 2名1室 ~6,000円（3,000円/人）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad312216/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/kuwana-green-hotel-kuwana-ekimae-h10670416/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E6%A1%91%E5%90%8D%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="ステーションホテル桑名" data-price="4000" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">ステーションホテル桑名（大浴場・サウナ）</div></div>
-            <div class="hotel-meta">駅徒歩3分 / 2名1室 ~8,000円（4,000円/人）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/5601" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad316522/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/station-hotel-kuwana/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="三交イン桑名駅前" data-price="3500" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">三交イン桑名駅前（駅近+無料朝食）</div></div>
-            <div class="hotel-meta">駅徒歩2分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食・無料駐車場50台</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/17776" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad383853/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/sanco-inn-kuwana-ekimae_4/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%A4%E3%82%A4%E3%83%B3%E6%A1%91%E5%90%8D%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="ビジネスホテルビーエル桑名" data-price="2750" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">ビジネスホテルビーエル桑名（大浴場サウナ付）</div></div>
-            <div class="hotel-meta">桑名駅から車10分（在良駅徒歩2分） / 2名1室 ~5,500円（2,750円/人） / サウナ付大浴場・無料駐車場40台</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/3053" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad315912/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/business-hotel-bl-kuwana/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%83%93%E3%83%BC%E3%82%A8%E3%83%AB%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ（プラン名・金額など）</div>
-          <div class="memo-row">
-            <label>プラン</label>
-            <input type="text" placeholder="例: ダブル素泊まり" data-memo="a-d1-hotel-plan" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="3500" data-budget="a-d1-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 夕食 -->
-    <div class="tl-item" data-chain="a-day1" data-base-time="20:00">
-      <div class="tl-time">20:00頃</div>
-      <div class="card">
-        <h3><span class="icon">🍖</span> 桑名名物 焼きはまぐり</h3>
-        <p>「その手は桑名の焼きはまぐり」の本場！</p>
-        <div class="resto-grid" data-group="a-d1-dinner">
-          <div class="resto-card" data-name="日の出" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">日の出（老舗料亭）</div></div>
-            <div class="resto-desc">創業約100年。はまぐり鍋コース10,000円〜。漫画「美味しんぼ」にも登場。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E3%81%AE%E5%87%BA+%E6%A1%91%E5%90%8D+%E3%81%AF%E3%81%BE%E3%81%90%E3%82%8A" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://ishi98.wixsite.com/hinode987" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="魚のてっぺん" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">魚のてっぺん（居酒屋・手頃）</div></div>
-            <div class="resto-desc">駅徒歩3分。焼きはまぐり1個から注文OK。三重産鮮魚も。3,000〜5,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24010803/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="蛤一択" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">蛤一択（完全予約制）</div></div>
-            <div class="resto-desc">駅徒歩4分。厳選桑名産天然蛤。全席掘りごたつ個室。</div>
-            <div class="links">
-              <a href="https://tabelog.com/mie/A2402/A240203/24019568/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E8%9B%A4%E4%B8%80%E6%8A%9E+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ（予約状況・注文メニューなど）</div>
-          <div class="memo-row">
-            <label>メニュー</label>
-            <input type="text" placeholder="例: はまぐり鍋コース" data-memo="a-d1-dinner-menu" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="5000" data-budget="a-d1-dinner" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ==================== DAY 2 ==================== -->
-<section id="a-day2" class="day-section day2">
-  <div class="day-header">
-    <div class="day-badge">D2</div>
-    <div class="day-header-text">
-      <h2>3/24（火）ナガシマスパーランド</h2>
-      <p>桑名 → スパーランド → 名古屋</p>
-    </div>
-  </div>
-  <div class="timeline">
-
-    <!-- 朝バス -->
-    <div class="tl-item" data-chain="a-day2" data-base-time="09:05" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="09:05" onchange="onAnchorChange(this)"> 桑名駅前発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">9:25 長島温泉着</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">650円/人</span></div>
-        <div class="highlight success">開園9:30に間に合う！朝イチが最も空いている。</div>
-      </div>
-    </div>
-
-    <!-- スパーランド -->
-    <div class="tl-item" data-chain="a-day2" data-base-time="09:30">
-      <div class="tl-time">9:30 - 17:00</div>
-      <div class="card">
-        <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
-        <div class="attr-grid">
-          <div class="attr-card"><div class="num" style="color:var(--day2)">6,000</div><div class="desc">円/人 パスポート</div></div>
-          <div class="attr-card"><div class="num" style="color:var(--day2)">~17:00</div><div class="desc">営業（春休みダイヤ）</div></div>
-        </div>
-
-        <h4 style="margin:16px 0 8px;font-size:.9rem">攻略順（重要！）</h4>
-        <p style="font-size:.82rem;color:var(--day2);font-weight:700;margin-bottom:8px">3/24は春休み平日火曜 = 週で最も空く曜日</p>
-        <table class="compare">
-          <tr><th>#</th><th>アトラクション</th><th>待ち</th><th>ポイント</th></tr>
-          <tr><td><strong>1</strong></td><td>白鯨</td><td>30-50分</td><td>開園直後が最短！</td></tr>
-          <tr><td><strong>2</strong></td><td>スチールドラゴン2000</td><td>30-50分</td><td>世界最長コースター</td></tr>
-          <tr><td><strong>3</strong></td><td>アクロバット</td><td>20-30分</td><td>うつ伏せフライング</td></tr>
-          <tr><td><strong>4</strong></td><td>嵐</td><td>~20分</td><td>4Dスピン</td></tr>
-        </table>
-        <div class="highlight tip">開園9:30にゲートイン → 白鯨に直行！これで1時間以上の時間節約。</div>
-        <div class="links">
-          <a href="https://www.nagashima-onsen.co.jp/spaland/" target="_blank" class="link-btn primary">公式サイト</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%8A%E3%82%AC%E3%82%B7%E3%83%9E%E3%82%B9%E3%83%91%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank" class="link-btn official">料金・営業時間</a>
-          <a href="https://7ticket.jp/s/113972/p/20260629/1" target="_blank" class="link-btn official">セブンチケット</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 名古屋へ -->
-    <div class="tl-item" data-chain="a-day2" data-base-time="16:40">
-      <div class="tl-time">16:40 / 17:00 長島温泉発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> 名鉄バス → 名古屋直行</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">17:35 / 17:55 名鉄バスセンター着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約55分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
-        <div class="highlight info">Day2は桑名に戻る必要なし。チェックアウト時に荷物を持ち出して名古屋へ直行。</div>
-        <div class="links">
-          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 名古屋ホテル -->
-    <div class="tl-item" data-chain="a-day2" data-base-time="18:00">
-      <div class="tl-time">18:00頃</div>
-      <div class="card">
-        <h3><span class="icon">🏨</span> 名古屋ホテル チェックイン</h3>
-        <div data-group="a-d2-hotel">
-          <div class="hotel-card recommended" data-name="ヴィアイン名古屋新幹線口" data-price="2920" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">ヴィアイン名古屋新幹線口（おすすめ）</div></div>
-            <div class="hotel-meta">名古屋駅 徒歩4分 / 2名1室 ~5,840円（2,920円/人） / 無料朝食（名古屋めし）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/141916" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad367046/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/via-inn-nagoya-shinkansenguchi_2/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%B4%E3%82%A3%E3%82%A2%E3%82%A4%E3%83%B3%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%96%B0%E5%B9%B9%E7%B7%9A%E5%8F%A3" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="名鉄イン名古屋駅前" data-price="3750" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">名鉄イン名古屋駅前</div></div>
-            <div class="hotel-meta">名古屋駅 徒歩3分 / 2名1室 ~7,500円（3,750円/人） / 朝食付き充実</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/67937" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad376064/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/meitetsu-inn-nagoyaeki-shinkansenguchi/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E9%89%84%E3%82%A4%E3%83%B3%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="相鉄フレッサイン名古屋駅桜通口" data-price="3200" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">相鉄フレッサイン名古屋駅桜通口</div></div>
-            <div class="hotel-meta">名古屋駅 徒歩4分 / 2名1室 ~6,400円（3,200円/人） / Sertaベッド・清潔感◎</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/177937" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad347300/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/sotetsu-fresa-inn-nagoya-sakuradoriguchi/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%9B%B8%E9%89%84%E3%83%95%E3%83%AC%E3%83%83%E3%82%B5%E3%82%A4%E3%83%B3%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E6%A1%9C%E9%80%9A%E5%8F%A3" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="コンフォートホテル名古屋新幹線口" data-price="3000" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">コンフォートホテル名古屋新幹線口（無料朝食）</div></div>
-            <div class="hotel-meta">名古屋駅 徒歩5分 / 2名1室 ~6,000円（3,000円/人） / 無料朝食・Library Cafe</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/176905" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad301555/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/comfort-hotel-nagoya-shinkansenguchi/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A9%E3%83%BC%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%96%B0%E5%B9%B9%E7%B7%9A%E5%8F%A3" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="スーパーホテル名古屋駅前" data-price="2500" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">スーパーホテル名古屋駅前（無料朝食+バー）</div></div>
-            <div class="hotel-meta">名古屋駅 徒歩7分 / 2名1室 ~5,000円（2,500円/人） / 無料朝食ビュッフェ+ウェルカムバー</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/80600" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad321117/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/super-hotel-nagoya-ekimae/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%9B%E3%83%86%E3%83%AB%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ（プラン名・金額など）</div>
-          <div class="memo-row">
-            <label>プラン</label>
-            <input type="text" placeholder="例: ダブル朝食付き" data-memo="a-d2-hotel-plan" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="2920" data-budget="a-d2-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 夕食 -->
-    <div class="tl-item" data-chain="a-day2" data-base-time="18:30">
-      <div class="tl-time">18:30頃</div>
-      <div class="card">
-        <h3><span class="icon">🍽️</span> 名古屋めしディナー</h3>
-        <div class="resto-grid" data-group="a-d2-dinner">
-          <div class="resto-card" data-name="あつた蓬莱軒 松坂屋店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">あつた蓬莱軒 松坂屋店（ひつまぶし）</div></div>
-            <div class="resto-desc">ひつまぶし発祥の名店。4,600円〜。行列覚悟（1〜2時間待ち）だが最高の味。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%82%E3%81%A4%E3%81%9F%E8%93%AC%E8%8E%B1%E8%BB%92+%E6%9D%BE%E5%9D%82%E5%B1%8B%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.houraiken.com/matsuzakaya/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="しら河 名駅店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）</div></div>
-            <div class="resto-desc">ひつまぶし2,800円〜。ネット予約可。エスカから徒歩すぐ。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://hitsumabushi.jp/tenpo/meiekiten" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="ひつまぶし 備長 エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">ひつまぶし 備長 エスカ店</div></div>
-            <div class="resto-desc">エスカ地下街直結。こちらもひつまぶしの人気店。3,000円〜。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23003773/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%B2%E3%81%A4%E3%81%BE%E3%81%B6%E3%81%97+%E5%82%99%E9%95%B7+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://hitsumabushi.co.jp/storeslist/esca/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="世界の山ちゃん" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">世界の山ちゃん（手羽先）</div></div>
-            <div class="resto-desc">名古屋名物「幻のコショウ」手羽先。飲み放題コースも。3,000〜5,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%96%E7%95%8C%E3%81%AE%E5%B1%B1%E3%81%A1%E3%82%83%E3%82%93+%E5%90%8D%E9%A7%85%E6%96%B0%E5%B9%B9%E7%B7%9A%E5%8F%A3%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.yamachan.co.jp/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="風来坊" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">風来坊（元祖手羽先唐揚）</div></div>
-            <div class="resto-desc">元祖手羽先唐揚。山ちゃんと食べ比べも。3,000〜5,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E9%A2%A8%E6%9D%A5%E5%9D%8A+%E5%90%8D%E9%A7%855%E4%B8%81%E7%9B%AE%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://furaibou.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="山本屋本店 エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div></div>
-            <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://www.esca-sc.com/shop_guide/120/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ（予約状況・注文メニューなど）</div>
-          <div class="memo-row">
-            <label>メニュー</label>
-            <input type="text" placeholder="例: ひつまぶし 上" data-memo="a-d2-dinner-menu" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="4000" data-budget="a-d2-dinner" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ==================== DAY 3 ==================== -->
-<section id="a-day3" class="day-section day3">
-  <div class="day-header">
-    <div class="day-badge">D3</div>
-    <div class="day-header-text">
-      <h2>3/25（水）水族館 → 名古屋観光 → 東京</h2>
-      <p>名古屋港水族館 → 大須商店街 → 品川</p>
-    </div>
-  </div>
-  <div class="timeline">
-
-    <!-- 移動 -->
-    <div class="tl-item" data-chain="a-day3" data-base-time="09:00" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="09:00" onchange="onAnchorChange(this)"> ホテル出発</div>
-      <div class="card">
-        <h3><span class="icon">🚇</span> 地下鉄で名古屋港へ</h3>
-        <p>名古屋駅 →（東山線）→ 栄 →（名港線）→ 名古屋港駅 3番出口 徒歩5分</p>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約30分</span></div>
-        <div class="info-row"><span class="label">地下鉄一日乗車券</span><span class="value">870円/人</span></div>
-        <div class="highlight success">一日乗車券で水族館200円引き + 1日乗り放題。元が取れる！</div>
-        <div class="links">
-          <a href="https://www.kotsu.city.nagoya.jp/jp/pc/ticket/" target="_blank" class="link-btn transport">名古屋市交通局 乗車券</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 水族館 -->
-    <div class="tl-item" data-chain="a-day3" data-base-time="09:30">
-      <div class="tl-time">9:30 - 14:00</div>
-      <div class="card">
-        <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
-        <div class="attr-grid">
-          <div class="attr-card"><div class="num" style="color:var(--day3)">1,830</div><div class="desc">円/人（割引後）</div></div>
-          <div class="attr-card"><div class="num" style="color:var(--day3)">~17:30</div><div class="desc">営業（春休み）</div></div>
-        </div>
-
-        <h4 style="margin:16px 0 8px;font-size:.9rem">3/25 イベントスケジュール</h4>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">11:00</div>
-          <div class="event-name">イルカパフォーマンス BLUE ECHO</div>
-          <div class="event-tag tag-dolphin">イルカ</div>
-        </div>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">12:00</div>
-          <div class="event-name">シャチ公開トレーニング</div>
-          <div class="event-tag tag-orca">シャチ</div>
-        </div>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">13:00</div>
-          <div class="event-name">イルカパフォーマンス BLUE ECHO（2回目）</div>
-          <div class="event-tag tag-dolphin">イルカ</div>
-        </div>
-        <div class="event">
-          <div class="event-time" style="color:var(--day3)">14:30</div>
-          <div class="event-name">シャチ公開トレーニング（2回目）</div>
-          <div class="event-tag tag-orca">シャチ</div>
-        </div>
-
-        <h4 style="margin:16px 0 8px;font-size:.9rem">おすすめ回り方</h4>
-        <table class="compare">
-          <tr><th>時間</th><th>行動</th></tr>
-          <tr><td>9:30</td><td>開館と同時に入館</td></tr>
-          <tr><td>9:30-10:30</td><td>北館 シャチ水槽・ベルーガ</td></tr>
-          <tr><td><strong>10:30</strong></td><td><strong>イルカショー席取り（30分前！）</strong></td></tr>
-          <tr><td><strong>11:00</strong></td><td><strong>イルカパフォーマンス BLUE ECHO</strong></td></tr>
-          <tr><td>11:20-12:00</td><td>南館（マイワシのトルネード・ペンギン）</td></tr>
-          <tr><td><strong>12:00</strong></td><td><strong>シャチ公開トレーニング</strong></td></tr>
-          <tr><td>12:30</td><td>昼食</td></tr>
-          <tr><td>13:00-14:00</td><td>残りの展示・お土産</td></tr>
-        </table>
-        <div class="highlight tip">イルカショーは30分前に席取りしないと正面席が取れない。10:30には着席！</div>
-        <div class="links">
-          <a href="https://nagoyaaqua.jp/" target="_blank" class="link-btn primary">公式サイト</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://nagoyaaqua.jp/fee/" target="_blank" class="link-btn official">料金・チケット</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 水族館ランチ -->
-    <div class="tl-item" data-chain="a-day3" data-base-time="12:30">
-      <div class="tl-time">12:30頃</div>
-      <div class="card">
-        <h3><span class="icon">🍽️</span> 水族館周辺ランチ</h3>
-        <div class="resto-grid" data-group="a-d3-lunch">
-          <div class="resto-card" data-name="水族館内レストラン" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">水族館内レストラン アリバダ</div></div>
-            <div class="resto-desc">水族館3F。シャチやイルカモチーフのメニュー。800〜1,500円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230112/23042155/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%83%AA%E3%83%90%E3%83%80+%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="JETTY（名古屋港）" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">JETTY（フードコート）</div></div>
-            <div class="resto-desc">水族館隣接の複合施設。名古屋めしから海鮮まで。800〜1,500円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230112/23080775/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=JETTY+%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ</div>
-          <div class="memo-row">
-            <label>メニュー</label>
-            <input type="text" placeholder="例: 海鮮丼" data-memo="a-d3-lunch-menu" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="1200" data-budget="a-d3-lunch" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 名古屋観光 -->
-    <div class="tl-item" data-chain="a-day3" data-base-time="14:30">
-      <div class="tl-time">14:30 - 17:00</div>
-      <div class="card">
-        <h3><span class="icon">🏯</span> 名古屋観光</h3>
-        <p>名古屋港駅 →（地下鉄）→ 大須観音駅</p>
-        <table class="compare">
-          <tr><th>スポット</th><th>時間</th><th>メモ</th></tr>
-          <tr class="winner"><td><strong>大須商店街</strong></td><td>1.5-2h</td><td>食べ歩き・サブカル</td></tr>
-          <tr><td>名古屋城</td><td>1-1.5h</td><td>本丸御殿必見（入城16:00迄）</td></tr>
-          <tr><td>栄エリア</td><td>1h</td><td>オアシス21</td></tr>
-        </table>
-        <div class="highlight success">大須商店街がいちばん楽しい。食べ歩き+ショッピングで2時間がちょうどいい。</div>
-        <div class="links">
-          <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%A0%88%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" class="link-btn gmap">大須 Googleマップ</a>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 食べ歩き・お買い物メモ</div>
-          <div class="memo-row">
-            <label>内容</label>
-            <input type="text" placeholder="例: 揚げまん棒、台湾まぜそば" data-memo="a-d3-osu" oninput="saveMemo(this)">
-          </div>
-          <div class="memo-row">
-            <label>金額/人</label>
-            <input type="number" placeholder="2000" data-budget="a-d3-osu" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 帰り新幹線 -->
-    <div class="tl-item" data-chain="a-day3" data-base-time="18:06">
-      <div class="tl-time">18:06 / 19:06 名古屋発</div>
-      <div class="card">
-        <h3><span class="icon">🚅</span> のぞみ → 品川</h3>
-        <table class="compare">
-          <tr><th>便</th><th>名古屋発</th><th>品川着</th></tr>
-          <tr><td>のぞみ176号</td><td>18:06</td><td>19:38</td></tr>
-          <tr><td>のぞみ182号</td><td>19:06</td><td>20:38</td></tr>
-          <tr><td>のぞみ188号</td><td>20:05</td><td>21:35</td></tr>
-        </table>
-        <div class="highlight info">16〜20時台は約10分間隔でのぞみ運行。時間に柔軟に対応可能。</div>
-        <div class="links">
-          <a href="https://smart-ex.jp/top.php" target="_blank" class="link-btn primary">スマートEX 予約</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Checklist -->
-<section style="padding:30px 0">
-  <div class="card" style="border:2px solid #764ba2">
-    <h3><span class="icon">✅</span> 出発前チェックリスト</h3>
-    <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">予約するもの</h4>
-    <ul class="checklist">
-      <li>新幹線チケット（<a href="https://smart-ex.jp/top.php" target="_blank">スマートEX</a>で登録・予約）</li>
-      <li>桑名ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad336392/" target="_blank">じゃらん</a>）</li>
-      <li>名古屋ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/141916" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad367046/" target="_blank">じゃらん</a>）</li>
-      <li>ナガシマパスポート（<a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank">セブンチケット or ファミマ</a>で事前購入 → 行列回避）</li>
-    </ul>
-    <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">当日の節約テク</h4>
-    <ul class="checklist">
-      <li>Day3に<a href="https://www.kotsu.city.nagoya.jp/jp/pc/ticket/" target="_blank">地下鉄一日乗車券</a>（870円）を購入</li>
-      <li>水族館窓口で一日乗車券を提示 → 200円引き</li>
-    </ul>
-  </div>
-</section>
-
-</div>
-</div><!-- end planA -->
-
-<!-- ========== PLAN B ========== -->
-<div id="planB" class="plan-container">
-<!-- Budget -->
-<div class="budget-banner">
-  <h2>予算サマリー（1人あたり）</h2>
-  <div class="budget-note">下の各項目でお店・ホテルを選択＆金額を入力すると自動で反映されます</div>
-  <div class="budget-grid">
-    <div class="budget-item"><div class="label">新幹線往復</div><div class="value" data-budget-display="train">21,120円</div></div>
-    <div class="budget-item"><div class="label">ホテル2泊</div><div class="value" data-budget-display="hotel"><span class="empty">未選択</span></div></div>
-    <div class="budget-item"><div class="label">スパーランド</div><div class="value" data-budget-display="spa">5,800円</div></div>
     <div class="budget-item"><div class="label">水族館</div><div class="value" data-budget-display="aqua">2,000円</div></div>
     <div class="budget-item"><div class="label">現地移動</div><div class="value" data-budget-display="transport">~5,000円</div></div>
     <div class="budget-item"><div class="label">食事</div><div class="value" data-budget-display="food"><span class="empty">未入力</span></div></div>
@@ -977,27 +273,33 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   </div>
 </div>
 
+<!-- Day Nav -->
 <nav class="day-nav">
-  <a href="#b-day1" onclick="smoothScroll('b-day1');return false">Day 1 水族館＋ヒルトン</a>
-  <a href="#b-day2" onclick="smoothScroll('b-day2');return false">Day 2 アウトレット</a>
-  <a href="#b-day3" onclick="smoothScroll('b-day3');return false">Day 3 スパーランド</a>
+  <a href="#day1" onclick="smoothScroll('day1');return false">Day 1 大須+桑名</a>
+  <a href="#day2" onclick="smoothScroll('day2');return false">Day 2 スパ+ヒルトン</a>
+  <a href="#day3" onclick="smoothScroll('day3');return false">Day 3 水族館</a>
 </nav>
 
 <div class="container">
 
-<!-- ==================== PLAN B DAY 1 ==================== -->
-<section id="b-day1" class="day-section day1">
+<!-- ==================== DAY 1 ==================== -->
+<section id="day1" class="day-section day1">
   <div class="day-header">
     <div class="day-badge">D1</div>
     <div class="day-header-text">
-      <h2>3/23（月）東京 → 水族館 → ヒルトン名古屋</h2>
-      <p>品川 → 名古屋 → 名古屋港水族館 → ヒルトン名古屋</p>
+      <h2>3/23（月）大須商店街 + 桑名</h2>
+      <p>品川 → 名古屋 → 大須商店街 → 桑名（はまぐり）</p>
     </div>
   </div>
   <div class="timeline">
 
-    <div class="tl-item" data-chain="b-day1" data-base-time="10:01" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="10:01" onchange="onAnchorChange(this)"> 品川発</div>
+    <!-- 新幹線 -->
+    <div class="tl-item" data-chain="day1" data-base-time="10:01" data-idx="0">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="10:01" onchange="onTimeChange(this)">
+        <span class="tl-label">品川発</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ327号 → 名古屋</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">11:33 名古屋着</span></div>
@@ -1010,12 +312,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day1" data-base-time="11:40">
-      <div class="tl-time">11:40 - 12:30</div>
+    <!-- ランチ -->
+    <div class="tl-item" data-chain="day1" data-base-time="11:40" data-idx="1">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="11:40" onchange="onTimeChange(this)">
+        <span class="tl-label">- 12:30</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🍽️</span> 名古屋駅ランチ（エスカ地下街）</h3>
         <p>新幹線口直結のエスカ地下街で名古屋めし。</p>
-        <div class="resto-grid" data-group="b-d1-lunch">
+        <div class="resto-grid" data-group="d1-lunch">
           <div class="resto-card" data-name="矢場とん エスカ店" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）</div></div>
             <div class="resto-desc">名古屋名物味噌カツの名店。わらじとんかつ定食 1,650円。</div>
@@ -1046,258 +353,78 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         </div>
         <div class="memo-area">
           <div class="memo-title">📝 メモ</div>
-          <div class="memo-row"><label>メニュー</label><input type="text" placeholder="例: わらじとんかつ定食" data-memo="b-d1-lunch-menu" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="1650" data-budget="b-d1-lunch" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+          <div class="memo-row"><label>メニュー</label><input type="text" placeholder="例: わらじとんかつ定食" data-memo="d1-lunch-menu" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="1650" data-budget="d1-lunch" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day1" data-base-time="12:40">
-      <div class="tl-time">12:40 地下鉄で名古屋港へ</div>
+    <!-- 地下鉄で大須へ -->
+    <div class="tl-item" data-chain="day1" data-base-time="13:00" data-idx="2">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
+        <span class="tl-label">地下鉄で大須へ</span>
+      </div>
       <div class="card">
-        <h3><span class="icon">🚇</span> 地下鉄 名古屋 → 名古屋港</h3>
-        <div class="info-row"><span class="label">ルート</span><span class="value">東山線→名港線 乗換1回</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約30分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">270円/人</span></div>
-        <div class="highlight tip">名古屋港駅3番出口が水族館最寄り。徒歩5分。</div>
+        <h3><span class="icon">🚇</span> 名古屋駅 → 大須観音</h3>
+        <div class="info-row"><span class="label">ルート</span><span class="value">東山線→鶴舞線 乗換1回</span></div>
+        <div class="info-row"><span class="label">所要時間</span><span class="value">約15分</span></div>
+        <div class="info-row"><span class="label">料金</span><span class="value">240円/人</span></div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day1" data-base-time="13:10">
-      <div class="tl-time">13:10 - 15:40</div>
+    <!-- 大須商店街 -->
+    <div class="tl-item" data-chain="day1" data-base-time="13:30" data-idx="3">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="13:30" onchange="onTimeChange(this)">
+        <span class="tl-label">- 15:30</span>
+      </div>
       <div class="card">
-        <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
-        <div class="attr-grid">
-          <div class="attr-card"><div class="num" style="color:var(--day1)">2,000</div><div class="desc">円/人 入場料</div></div>
-          <div class="attr-card"><div class="num" style="color:var(--day1)">~2.5h</div><div class="desc">滞在時間</div></div>
-        </div>
-        <h4 style="margin:16px 0 8px;font-size:.9rem">到着後のショースケジュール</h4>
-        <div class="event">
-          <div class="event-time" style="color:var(--day1)">14:30</div>
-          <div class="event-name">シャチ公開トレーニング</div>
-          <div class="event-tag tag-orca">シャチ</div>
-        </div>
-        <div class="highlight info">13:10着→14:30シャチを軸に回ろう。15分前に北館3Fメインプールで席確保。</div>
+        <h3><span class="icon">🏯</span> 大須商店街</h3>
+        <p>名古屋のアメ横。食べ歩き＋ショッピング＋翌朝のパン買い出し。</p>
+        <div class="highlight success">翌朝のごはんをここで調達しておくと桑名で楽！パン屋・惣菜・おにぎり屋が豊富。</div>
+        <div class="highlight tip">揚げまん棒（大須ういろ）、台湾まぜそば、李さんの台湾唐揚げ、鯛焼きなど食べ歩きが充実。</div>
         <div class="links">
-          <a href="https://nagoyaaqua.jp/" target="_blank" class="link-btn primary">公式サイト</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="link-btn gmap">Googleマップ</a>
-          <a href="https://nagoyaaqua.jp/fee/" target="_blank" class="link-btn official">料金・チケット</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day1" data-base-time="15:45">
-      <div class="tl-time">15:45 地下鉄で伏見へ</div>
-      <div class="card">
-        <h3><span class="icon">🚇</span> 名古屋港 → 伏見</h3>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約25分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">270円/人</span></div>
-        <div class="highlight tip">伏見駅7番出口から徒歩約3分でヒルトン名古屋。</div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day1" data-base-time="16:10">
-      <div class="tl-time">16:10</div>
-      <div class="card">
-        <h3><span class="icon">🏨</span> ヒルトン名古屋 チェックイン</h3>
-        <p>伏見駅 徒歩3分 / エグゼクティブフロア</p>
-        <div class="hilton-info">
-          <h4>🏛️ ヒルトン名古屋 プレミアム特典</h4>
-          <div class="hilton-grid">
-            <div class="hilton-item"><div class="hi-label">Executive Lounge (2F)</div><div class="hi-value">6:30〜21:00</div></div>
-            <div class="hilton-item"><div class="hi-label">ラウンジ朝食</div><div class="hi-value">7:00〜10:00（80品目+）</div></div>
-            <div class="hilton-item"><div class="hi-label">リフレッシュメント</div><div class="hi-value">10:00〜17:00</div></div>
-            <div class="hilton-item"><div class="hi-label">カクテルタイム</div><div class="hi-value">17:30〜20:00（飲放+前菜）</div></div>
-            <div class="hilton-item"><div class="hi-label">プール15m+ジャグジー (7F)</div><div class="hi-value">6:00〜21:00（無料）</div></div>
-            <div class="hilton-item"><div class="hi-label">大浴場+ドライサウナ (7F)</div><div class="hi-value">6:00〜22:00（最終21:30）</div></div>
-            <div class="hilton-item"><div class="hi-label">レストラン朝食 (1F)</div><div class="hi-value">In-Place 3-3 6:30〜10:00</div></div>
-            <div class="hilton-item"><div class="hi-label">Diamond特典</div><div class="hi-value">ラウンジ無料/スイートUP/レイトC/O15:00</div></div>
-          </div>
-          <div class="hilton-schedule">
-            <table>
-              <tr><th>時間帯</th><th>おすすめアクション</th></tr>
-              <tr><td>16:10</td><td>チェックイン → 部屋で荷物整理</td></tr>
-              <tr><td>16:30</td><td>プール＆大浴場＆サウナ（7F）</td></tr>
-              <tr><td>17:30</td><td>カクテルタイム（2F ラウンジ）</td></tr>
-              <tr><td>20:30</td><td>大浴場＆サウナ（最終受付21:30）</td></tr>
-            </table>
-          </div>
-        </div>
-        <div class="links">
-          <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank" class="link-btn rakuten">楽天トラベル</a>
-          <a href="https://www.jalan.net/yad337680/" target="_blank" class="link-btn jalan">じゃらん</a>
-          <a href="https://www.agoda.com/ja-jp/hilton-nagoya_6/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda">Agoda</a>
-          <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank" class="link-btn official">公式</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%A0%88%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" class="link-btn gmap">大須 Googleマップ</a>
+          <a href="https://osu.co.jp/" target="_blank" class="link-btn official">大須商店街公式</a>
         </div>
         <div class="memo-area">
-          <div class="memo-title">📝 メモ（プラン名・金額など）</div>
-          <div class="memo-row"><label>プラン</label><input type="text" placeholder="例: エグゼクティブツイン" data-memo="b-d1-hotel-plan" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="20000" data-budget="b-d1-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+          <div class="memo-title">📝 食べ歩き・買い出しメモ</div>
+          <div class="memo-row"><label>内容</label><input type="text" placeholder="例: 揚げまん棒、翌朝のパン" data-memo="d1-osu" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="2000" data-budget="d1-osu" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day1" data-base-time="16:30">
-      <div class="tl-time">16:30</div>
-      <div class="card">
-        <h3><span class="icon">🏊</span> プール(15m温水) + 大浴場 + サウナ</h3>
-        <p>7F フィットネスエリア。温水プール＆ジャグジーで水族館の疲れをリセット。</p>
-        <div class="highlight success">プール・大浴場・ドライサウナすべて宿泊者無料。</div>
+    <!-- 近鉄で桑名 -->
+    <div class="tl-item" data-chain="day1" data-base-time="16:00" data-idx="4">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
+        <span class="tl-label">名古屋→桑名</span>
       </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day1" data-base-time="17:30">
-      <div class="tl-time">17:30 - 20:00</div>
       <div class="card">
-        <h3><span class="icon">🍸</span> エグゼクティブラウンジ カクテルタイム</h3>
-        <p>2F ラウンジ。アルコール飲み放題＆前菜ビュッフェ。夕食代わりにもなるボリューム。</p>
-        <div class="highlight success">窓際席がおすすめ。17:30開始直後が空いている。</div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day1" data-base-time="20:30">
-      <div class="tl-time">20:30</div>
-      <div class="card">
-        <h3><span class="icon">♨️</span> 大浴場＆サウナ（ナイト）</h3>
-        <p>7F 最終受付21:30 / 閉場22:00。カクテルタイム後のサウナは最高。</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ==================== PLAN B DAY 2 ==================== -->
-<section id="b-day2" class="day-section day2">
-  <div class="day-header">
-    <div class="day-badge">D2</div>
-    <div class="day-header-text">
-      <h2>3/24（火）ヒルトン満喫 → アウトレット</h2>
-      <p>ヒルトン朝活 → 長島アウトレット → 桑名</p>
-    </div>
-  </div>
-  <div class="timeline">
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="06:30" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="06:30" onchange="onAnchorChange(this)"> 朝食</div>
-      <div class="card">
-        <h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3>
-        <p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p>
-        <div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="08:00">
-      <div class="tl-time">08:00</div>
-      <div class="card">
-        <h3><span class="icon">🏊</span> プール / ジム / サウナ</h3>
-        <p>7F フィットネス。15m温水プール、ジャグジー、ドライサウナ。朝イチで空いてる。</p>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="10:00">
-      <div class="tl-time">10:00</div>
-      <div class="card">
-        <h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3>
-        <p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。チェックアウトまでゆっくり。</p>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="12:00">
-      <div class="tl-time">12:00 チェックアウト</div>
-      <div class="card">
-        <h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3>
-        <p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="12:30">
-      <div class="tl-time">12:30</div>
-      <div class="card">
-        <h3><span class="icon">🚇</span> 伏見 → 名古屋駅</h3>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">地下鉄東山線 5分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">270円/人</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="13:00">
-      <div class="tl-time">13:00 - 14:00</div>
-      <div class="card">
-        <h3><span class="icon">🍽️</span> 名古屋駅ランチ（エスカ地下街）</h3>
-        <div class="resto-grid" data-group="b-d2-lunch">
-          <div class="resto-card" data-name="矢場とん エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）</div></div>
-            <div class="resto-desc">わらじとんかつ定食 1,650円。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="しら河 名駅店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）</div></div>
-            <div class="resto-desc">ひつまぶし2,800円〜。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="resto-card" data-name="山本屋本店 エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div></div>
-            <div class="resto-desc">味噌煮込みうどん 1,000〜2,000円/人。</div>
-            <div class="links">
-              <a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-        </div>
-        <div class="memo-area">
-          <div class="memo-title">📝 メモ</div>
-          <div class="memo-row"><label>メニュー</label><input type="text" placeholder="例: ひつまぶし" data-memo="b-d2-lunch-menu" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="2000" data-budget="b-d2-lunch" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="14:30">
-      <div class="tl-time">14:30 名古屋駅発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> 名鉄バス → 長島温泉</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">15:25頃 長島温泉着</span></div>
-        <div class="info-row"><span class="label">所要時間</span><span class="value">約55分</span></div>
-        <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
+        <h3><span class="icon">🚃</span> 近鉄急行 → 桑名</h3>
+        <div class="info-row"><span class="label">所要時間</span><span class="value">約20分</span></div>
+        <div class="info-row"><span class="label">料金</span><span class="value">530円/人</span></div>
         <div class="links">
-          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
+          <a href="https://www.kintetsu.co.jp/tetsudo/jikoku/" target="_blank" class="link-btn transport">近鉄 時刻表</a>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day2" data-base-time="15:30">
-      <div class="tl-time">15:30 - 18:30</div>
-      <div class="card">
-        <h3><span class="icon">🛍️</span> 三井アウトレットパーク ジャズドリーム長島</h3>
-        <div class="attr-grid">
-          <div class="attr-card"><div class="num">~300</div><div class="desc">店舗（国内最大級）</div></div>
-          <div class="attr-card"><div class="num">~3h</div><div class="desc">滞在時間</div></div>
-        </div>
-        <div class="links">
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn primary">公式サイト</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%95%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88%E3%83%91%E3%83%BC%E3%82%AF+%E3%82%B8%E3%83%A3%E3%82%BA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E9%95%B7%E5%B3%B6" target="_blank" class="link-btn gmap">Googleマップ</a>
-        </div>
+    <!-- 桑名ホテル -->
+    <div class="tl-item" data-chain="day1" data-base-time="17:00" data-idx="5">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
+        <span class="tl-label">桑名ホテルCI</span>
       </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="18:30">
-      <div class="tl-time">18:30頃 長島温泉発</div>
-      <div class="card">
-        <h3><span class="icon">🚌</span> バスで桑名駅へ</h3>
-        <p>三重交通バス 650円/人、約20分。</p>
-      </div>
-    </div>
-
-    <div class="tl-item" data-chain="b-day2" data-base-time="19:00">
-      <div class="tl-time">19:00頃</div>
       <div class="card">
         <h3><span class="icon">🏨</span> 桑名ホテル チェックイン</h3>
-        <div data-group="b-d2-hotel">
+        <div data-group="d1-hotel">
           <div class="hotel-card recommended" data-name="スーパーホテル桑名駅前" data-price="3500" onclick="selectHotel(this)">
             <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">スーパーホテル桑名駅前（おすすめ）</div></div>
             <div class="hotel-meta">駅徒歩3分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食+ウェルカムバー</div>
@@ -1305,17 +432,14 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
               <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
               <a href="https://www.jalan.net/yad336392/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
               <a href="https://www.agoda.com/ja-jp/super-hotel-kuwana-ekimae/hotel/hatasho-cho-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%9B%E3%83%86%E3%83%AB%E6%A1%91%E5%90%8D%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
             </div>
           </div>
-          <div class="hotel-card" data-name="桑名グリーンホテル" data-price="3000" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">桑名グリーンホテル（最安）</div></div>
-            <div class="hotel-meta">駅徒歩1分 / 2名1室 ~6,000円（3,000円/人）</div>
+          <div class="hotel-card" data-name="三交イン桑名駅前" data-price="3500" onclick="selectHotel(this)">
+            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">三交イン桑名駅前（駅近+無料朝食）</div></div>
+            <div class="hotel-meta">駅徒歩2分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食・無料駐車場</div>
             <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad312216/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/kuwana-green-hotel-kuwana-ekimae-h10670416/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E6%A1%91%E5%90%8D%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
+              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/17776" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
+              <a href="https://www.jalan.net/yad383853/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
             </div>
           </div>
           <div class="hotel-card" data-name="ステーションホテル桑名" data-price="4000" onclick="selectHotel(this)">
@@ -1324,57 +448,47 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
             <div class="links">
               <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/5601" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
               <a href="https://www.jalan.net/yad316522/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/station-hotel-kuwana/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
             </div>
           </div>
-          <div class="hotel-card" data-name="三交イン桑名駅前" data-price="3500" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">三交イン桑名駅前（駅近+無料朝食）</div></div>
-            <div class="hotel-meta">駅徒歩2分 / 2名1室 ~7,000円（3,500円/人） / 無料朝食・無料駐車場50台</div>
+          <div class="hotel-card" data-name="桑名グリーンホテル" data-price="3000" onclick="selectHotel(this)">
+            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">桑名グリーンホテル（最安）</div></div>
+            <div class="hotel-meta">駅徒歩1分 / 2名1室 ~6,000円（3,000円/人）</div>
             <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/17776" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad383853/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/sanco-inn-kuwana-ekimae_4/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%A4%E3%82%A4%E3%83%B3%E6%A1%91%E5%90%8D%E9%A7%85%E5%89%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-            </div>
-          </div>
-          <div class="hotel-card" data-name="ビジネスホテルビーエル桑名" data-price="2750" onclick="selectHotel(this)">
-            <div class="hotel-header"><div class="hotel-radio"></div><div class="hotel-name">ビジネスホテルビーエル桑名（大浴場サウナ付）</div></div>
-            <div class="hotel-meta">桑名駅から車10分（在良駅徒歩2分） / 2名1室 ~5,500円（2,750円/人）</div>
-            <div class="links">
-              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/3053" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
-              <a href="https://www.jalan.net/yad315912/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
-              <a href="https://www.agoda.com/ja-jp/business-hotel-bl-kuwana/hotel/yokkaichi-jp.html" target="_blank" class="link-btn agoda" onclick="event.stopPropagation()">Agoda</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%83%93%E3%83%BC%E3%82%A8%E3%83%AB%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
+              <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/730" target="_blank" class="link-btn rakuten" onclick="event.stopPropagation()">楽天トラベル</a>
+              <a href="https://www.jalan.net/yad312216/" target="_blank" class="link-btn jalan" onclick="event.stopPropagation()">じゃらん</a>
             </div>
           </div>
         </div>
         <div class="memo-area">
           <div class="memo-title">📝 メモ</div>
-          <div class="memo-row"><label>プラン</label><input type="text" placeholder="例: ダブル素泊まり" data-memo="b-d2-hotel-plan" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="3500" data-budget="b-d2-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+          <div class="memo-row"><label>プラン</label><input type="text" placeholder="例: ダブル素泊まり" data-memo="d1-hotel-plan" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="3500" data-budget="d1-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day2" data-base-time="20:00">
-      <div class="tl-time">20:00頃</div>
+    <!-- はまぐりディナー -->
+    <div class="tl-item" data-chain="day1" data-base-time="19:00" data-idx="6">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="19:00" onchange="onTimeChange(this)">
+        <span class="tl-label">はまぐりディナー</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🍖</span> 桑名名物 焼きはまぐり</h3>
         <p>「その手は桑名の焼きはまぐり」の本場！</p>
-        <div class="resto-grid" data-group="b-d2-dinner">
+        <div class="resto-grid" data-group="d1-dinner">
           <div class="resto-card" data-name="日の出" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">日の出（老舗料亭）</div></div>
             <div class="resto-desc">創業約100年。はまぐり鍋コース10,000円〜。</div>
             <div class="links">
               <a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
               <a href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E3%81%AE%E5%87%BA+%E6%A1%91%E5%90%8D+%E3%81%AF%E3%81%BE%E3%81%90%E3%82%8A" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
-              <a href="https://ishi98.wixsite.com/hinode987" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
             </div>
           </div>
           <div class="resto-card" data-name="魚のてっぺん" onclick="selectResto(this)">
             <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">魚のてっぺん（居酒屋・手頃）</div></div>
-            <div class="resto-desc">駅徒歩3分。焼きはまぐり1個から注文OK。3,000〜5,000円/人。</div>
+            <div class="resto-desc">駅徒歩3分。焼きはまぐり1個からOK。3,000〜5,000円/人。</div>
             <div class="links">
               <a href="https://tabelog.com/mie/A2402/A240203/24010803/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
               <a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
@@ -1385,43 +499,74 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
             <div class="resto-desc">駅徒歩4分。厳選桑名産天然蛤。全席掘りごたつ個室。</div>
             <div class="links">
               <a href="https://tabelog.com/mie/A2402/A240203/24019568/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E8%9B%A4%E4%B8%80%E6%8A%9E+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a>
               <a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a>
             </div>
           </div>
         </div>
         <div class="memo-area">
           <div class="memo-title">📝 メモ</div>
-          <div class="memo-row"><label>メニュー</label><input type="text" placeholder="例: はまぐり鍋コース" data-memo="b-d2-dinner-menu" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="5000" data-budget="b-d2-dinner" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+          <div class="memo-row"><label>メニュー</label><input type="text" placeholder="例: はまぐり鍋コース" data-memo="d1-dinner-menu" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="5000" data-budget="d1-dinner" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
         </div>
       </div>
     </div>
 
   </div>
+
+  <!-- アウトレット代替プラン -->
+  <details class="alt-plan">
+    <summary>🛍️ Plan B: 大須の代わりにアウトレットへ</summary>
+    <div class="alt-content">
+      <p style="font-size:.85rem;color:var(--text-light);margin-bottom:12px">大須を飽きた場合 or スキップしたい場合の代替ルート。ランチ後に桑名経由でアウトレットへ。</p>
+      <table class="compare">
+        <tr><th>時刻</th><th>内容</th></tr>
+        <tr><td>14:00</td><td>近鉄急行 → 桑名（20分, 530円）</td></tr>
+        <tr><td>14:25</td><td>ホテルに荷物を預ける</td></tr>
+        <tr><td>15:00</td><td>三重交通バス → 長島温泉（25分, 650円）</td></tr>
+        <tr><td>15:30</td><td>ジャズドリーム長島（~300店舗、3時間）</td></tr>
+        <tr><td>18:30</td><td>バス → 桑名駅（20分, 650円）</td></tr>
+        <tr><td>19:00</td><td>ホテルCI → はまぐりディナー</td></tr>
+      </table>
+      <div class="links" style="margin-top:12px">
+        <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn primary">アウトレット公式</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BA%95%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88%E3%83%91%E3%83%BC%E3%82%AF+%E3%82%B8%E3%83%A3%E3%82%BA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E9%95%B7%E5%B3%B6" target="_blank" class="link-btn gmap">Googleマップ</a>
+        <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス時刻表</a>
+      </div>
+    </div>
+  </details>
 </section>
 
-<!-- ==================== PLAN B DAY 3 ==================== -->
-<section id="b-day3" class="day-section day3">
+<!-- ==================== DAY 2 ==================== -->
+<section id="day2" class="day-section day2">
   <div class="day-header">
-    <div class="day-badge">D3</div>
+    <div class="day-badge">D2</div>
     <div class="day-header-text">
-      <h2>3/25（水）スパーランド → 名古屋観光 → 東京</h2>
-      <p>桑名 → ナガシマスパーランド → 名古屋 → 品川</p>
+      <h2>3/24（火）スパーランド + ヒルトン名古屋</h2>
+      <p>桑名 → ナガシマスパーランド → ヒルトン名古屋</p>
     </div>
   </div>
   <div class="timeline">
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="08:00" data-anchor="true">
-      <div class="tl-time"><input type="time" class="time-shift-input" value="08:00" onchange="onAnchorChange(this)"> 桑名ホテルC/O</div>
+    <!-- 桑名CO -->
+    <div class="tl-item" data-chain="day2" data-base-time="08:00" data-idx="0">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)">
+        <span class="tl-label">桑名ホテルC/O</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🧳</span> 桑名ホテル チェックアウト</h3>
-        <p>荷物を持ってバス停へ。</p>
+        <p>荷物を持ってバス停へ。大須で買ったパン等で朝食。</p>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="09:05">
-      <div class="tl-time">09:05 桑名駅前発</div>
+    <!-- バスで長島 -->
+    <div class="tl-item" data-chain="day2" data-base-time="09:05" data-idx="1">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)">
+        <span class="tl-label">桑名駅前発</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">9:25 長島温泉着</span></div>
@@ -1433,15 +578,21 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="09:30">
-      <div class="tl-time">09:30 - 15:00</div>
+    <!-- スパーランド -->
+    <div class="tl-item" data-chain="day2" data-base-time="09:30" data-idx="2">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)">
+        <span class="tl-label">- 17:00</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
         <div class="attr-grid">
-          <div class="attr-card"><div class="num" style="color:var(--day3)">5,800</div><div class="desc">円/人 パスポート</div></div>
-          <div class="attr-card"><div class="num" style="color:var(--day3)">~17:00</div><div class="desc">営業（春休み）</div></div>
+          <div class="attr-card"><div class="num" style="color:var(--day2)">6,000</div><div class="desc">円/人 パスポート</div></div>
+          <div class="attr-card"><div class="num" style="color:var(--day2)">~17:00</div><div class="desc">営業（春休み）</div></div>
         </div>
         <h4 style="margin:16px 0 8px;font-size:.9rem">攻略順（重要！）</h4>
+        <p style="font-size:.82rem;color:var(--day2);font-weight:700;margin-bottom:8px">3/24は春休み平日火曜 = 週で最も空く曜日</p>
         <table class="compare">
           <tr><th>#</th><th>アトラクション</th><th>待ち</th><th>ポイント</th></tr>
           <tr><td><strong>1</strong></td><td>白鯨</td><td>30-50分</td><td>開園直後が最短！</td></tr>
@@ -1459,11 +610,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="15:30">
-      <div class="tl-time">15:30 長島温泉発</div>
+    <!-- 名古屋へ -->
+    <div class="tl-item" data-chain="day2" data-base-time="17:00" data-idx="3">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
+        <span class="tl-label">長島温泉発</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🚌</span> 名鉄バス → 名古屋直行</h3>
-        <div class="info-row"><span class="label">到着</span><span class="value">16:25頃 名鉄バスセンター着</span></div>
+        <div class="info-row"><span class="label">到着</span><span class="value">17:55頃 名鉄バスセンター着</span></div>
+        <div class="info-row"><span class="label">所要時間</span><span class="value">約55分</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
         <div class="links">
           <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
@@ -1471,24 +628,225 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="17:00">
-      <div class="tl-time">17:00 - 18:00</div>
+    <!-- ヒルトンCI -->
+    <div class="tl-item" data-chain="day2" data-base-time="18:00" data-idx="4">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)">
+        <span class="tl-label">ヒルトン名古屋CI</span>
+      </div>
       <div class="card">
-        <h3><span class="icon">🏯</span> 大須商店街 or 最後の名古屋めし</h3>
-        <p>名古屋駅 →（地下鉄）→ 大須観音駅。食べ歩き＋ショッピングで1時間。</p>
+        <h3><span class="icon">🏨</span> ヒルトン名古屋 チェックイン</h3>
+        <p>名古屋駅 →（地下鉄東山線）→ 伏見駅 徒歩3分</p>
+        <div class="hilton-info">
+          <h4>🏛️ ヒルトン名古屋 プレミアム特典</h4>
+          <div class="hilton-grid">
+            <div class="hilton-item"><div class="hi-label">Executive Lounge (2F)</div><div class="hi-value">6:30〜21:00</div></div>
+            <div class="hilton-item"><div class="hi-label">ラウンジ朝食</div><div class="hi-value">7:00〜10:00（80品目+）</div></div>
+            <div class="hilton-item"><div class="hi-label">リフレッシュメント</div><div class="hi-value">10:00〜17:00</div></div>
+            <div class="hilton-item"><div class="hi-label">カクテルタイム</div><div class="hi-value">17:30〜20:00（飲放+前菜）</div></div>
+            <div class="hilton-item"><div class="hi-label">プール15m+ジャグジー (7F)</div><div class="hi-value">6:00〜21:00（無料）</div></div>
+            <div class="hilton-item"><div class="hi-label">大浴場+ドライサウナ (7F)</div><div class="hi-value">6:00〜22:00（最終21:30）</div></div>
+            <div class="hilton-item"><div class="hi-label">レストラン朝食 (1F)</div><div class="hi-value">In-Place 3-3 6:30〜10:00</div></div>
+            <div class="hilton-item"><div class="hi-label">Diamond特典</div><div class="hi-value">ラウンジ無料/スイートUP/レイトC/O15:00</div></div>
+          </div>
+        </div>
         <div class="links">
-          <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%A0%88%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" class="link-btn gmap">大須 Googleマップ</a>
+          <a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank" class="link-btn rakuten">楽天トラベル</a>
+          <a href="https://www.jalan.net/yad337680/" target="_blank" class="link-btn jalan">じゃらん</a>
+          <a href="https://www.agoda.com/ja-jp/hilton-nagoya_6/hotel/nagoya-jp.html" target="_blank" class="link-btn agoda">Agoda</a>
+          <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank" class="link-btn official">公式</a>
         </div>
         <div class="memo-area">
-          <div class="memo-title">📝 食べ歩き・お買い物メモ</div>
-          <div class="memo-row"><label>内容</label><input type="text" placeholder="例: 揚げまん棒、台湾まぜそば" data-memo="b-d3-osu" oninput="saveMemo(this)"></div>
-          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="2000" data-budget="b-d3-snack" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+          <div class="memo-title">📝 メモ</div>
+          <div class="memo-row"><label>プラン</label><input type="text" placeholder="例: エグゼクティブツイン" data-memo="d2-hotel-plan" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="20000" data-budget="d2-hotel" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="b-day3" data-base-time="18:06">
-      <div class="tl-time">18:06 / 19:06 名古屋発</div>
+    <!-- プール -->
+    <div class="tl-item" data-chain="day2" data-base-time="18:30" data-idx="5">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)">
+        <span class="tl-label">プール＆サウナ</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🏊</span> プール(15m温水) + 大浴場 + サウナ</h3>
+        <p>7F フィットネスエリア。温水プール＆ジャグジーでスパーランドの疲れをリセット。</p>
+        <div class="highlight success">プール・大浴場・ドライサウナすべて宿泊者無料。</div>
+      </div>
+    </div>
+
+    <!-- カクテルタイム -->
+    <div class="tl-item" data-chain="day2" data-base-time="19:30" data-idx="6">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)">
+        <span class="tl-label">- 20:00</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🍸</span> エグゼクティブラウンジ カクテルタイム</h3>
+        <p>2F ラウンジ。アルコール飲み放題＆前菜ビュッフェ。夕食代わりにもなるボリューム。</p>
+        <div class="highlight success">17:30開始。遅めに入っても20:00まで。夕食費ゼロ！</div>
+      </div>
+    </div>
+
+    <!-- ナイト大浴場 -->
+    <div class="tl-item" data-chain="day2" data-base-time="21:00" data-idx="7">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)">
+        <span class="tl-label">大浴場ナイト</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">♨️</span> 大浴場＆サウナ（ナイト）</h3>
+        <p>7F 最終受付21:30 / 閉場22:00。カクテルタイム後のサウナは最高。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== DAY 3 ==================== -->
+<section id="day3" class="day-section day3">
+  <div class="day-header">
+    <div class="day-badge">D3</div>
+    <div class="day-header-text">
+      <h2>3/25（水）ヒルトン朝活 → 水族館 → 帰京</h2>
+      <p>ヒルトン名古屋 → 名古屋港水族館 → 名古屋駅 → 品川</p>
+    </div>
+  </div>
+  <div class="timeline">
+
+    <!-- 朝食 -->
+    <div class="tl-item" data-chain="day3" data-base-time="06:30" data-idx="0">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)">
+        <span class="tl-label">朝食</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3>
+        <p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p>
+        <div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div>
+      </div>
+    </div>
+
+    <!-- プール朝 -->
+    <div class="tl-item" data-chain="day3" data-base-time="08:00" data-idx="1">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)">
+        <span class="tl-label">プール/ジム</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🏊</span> プール / ジム / サウナ</h3>
+        <p>7F フィットネス。朝イチで空いてる。チェックアウトまでゆっくり。</p>
+      </div>
+    </div>
+
+    <!-- ラウンジ -->
+    <div class="tl-item" data-chain="day3" data-base-time="10:00" data-idx="2">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)">
+        <span class="tl-label">ラウンジ</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3>
+        <p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。</p>
+      </div>
+    </div>
+
+    <!-- ヒルトンCO -->
+    <div class="tl-item" data-chain="day3" data-base-time="12:00" data-idx="3">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)">
+        <span class="tl-label">ヒルトンC/O</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3>
+        <p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p>
+      </div>
+    </div>
+
+    <!-- 地下鉄で水族館 -->
+    <div class="tl-item" data-chain="day3" data-base-time="12:30" data-idx="4">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)">
+        <span class="tl-label">地下鉄で名古屋港へ</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🚇</span> 伏見 → 名古屋港</h3>
+        <div class="info-row"><span class="label">ルート</span><span class="value">東山線→名港線 乗換1回</span></div>
+        <div class="info-row"><span class="label">所要時間</span><span class="value">約25分</span></div>
+        <div class="info-row"><span class="label">料金</span><span class="value">270円/人</span></div>
+        <div class="highlight tip">名古屋港駅3番出口が水族館最寄り。徒歩5分。</div>
+      </div>
+    </div>
+
+    <!-- 水族館 -->
+    <div class="tl-item" data-chain="day3" data-base-time="13:00" data-idx="5">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
+        <span class="tl-label">- 15:30</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
+        <div class="attr-grid">
+          <div class="attr-card"><div class="num" style="color:var(--day3)">2,000</div><div class="desc">円/人 入場料</div></div>
+          <div class="attr-card"><div class="num" style="color:var(--day3)">~2.5h</div><div class="desc">滞在時間</div></div>
+        </div>
+        <h4 style="margin:16px 0 8px;font-size:.9rem">ショースケジュール（目安）</h4>
+        <div class="event">
+          <div class="event-time" style="color:var(--day3)">13:00</div>
+          <div class="event-name">イルカパフォーマンス BLUE ECHO</div>
+          <div class="event-tag tag-dolphin">イルカ</div>
+        </div>
+        <div class="event">
+          <div class="event-time" style="color:var(--day3)">14:30</div>
+          <div class="event-name">シャチ公開トレーニング</div>
+          <div class="event-tag tag-orca">シャチ</div>
+        </div>
+        <div class="highlight tip">イルカショーは15分前に席取り推奨。北館3Fメインプール正面が最高の席。</div>
+        <div class="links">
+          <a href="https://nagoyaaqua.jp/" target="_blank" class="link-btn primary">公式サイト</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="link-btn gmap">Googleマップ</a>
+          <a href="https://nagoyaaqua.jp/fee/" target="_blank" class="link-btn official">料金・チケット</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 名古屋駅周辺 -->
+    <div class="tl-item" data-chain="day3" data-base-time="16:00" data-idx="6">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
+        <span class="tl-label">- 17:30</span>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🏙️</span> 名古屋駅周辺（お土産・最後の名古屋めし）</h3>
+        <p>名古屋港駅 →（地下鉄）→ 名古屋駅。エスカ・名鉄百貨店でお土産。</p>
+        <div class="memo-area">
+          <div class="memo-title">📝 メモ</div>
+          <div class="memo-row"><label>内容</label><input type="text" placeholder="例: お土産、台湾まぜそば" data-memo="d3-station" oninput="saveMemo(this)"></div>
+          <div class="memo-row"><label>金額/人</label><input type="number" placeholder="2000" data-budget="d3-snack" oninput="updateBudget()"> <span style="font-size:.8rem;color:var(--text-light)">円</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 帰り新幹線 -->
+    <div class="tl-item" data-chain="day3" data-base-time="18:06" data-idx="7">
+      <div class="tl-time">
+        <button class="puzzle-toggle" onclick="toggleItem(this)" title="この項目をON/OFF">👁</button>
+        <input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)">
+        <span class="tl-label">名古屋発</span>
+      </div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ → 品川</h3>
         <table class="compare">
@@ -1513,8 +871,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <h4 style="margin:12px 0 8px;font-size:.85rem;color:var(--text-light)">予約するもの</h4>
     <ul class="checklist">
       <li>新幹線チケット（<a href="https://smart-ex.jp/top.php" target="_blank">スマートEX</a>で登録・予約）</li>
-      <li>ヒルトン名古屋（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad337680/" target="_blank">じゃらん</a> / <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank">公式</a>）</li>
       <li>桑名ホテル（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/79391" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad336392/" target="_blank">じゃらん</a>）</li>
+      <li>ヒルトン名古屋（<a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1410" target="_blank">楽天</a> / <a href="https://www.jalan.net/yad337680/" target="_blank">じゃらん</a> / <a href="https://www.hilton.com/ja/hotels/naghitw-hilton-nagoya/" target="_blank">公式</a>）</li>
       <li>ナガシマパスポート（<a href="https://www.nagashima-onsen.co.jp/spaland/fee/index.html" target="_blank">セブンチケット or ファミマ</a>で事前購入 → 行列回避）</li>
       <li>名古屋港水族館チケット（<a href="https://nagoyaaqua.jp/fee/" target="_blank">公式サイト</a>で事前購入可）</li>
     </ul>
@@ -1526,8 +884,105 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   </div>
 </section>
 
+<!-- ==================== 保険リスト ==================== -->
+<section class="backup-section">
+  <div class="card">
+    <h3 style="font-size:1.1rem;margin-bottom:4px">🔄 保険リスト（代替候補）</h3>
+    <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px">予定変更時のバックアップ。食べログ評価の高い名古屋めし＆遊びスポット。</p>
+
+    <div class="backup-cat">
+      <h3>🍽️ ランチ・軽食</h3>
+      <div class="backup-item">
+        <div><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）</div><div class="bi-desc">ひつまぶし発祥の名店。4,600円〜。行列覚悟だが最高の味。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">ひつまぶし 備長 エスカ店</div><div class="bi-desc">エスカ直結。ひつまぶし人気店。3,000円〜。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230101/23003773/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">味仙 矢場店（台湾ラーメン）</div><div class="bi-desc">名古屋発祥の激辛台湾ラーメン。800〜1,500円。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230103/23003870/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">スガキヤ（名古屋ラーメン）</div><div class="bi-desc">名古屋ソウルフード。ラーメン390円。エスカ・大須等に店舗多数。</div></div>
+        <div class="links">
+          <a href="https://www.sugakico.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">コンパル 大須本店（エビフライサンド）</div><div class="bi-desc">名古屋名物エビフライサンド。テイクアウトOK。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230103/23001506/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="backup-cat">
+      <h3>🍺 ディナー・居酒屋</h3>
+      <div class="backup-item">
+        <div><div class="bi-name">世界の山ちゃん（手羽先）</div><div class="bi-desc">名古屋名物「幻のコショウ」手羽先。3,000〜5,000円/人。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">風来坊（元祖手羽先唐揚）</div><div class="bi-desc">元祖手羽先。山ちゃんと双璧。3,000〜5,000円/人。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">矢場とん 矢場町本店（味噌カツ）</div><div class="bi-desc">本店ならではの雰囲気。1,650円〜。</div></div>
+        <div class="links">
+          <a href="https://tabelog.com/aichi/A2301/A230103/23000125/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="backup-cat">
+      <h3>🎯 遊びスポット</h3>
+      <div class="backup-item">
+        <div><div class="bi-name">ジャズドリーム長島（アウトレット）</div><div class="bi-desc">国内最大級~300店舗。スパーランド隣接。無料入場。</div></div>
+        <div class="links">
+          <a href="https://mitsui-shopping-park.com/mop/nagashima/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">名古屋城 + 本丸御殿</div><div class="bi-desc">入城500円。本丸御殿は必見。入城16:00まで。</div></div>
+        <div class="links">
+          <a href="https://www.nagoyajo.city.nagoya.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">栄・オアシス21</div><div class="bi-desc">名古屋の中心繁華街。テレビ塔＋オアシス21のフォトスポット。</div></div>
+        <div class="links">
+          <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B921+%E6%A0%84" target="_blank" class="link-btn gmap" style="font-size:.7rem">Googleマップ</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">熱田神宮</div><div class="bi-desc">三種の神器の一つ草薙剣を祀る。名古屋駅から名鉄5分。無料。</div></div>
+        <div class="links">
+          <a href="https://www.atsutajingu.or.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
+        </div>
+      </div>
+      <div class="backup-item">
+        <div><div class="bi-name">リニア・鉄道館</div><div class="bi-desc">名古屋港近く。鉄道好きなら必見。1,000円。</div></div>
+        <div class="links">
+          <a href="https://museum.jr-central.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
-</div><!-- end planB -->
 
 <footer class="footer">
   名古屋・長島 2泊3日 旅行プラン &copy; 2026
@@ -1536,134 +991,83 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 <script>
 // ===== Budget Config =====
 const BUDGET_CONFIG = {
-  planA: {
-    fixed: { train: 21120, spa: 6000, aqua: 1830, transport: 4750 },
-    hotelKeys: ['a-d1-hotel', 'a-d2-hotel'],
-    foodKeys: ['a-d1-lunch', 'a-d1-dinner', 'a-d2-dinner', 'a-d3-lunch', 'a-d3-osu'],
-    foodCount: 5
-  },
-  planB: {
-    fixed: { train: 21120, spa: 5800, aqua: 2000, transport: 5000 },
-    hotelKeys: ['b-d1-hotel', 'b-d2-hotel'],
-    foodKeys: ['b-d1-lunch', 'b-d2-lunch', 'b-d2-dinner', 'b-d3-snack'],
-    foodCount: 4
-  }
+  fixed: { train: 21120, spa: 6000, aqua: 2000, transport: 5000 },
+  hotelKeys: ['d1-hotel', 'd2-hotel'],
+  foodKeys: ['d1-lunch', 'd1-osu', 'd1-dinner', 'd3-snack'],
+  foodCount: 4
 };
 
 // ===== State =====
 const state = {
-  activePlan: 'planA',
-  planA: { selections: {}, memos: {}, budgets: {}, timeShifts: {} },
-  planB: { selections: {}, memos: {}, budgets: {}, timeShifts: {} }
+  selections: {},
+  memos: {},
+  budgets: {},
+  timeShifts: {},  // chain -> { idx: delta }
+  disabled: {}     // "chain-idx" -> true
 };
 
 // ===== Helpers =====
-function getContainingPlan(el) {
-  const c = el.closest('.plan-container');
-  return c ? c.id : 'planA';
-}
 function fmt(n) { return n.toLocaleString() + '円'; }
 
 // ===== State Persistence =====
 function loadState() {
   try {
-    const saved = localStorage.getItem('nagoya-trip-state');
+    const saved = localStorage.getItem('nagoya-trip-v2');
     if (!saved) { updateBudget(); return; }
     const parsed = JSON.parse(saved);
-
-    // Migration: old flat format → new nested
-    if (parsed.selections && !parsed.planA) {
-      const migrate = (obj) => {
-        const out = {};
-        Object.entries(obj).forEach(([k, v]) => {
-          out[k.startsWith('a-') || k.startsWith('b-') ? k : 'a-' + k] = v;
-        });
-        return out;
-      };
-      state.planA.selections = migrate(parsed.selections || {});
-      state.planA.memos = migrate(parsed.memos || {});
-      state.planA.budgets = migrate(parsed.budgets || {});
-    } else {
-      if (parsed.activePlan) state.activePlan = parsed.activePlan;
-      ['planA', 'planB'].forEach(p => {
-        if (parsed[p]) {
-          state[p].selections = parsed[p].selections || {};
-          state[p].memos = parsed[p].memos || {};
-          state[p].budgets = parsed[p].budgets || {};
-          state[p].timeShifts = parsed[p].timeShifts || {};
-        }
-      });
-    }
-
+    Object.assign(state, parsed);
     restoreUI();
   } catch(e) { console.log('State load error:', e); updateBudget(); }
 }
 
 function restoreUI() {
-  ['planA', 'planB'].forEach(plan => {
-    const container = document.getElementById(plan);
-    if (!container) return;
-    const s = state[plan];
-
-    // Selections
-    Object.entries(s.selections).forEach(([group, name]) => {
-      const g = container.querySelector(`[data-group="${group}"]`);
-      if (!g) return;
-      g.querySelectorAll('.resto-card, .hotel-card').forEach(card => {
-        if (card.dataset.name === name) card.classList.add('selected');
-      });
-    });
-
-    // Memos
-    Object.entries(s.memos).forEach(([key, val]) => {
-      const input = container.querySelector(`[data-memo="${key}"]`);
-      if (input) input.value = val;
-    });
-
-    // Budgets
-    Object.entries(s.budgets).forEach(([key, val]) => {
-      const input = container.querySelector(`[data-budget="${key}"]`);
-      if (input) input.value = val;
-    });
-
-    // Time shifts
-    Object.entries(s.timeShifts).forEach(([chain, delta]) => {
-      if (delta !== 0) {
-        const anchor = container.querySelector(`[data-chain="${chain}"][data-anchor="true"]`);
-        if (anchor) {
-          const input = anchor.querySelector('.time-shift-input');
-          if (input) input.value = shiftTimeStr(anchor.dataset.baseTime, delta);
-        }
-        applyTimeShift(chain, delta);
-      }
+  // Selections
+  Object.entries(state.selections).forEach(([group, name]) => {
+    const g = document.querySelector(`[data-group="${group}"]`);
+    if (!g) return;
+    g.querySelectorAll('.resto-card, .hotel-card').forEach(card => {
+      if (card.dataset.name === name) card.classList.add('selected');
     });
   });
 
-  // Activate correct plan
-  const hash = location.hash.replace('#', '');
-  if (hash === 'planA' || hash === 'planB') state.activePlan = hash;
-  if (state.activePlan !== 'planA') switchPlan(state.activePlan, true);
+  // Memos
+  Object.entries(state.memos).forEach(([key, val]) => {
+    const input = document.querySelector(`[data-memo="${key}"]`);
+    if (input) input.value = val;
+  });
+
+  // Budgets
+  Object.entries(state.budgets).forEach(([key, val]) => {
+    const input = document.querySelector(`[data-budget="${key}"]`);
+    if (input) input.value = val;
+  });
+
+  // Time shifts
+  Object.entries(state.timeShifts).forEach(([chain, shifts]) => {
+    Object.entries(shifts).forEach(([idx, delta]) => {
+      if (delta === 0) return;
+      const item = document.querySelector(`[data-chain="${chain}"][data-idx="${idx}"]`);
+      if (!item) return;
+      const input = item.querySelector('.time-shift-input');
+      if (input) input.value = shiftTimeStr(item.dataset.baseTime, delta);
+    });
+  });
+
+  // Disabled items
+  Object.entries(state.disabled).forEach(([key, val]) => {
+    if (!val) return;
+    const [chain, idx] = key.split('-');
+    const fullChain = 'day' + chain;
+    // key format: "1-3" means day1, idx 3
+    const item = document.querySelector(`[data-chain="day${chain}"][data-idx="${idx}"]`);
+    if (item) item.classList.add('disabled');
+  });
 
   updateBudget();
 }
 
 function saveState() {
-  try { localStorage.setItem('nagoya-trip-state', JSON.stringify(state)); } catch(e) {}
-}
-
-// ===== Plan Switching =====
-function switchPlan(planId, silent) {
-  state.activePlan = planId;
-  document.querySelectorAll('.plan-container').forEach(c => c.classList.remove('active'));
-  document.getElementById(planId).classList.add('active');
-  document.querySelectorAll('.plan-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i === 0 && planId === 'planA') || (i === 1 && planId === 'planB'));
-  });
-  if (!silent) {
-    history.replaceState(null, '', '#' + planId);
-    saveState();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  try { localStorage.setItem('nagoya-trip-v2', JSON.stringify(state)); } catch(e) {}
 }
 
 // ===== Smooth Scroll =====
@@ -1676,15 +1080,14 @@ function smoothScroll(id) {
 function selectResto(card) {
   const group = card.closest('[data-group]');
   if (!group) return;
-  const plan = getContainingPlan(card);
   const groupName = group.dataset.group;
   if (card.classList.contains('selected')) {
     card.classList.remove('selected');
-    delete state[plan].selections[groupName];
+    delete state.selections[groupName];
   } else {
     group.querySelectorAll('.resto-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
-    state[plan].selections[groupName] = card.dataset.name;
+    state.selections[groupName] = card.dataset.name;
   }
   saveState();
 }
@@ -1693,21 +1096,19 @@ function selectResto(card) {
 function selectHotel(card) {
   const group = card.closest('[data-group]');
   if (!group) return;
-  const plan = getContainingPlan(card);
   const groupName = group.dataset.group;
   if (card.classList.contains('selected')) {
     card.classList.remove('selected');
-    delete state[plan].selections[groupName];
+    delete state.selections[groupName];
   } else {
     group.querySelectorAll('.hotel-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
-    state[plan].selections[groupName] = card.dataset.name;
-    // Auto-fill price
+    state.selections[groupName] = card.dataset.name;
     if (card.dataset.price) {
       const budgetInput = card.closest('.card').querySelector('[data-budget$="hotel"]');
       if (budgetInput && !budgetInput.value) {
         budgetInput.value = card.dataset.price;
-        state[plan].budgets[budgetInput.dataset.budget] = parseInt(card.dataset.price);
+        state.budgets[budgetInput.dataset.budget] = parseInt(card.dataset.price);
       }
     }
   }
@@ -1717,60 +1118,53 @@ function selectHotel(card) {
 
 // ===== Memo =====
 function saveMemo(input) {
-  const plan = getContainingPlan(input);
-  state[plan].memos[input.dataset.memo] = input.value;
+  state.memos[input.dataset.memo] = input.value;
   saveState();
 }
 
 // ===== Budget Calculation =====
 function updateBudget() {
-  ['planA', 'planB'].forEach(planId => {
-    const container = document.getElementById(planId);
-    if (!container) return;
-    const config = BUDGET_CONFIG[planId];
-    const s = state[planId];
+  const config = BUDGET_CONFIG;
 
-    // Gather budget inputs
-    container.querySelectorAll('[data-budget]').forEach(input => {
-      const val = parseInt(input.value);
-      if (!isNaN(val) && val > 0) {
-        s.budgets[input.dataset.budget] = val;
-      } else {
-        delete s.budgets[input.dataset.budget];
-      }
-    });
-
-    // Hotel total
-    let hotelTotal = 0;
-    config.hotelKeys.forEach(k => { hotelTotal += s.budgets[k] || 0; });
-
-    // Food total
-    let foodTotal = 0, foodCnt = 0;
-    config.foodKeys.forEach(k => {
-      if (s.budgets[k]) { foodTotal += s.budgets[k]; foodCnt++; }
-    });
-
-    // Update display
-    const disp = (attr, html) => {
-      const el = container.querySelector(`[data-budget-display="${attr}"]`);
-      if (el) el.innerHTML = html;
-    };
-    disp('train', fmt(config.fixed.train));
-    disp('hotel', hotelTotal > 0 ? fmt(hotelTotal) : '<span class="empty">未選択</span>');
-    disp('spa', fmt(config.fixed.spa));
-    disp('aqua', fmt(config.fixed.aqua));
-    disp('transport', '~' + fmt(config.fixed.transport));
-    disp('food', foodTotal > 0
-      ? fmt(foodTotal) + (foodCnt < config.foodCount ? '<span style="font-size:.7rem;color:#999"> (' + foodCnt + '/' + config.foodCount + '食入力済)</span>' : '')
-      : '<span class="empty">未入力</span>');
-
-    // Total
-    const fixedTotal = Object.values(config.fixed).reduce((a, b) => a + b, 0);
-    const variableTotal = hotelTotal + foodTotal;
-    disp('total', variableTotal > 0
-      ? '約 ' + (fixedTotal + variableTotal).toLocaleString() + ' 円 /人'
-      : '---');
+  // Gather budget inputs
+  document.querySelectorAll('[data-budget]').forEach(input => {
+    const val = parseInt(input.value);
+    if (!isNaN(val) && val > 0) {
+      state.budgets[input.dataset.budget] = val;
+    } else {
+      delete state.budgets[input.dataset.budget];
+    }
   });
+
+  // Hotel total
+  let hotelTotal = 0;
+  config.hotelKeys.forEach(k => { hotelTotal += state.budgets[k] || 0; });
+
+  // Food total
+  let foodTotal = 0, foodCnt = 0;
+  config.foodKeys.forEach(k => {
+    if (state.budgets[k]) { foodTotal += state.budgets[k]; foodCnt++; }
+  });
+
+  // Update display
+  const disp = (attr, html) => {
+    const el = document.querySelector(`[data-budget-display="${attr}"]`);
+    if (el) el.innerHTML = html;
+  };
+  disp('train', fmt(config.fixed.train));
+  disp('hotel', hotelTotal > 0 ? fmt(hotelTotal) : '<span class="empty">未選択</span>');
+  disp('spa', fmt(config.fixed.spa));
+  disp('aqua', fmt(config.fixed.aqua));
+  disp('transport', '~' + fmt(config.fixed.transport));
+  disp('food', foodTotal > 0
+    ? fmt(foodTotal) + (foodCnt < config.foodCount ? '<span style="font-size:.7rem;color:#999"> (' + foodCnt + '/' + config.foodCount + '食入力済)</span>' : '')
+    : '<span class="empty">未入力</span>');
+
+  const fixedTotal = Object.values(config.fixed).reduce((a, b) => a + b, 0);
+  const variableTotal = hotelTotal + foodTotal;
+  disp('total', variableTotal > 0
+    ? '約 ' + (fixedTotal + variableTotal).toLocaleString() + ' 円 /人'
+    : '---');
   saveState();
 }
 
@@ -1782,48 +1176,68 @@ function shiftTimeStr(timeStr, deltaMinutes) {
   return String(Math.floor(total / 60)).padStart(2, '0') + ':' + String(total % 60).padStart(2, '0');
 }
 
-function onAnchorChange(input) {
+function onTimeChange(input) {
   const item = input.closest('.tl-item');
   const chain = item.dataset.chain;
+  const idx = parseInt(item.dataset.idx);
   const baseTime = item.dataset.baseTime;
   const newTime = input.value;
-  const plan = getContainingPlan(input);
 
   const [bh, bm] = baseTime.split(':').map(Number);
   const [nh, nm] = newTime.split(':').map(Number);
   const delta = (nh * 60 + nm) - (bh * 60 + bm);
 
-  state[plan].timeShifts[chain] = delta;
-  applyTimeShift(chain, delta);
+  // Store this item's delta
+  if (!state.timeShifts[chain]) state.timeShifts[chain] = {};
+  state.timeShifts[chain][idx] = delta;
+
+  // Shift all subsequent items in same chain
+  const items = document.querySelectorAll(`[data-chain="${chain}"]`);
+  items.forEach(el => {
+    const elIdx = parseInt(el.dataset.idx);
+    if (elIdx <= idx) return;
+    const elInput = el.querySelector('.time-shift-input');
+    if (!elInput) return;
+    const shifted = shiftTimeStr(el.dataset.baseTime, delta);
+    elInput.value = shifted;
+    // Update label times too
+    const label = el.querySelector('.tl-label');
+    if (label && label.dataset.originalHtml === undefined) {
+      label.dataset.originalHtml = label.innerHTML;
+    }
+    if (label && label.dataset.originalHtml) {
+      let html = label.dataset.originalHtml;
+      if (delta !== 0) {
+        html = html.replace(/(\d{1,2}):(\d{2})/g, (match, h2, m2) => {
+          let t = parseInt(h2) * 60 + parseInt(m2) + delta;
+          t = ((t % 1440) + 1440) % 1440;
+          return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
+        });
+      }
+      label.innerHTML = html;
+    }
+    if (!state.timeShifts[chain]) state.timeShifts[chain] = {};
+    state.timeShifts[chain][elIdx] = delta;
+  });
+
   saveState();
 }
 
-function applyTimeShift(chain, delta) {
-  document.querySelectorAll(`[data-chain="${chain}"]`).forEach(item => {
-    if (item.dataset.anchor === 'true') return;
-    const tlTime = item.querySelector('.tl-time');
-    if (!tlTime) return;
+// ===== Puzzle Toggle =====
+function toggleItem(btn) {
+  const item = btn.closest('.tl-item');
+  const chain = item.dataset.chain;
+  const idx = item.dataset.idx;
+  const dayNum = chain.replace('day', '');
+  const key = dayNum + '-' + idx;
 
-    // Store original on first call
-    if (!tlTime.dataset.originalHtml) {
-      tlTime.dataset.originalHtml = tlTime.innerHTML;
-    }
-
-    let html = tlTime.dataset.originalHtml;
-    if (delta !== 0) {
-      html = html.replace(/(\d{1,2}):(\d{2})/g, (match, h, m) => {
-        let total = parseInt(h) * 60 + parseInt(m) + delta;
-        total = ((total % 1440) + 1440) % 1440;
-        return Math.floor(total / 60) + ':' + String(total % 60).padStart(2, '0');
-      });
-    }
-    tlTime.innerHTML = html;
-  });
+  item.classList.toggle('disabled');
+  state.disabled[key] = item.classList.contains('disabled');
+  saveState();
 }
 
 // ===== Init =====
 loadState();
-
 </script>
 </body>
 </html>
