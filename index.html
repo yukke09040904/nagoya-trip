@@ -21,10 +21,13 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .container{max-width:800px;margin:0 auto;padding:0 20px}
 
 /* Hero - Travel Style */
-.hero{background:linear-gradient(135deg,#E07A5F 0%,#F2CC8F 60%,#F4E8C1 100%);color:#fff;padding:60px 20px 55px;text-align:center;position:relative}
-.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;letter-spacing:.02em;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
-.hero .subtitle{font-size:.95rem;opacity:.95;margin-bottom:18px;text-shadow:0 1px 4px rgba(0,0,0,.1)}
-.hero .dates{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.25);backdrop-filter:blur(10px);padding:10px 24px;border-radius:50px;font-size:.95rem;font-weight:500}
+.hero{background:linear-gradient(135deg,#E07A5F 0%,#F2CC8F 60%,#F4E8C1 100%);color:#fff;padding:60px 20px 55px;text-align:center;position:relative;background-size:cover;background-position:center;cursor:pointer;transition:background .3s}
+.hero.has-image::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.35)}
+.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;letter-spacing:.02em;margin-bottom:6px;text-shadow:0 2px 8px rgba(0,0,0,.15);position:relative;z-index:1}
+.hero .subtitle{font-size:.95rem;opacity:.95;margin-bottom:18px;text-shadow:0 1px 4px rgba(0,0,0,.1);position:relative;z-index:1}
+.hero .dates{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.25);backdrop-filter:blur(10px);padding:10px 24px;border-radius:50px;font-size:.95rem;font-weight:500;position:relative;z-index:1}
+.hero .hero-upload-hint{position:absolute;bottom:8px;right:12px;font-size:.7rem;opacity:.5;z-index:1}
+.hero:hover .hero-upload-hint{opacity:.8}
 
 /* Budget Banner */
 .budget-banner{background:var(--card);margin:-28px 20px 30px;border-radius:18px;padding:24px 28px;box-shadow:var(--shadow-lg);position:relative;z-index:2;max-width:800px;margin-left:auto;margin-right:auto;border:1px solid rgba(61,64,91,.06)}
@@ -73,20 +76,20 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .day2 .tl-time{color:var(--day2)}
 .day3 .tl-time{color:var(--day3)}
 
-/* Drag Handle */
-.drag-handle{width:28px;height:28px;border:none;border-radius:6px;background:transparent;cursor:grab;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#bbb;transition:all .2s;user-select:none}
-.drag-handle:hover{background:var(--bg);color:var(--text-light)}
-.drag-handle:active{cursor:grabbing}
+/* Move Buttons */
+.move-btns{display:flex;flex-direction:column;gap:1px;flex-shrink:0}
+.move-btn{width:22px;height:16px;border:none;border-radius:4px;background:transparent;cursor:pointer;font-size:.6rem;display:flex;align-items:center;justify-content:center;color:#bbb;transition:all .15s;padding:0;line-height:1}
+.move-btn:hover{background:var(--bg);color:var(--text)}
 
 /* Puzzle remove */
 .puzzle-remove{width:24px;height:24px;border:none;border-radius:50%;background:transparent;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#ccc;transition:all .2s}
 .puzzle-remove:hover{background:#fee;color:#e53935}
 
-/* Drag states */
-.tl-item.dragging{opacity:.4;transform:scale(.98)}
-.tl-item.drag-over{border-top:3px solid var(--accent-warm);padding-top:4px}
-.tl-item.disabled{opacity:.3;pointer-events:none}
+/* Item states */
+.tl-item.disabled{opacity:.3}
 .tl-item.disabled .card{display:none}
+.tl-item.disabled .puzzle-remove{pointer-events:auto;opacity:1;color:#4CAF50}
+.tl-item.disabled .move-btns,.tl-item.disabled .time-shift-input,.tl-item.disabled .tl-label{opacity:.3;pointer-events:none}
 
 /* Card - Travel Style */
 .card{background:var(--card);border-radius:16px;padding:20px;box-shadow:var(--shadow);transition:transform .2s;border:1px solid rgba(61,64,91,.04)}
@@ -131,6 +134,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .resto-card.selected .resto-radio{border-color:var(--accent-warm);background:var(--accent-warm)}
 .resto-card.selected .resto-radio::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%}
 .resto-card .resto-name{font-weight:700;font-size:.9rem}
+.rating-badge{display:inline-flex;align-items:center;gap:2px;font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:6px;margin-left:6px;vertical-align:middle}
+.rating-badge.tabelog{background:#FFF3E8;color:#D4520C}
+.rating-badge.gmap{background:#E8F5E9;color:#34A853}
 .resto-card .resto-desc{font-size:.78rem;color:var(--text-light);margin:4px 0 0 26px}
 .resto-card .links{margin:6px 0 0 26px}
 
@@ -259,10 +265,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 <body>
 
 <!-- Hero -->
-<header class="hero">
+<header class="hero" onclick="document.getElementById('hero-upload').click()">
   <h1>✈️ 名古屋・長島 2泊3日</h1>
   <p class="subtitle">大須商店街 / スパーランド / ヒルトン / 水族館</p>
   <div class="dates">2026.3.23 Mon - 3.25 Wed / 2名</div>
+  <span class="hero-upload-hint">📷 クリックで背景画像を変更</span>
+  <input type="file" id="hero-upload" accept="image/*" style="display:none" onchange="uploadHeroImage(this)">
 </header>
 
 <!-- Budget -->
@@ -303,9 +311,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="timeline" data-day="day1">
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="10:01" data-idx="0">
+    <div class="tl-item" data-chain="day1" data-base-time="10:01" data-idx="0">
       <div class="tl-time">
-        <span class="drag-handle" title="ドラッグで並べ替え">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="10:01" onchange="onTimeChange(this)">
         <span class="tl-label">品川発</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -323,9 +331,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="11:40" data-idx="1">
+    <div class="tl-item" data-chain="day1" data-base-time="11:40" data-idx="1">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="11:40" onchange="onTimeChange(this)">
         <span class="tl-label">- 12:30</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -335,17 +343,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <p>新幹線口直結のエスカ地下街で名古屋めし。</p>
         <div class="resto-grid" data-group="d1-lunch">
           <div class="resto-card" data-name="矢場とん エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">矢場とん エスカ店（味噌カツ）<span class="rating-badge tabelog">食べログ 3.41</span><span class="rating-badge gmap">Google 4.1</span></div></div>
             <div class="resto-desc">名古屋名物味噌カツの名店。わらじとんかつ定食 1,650円。</div>
             <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000136/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="しら河 名駅店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">しら河 名駅店（ひつまぶし）<span class="rating-badge tabelog">食べログ 3.53</span><span class="rating-badge gmap">Google 4.1</span></div></div>
             <div class="resto-desc">ひつまぶし2,800円〜。エスカ地下街。</div>
-            <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000159/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
+            <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23063437/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%97%E3%82%89%E6%B2%B3+%E5%90%8D%E9%A7%85%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="山本屋本店 エスカ店" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">山本屋本店 エスカ店（味噌煮込みうどん）<span class="rating-badge tabelog">食べログ 3.55</span><span class="rating-badge gmap">Google 4.0</span></div></div>
             <div class="resto-desc">名古屋名物味噌煮込みうどん。1,000〜2,000円/人。</div>
             <div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB%E5%BA%97" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
@@ -358,9 +366,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="13:00" data-idx="2">
+    <div class="tl-item" data-chain="day1" data-base-time="13:00" data-idx="2">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
         <span class="tl-label">地下鉄で大須へ</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -374,9 +382,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="13:30" data-idx="3">
+    <div class="tl-item" data-chain="day1" data-base-time="13:30" data-idx="3">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="13:30" onchange="onTimeChange(this)">
         <span class="tl-label">- 15:30</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -398,9 +406,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="16:00" data-idx="4">
+    <div class="tl-item" data-chain="day1" data-base-time="16:00" data-idx="4">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
         <span class="tl-label">名古屋→桑名</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -416,9 +424,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="17:00" data-idx="5">
+    <div class="tl-item" data-chain="day1" data-base-time="17:00" data-idx="5">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
         <span class="tl-label">桑名ホテルCI</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -455,9 +463,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day1" data-base-time="19:00" data-idx="6">
+    <div class="tl-item" data-chain="day1" data-base-time="19:00" data-idx="6">
       <div class="tl-time">
-        <span class="drag-handle">☰</span>
+        <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="19:00" onchange="onTimeChange(this)">
         <span class="tl-label">はまぐりディナー</span>
         <button class="puzzle-remove" onclick="removeItem(this)" title="除外">✕</button>
@@ -467,19 +475,19 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <p>「その手は桑名の焼きはまぐり」の本場！</p>
         <div class="resto-grid" data-group="d1-dinner">
           <div class="resto-card" data-name="日の出" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">日の出（老舗料亭）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">日の出（老舗料亭）<span class="rating-badge tabelog">食べログ 3.67</span><span class="rating-badge gmap">Google 4.3</span></div></div>
             <div class="resto-desc">創業約100年。はまぐり鍋コース10,000円〜。</div>
             <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24000026/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E3%81%AE%E5%87%BA+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="魚のてっぺん" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">魚のてっぺん（居酒屋・手頃）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">魚のてっぺん（居酒屋・手頃）<span class="rating-badge tabelog">食べログ 3.45</span><span class="rating-badge gmap">Google 3.9</span></div></div>
             <div class="resto-desc">駅徒歩3分。焼きはまぐり1個からOK。3,000〜5,000円/人。</div>
-            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24010803/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
+            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24007858/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E3%81%AE%E3%81%A6%E3%81%A3%E3%81%BA%E3%82%93+%E6%A1%91%E5%90%8D" target="_blank" class="link-btn gmap" onclick="event.stopPropagation()">Googleマップ</a></div>
           </div>
           <div class="resto-card" data-name="蛤一択" onclick="selectResto(this)">
-            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">蛤一択（完全予約制）</div></div>
+            <div class="resto-header"><div class="resto-radio"></div><div class="resto-name">蛤一択（完全予約制）<span class="rating-badge tabelog">食べログ 3.73</span><span class="rating-badge gmap">Google 4.5</span></div></div>
             <div class="resto-desc">駅徒歩4分。厳選桑名産天然蛤。全席掘りごたつ個室。</div>
-            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24019568/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a></div>
+            <div class="links"><a href="https://tabelog.com/mie/A2402/A240203/24012650/" target="_blank" class="link-btn tabelog" onclick="event.stopPropagation()">食べログ</a><a href="https://hamaguriittaku.com/" target="_blank" class="link-btn official" onclick="event.stopPropagation()">公式</a></div>
           </div>
         </div>
         <div class="memo-area">
@@ -524,16 +532,16 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="timeline" data-day="day2">
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="08:00" data-idx="0">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">桑名ホテルC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="08:00" data-idx="0">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">桑名ホテルC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🧳</span> 桑名ホテル チェックアウト</h3>
         <p>荷物を持ってバス停へ。大須で買ったパン等で朝食。</p>
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="09:05" data-idx="1">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)"><span class="tl-label">桑名駅前発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="09:05" data-idx="1">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)"><span class="tl-label">桑名駅前発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">9:25 長島温泉着</span></div>
@@ -546,8 +554,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="09:30" data-idx="2">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)"><span class="tl-label">- 17:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="09:30" data-idx="2">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)"><span class="tl-label">- 17:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
         <div class="attr-grid">
@@ -571,8 +579,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="17:00" data-idx="3">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)"><span class="tl-label">長島温泉発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="17:00" data-idx="3">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)"><span class="tl-label">長島温泉発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 名鉄バス → 名古屋直行</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">17:55頃 名鉄バスセンター着</span></div>
@@ -584,8 +592,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="18:00" data-idx="4">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトン名古屋CI</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="18:00" data-idx="4">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトン名古屋CI</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏨</span> ヒルトン名古屋 チェックイン</h3>
         <p>名古屋駅 →（地下鉄東山線）→ 伏見駅 徒歩3分</p>
@@ -616,8 +624,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="18:30" data-idx="5">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)"><span class="tl-label">プール＆サウナ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="18:30" data-idx="5">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)"><span class="tl-label">プール＆サウナ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏊</span> プール(15m温水) + 大浴場 + サウナ</h3>
         <p>7F フィットネスエリア。温水プール＆ジャグジーでスパーランドの疲れをリセット。</p>
@@ -625,8 +633,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="19:30" data-idx="6">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)"><span class="tl-label">- 20:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="19:30" data-idx="6">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)"><span class="tl-label">- 20:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🍸</span> エグゼクティブラウンジ カクテルタイム</h3>
         <p>2F ラウンジ。アルコール飲み放題＆前菜ビュッフェ。夕食代わりにもなるボリューム。</p>
@@ -634,8 +642,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day2" data-base-time="21:00" data-idx="7">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)"><span class="tl-label">大浴場ナイト</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day2" data-base-time="21:00" data-idx="7">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)"><span class="tl-label">大浴場ナイト</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">♨️</span> 大浴場＆サウナ（ナイト）</h3>
         <p>7F 最終受付21:30 / 閉場22:00。カクテルタイム後のサウナは最高。</p>
@@ -656,28 +664,28 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="timeline" data-day="day3">
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="06:30" data-idx="0">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)"><span class="tl-label">朝食</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="06:30" data-idx="0">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)"><span class="tl-label">朝食</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3><p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p><div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div></div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="08:00" data-idx="1">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">プール/ジム</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="08:00" data-idx="1">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">プール/ジム</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🏊</span> プール / ジム / サウナ</h3><p>7F フィットネス。朝イチで空いてる。</p></div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="10:00" data-idx="2">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)"><span class="tl-label">ラウンジ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="10:00" data-idx="2">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)"><span class="tl-label">ラウンジ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3><p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。</p></div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="12:00" data-idx="3">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトンC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="12:00" data-idx="3">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトンC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3><p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p></div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="12:30" data-idx="4">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)"><span class="tl-label">地下鉄で名古屋港へ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="12:30" data-idx="4">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)"><span class="tl-label">地下鉄で名古屋港へ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚇</span> 伏見 → 名古屋港</h3>
         <div class="info-row"><span class="label">所要時間</span><span class="value">約25分</span></div>
@@ -686,8 +694,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="13:00" data-idx="5">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)"><span class="tl-label">- 15:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="13:00" data-idx="5">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)"><span class="tl-label">- 15:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
         <div class="attr-grid">
@@ -705,8 +713,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="16:00" data-idx="6">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)"><span class="tl-label">- 17:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="16:00" data-idx="6">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)"><span class="tl-label">- 17:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏙️</span> 名古屋駅周辺（お土産・最後の名古屋めし）</h3>
         <p>名古屋港駅 →（地下鉄）→ 名古屋駅。エスカ・名鉄百貨店でお土産。</p>
@@ -719,8 +727,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" draggable="true" data-chain="day3" data-base-time="18:06" data-idx="7">
-      <div class="tl-time"><span class="drag-handle">☰</span><input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)"><span class="tl-label">名古屋発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
+    <div class="tl-item" data-chain="day3" data-base-time="18:06" data-idx="7">
+      <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)"><span class="tl-label">名古屋発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ → 品川</h3>
         <table class="compare">
@@ -766,19 +774,25 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px">予定変更時のバックアップ。「＋」ボタンでタイムラインに追加できます。</p>
 
     <div class="backup-cat">
-      <h3>🍽️ ランチ・軽食</h3>
-      <div class="backup-item" data-backup-id="atsuta"><div class="bi-info"><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）</div><div class="bi-desc">ひつまぶし発祥の名店。4,600円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)" title="タイムラインに追加">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="bincho"><div class="bi-info"><div class="bi-name">ひつまぶし 備長 エスカ店</div><div class="bi-desc">エスカ直結。3,000円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23003773/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="misen"><div class="bi-info"><div class="bi-name">味仙 矢場店（台湾ラーメン）</div><div class="bi-desc">名古屋発祥の激辛台湾ラーメン。800〜1,500円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23003870/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="sugakiya"><div class="bi-info"><div class="bi-name">スガキヤ（名古屋ラーメン）</div><div class="bi-desc">名古屋ソウルフード。ラーメン390円。</div></div><div class="bi-actions"><div class="links"><a href="https://www.sugakico.co.jp/" target="_blank" class="link-btn official" style="font-size:.7rem">公式</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="konparu"><div class="bi-info"><div class="bi-name">コンパル 大須本店（エビフライサンド）</div><div class="bi-desc">名古屋名物エビフライサンド。テイクアウトOK。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23001506/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <h3>🍽️ ランチ・軽食（食べログ3.4+ / Gマップ3.8+）</h3>
+      <div class="backup-item" data-backup-id="atsuta"><div class="bi-info"><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）<span class="rating-badge tabelog">食べログ 3.70</span><span class="rating-badge gmap">Google 4.2</span></div><div class="bi-desc">ひつまぶし発祥の名店。4,600円〜。百名店選出。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%82%E3%81%A4%E3%81%9F%E8%93%AC%E8%8E%B1%E8%BB%92+%E6%9D%BE%E5%9D%82%E5%B1%8B" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)" title="タイムラインに追加">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yoshida"><div class="bi-info"><div class="bi-name">きしめん よしだ エスカ店<span class="rating-badge tabelog">食べログ 3.49</span><span class="rating-badge gmap">Google 4.1</span></div><div class="bi-desc">明治23年創業。国産小麦の生きしめん。700〜1,200円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000916/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8D%E3%81%97%E3%82%81%E3%82%93+%E3%82%88%E3%81%97%E3%81%A0+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yokoi"><div class="bi-info"><div class="bi-name">ヨコイ 錦店（元祖あんかけスパ）<span class="rating-badge tabelog">食べログ 3.49</span><span class="rating-badge gmap">Google 3.9</span></div><div class="bi-desc">あんかけスパ発祥。ミラカンが一番人気。900〜1,200円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000487/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%83%A8%E3%82%B3%E3%82%A4+%E9%8C%A6%E5%BA%97" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="hanabi"><div class="bi-info"><div class="bi-name">はなび 名駅西口店（台湾まぜそば）<span class="rating-badge tabelog">食べログ 3.47</span><span class="rating-badge gmap">Google 3.9</span></div><div class="bi-desc">台湾まぜそば発祥の店。900円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23086111/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%AF%E3%81%AA%E3%81%B3+%E5%90%8D%E9%A7%85%E8%A5%BF%E5%8F%A3" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="konparu"><div class="bi-info"><div class="bi-name">コンパル 大須本店（エビフライサンド）<span class="rating-badge tabelog">食べログ 3.46</span><span class="rating-badge gmap">Google 4.1</span></div><div class="bi-desc">1947年創業。名古屋名物エビフライサンド。テイクアウトOK。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230105/23002607/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%B3%E3%83%91%E3%83%AB+%E5%A4%A7%E9%A0%88%E6%9C%AC%E5%BA%97" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="misen"><div class="bi-info"><div class="bi-name">味仙 矢場店（台湾ラーメン）<span class="rating-badge tabelog">食べログ 3.48</span><span class="rating-badge gmap">Google 3.9</span></div><div class="bi-desc">名古屋発祥の激辛台湾ラーメン。800〜1,500円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23004315/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E4%BB%99+%E7%9F%A2%E5%A0%B4%E5%BA%97" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="bincho"><div class="bi-info"><div class="bi-name">ひつまぶし 備長 エスカ店<span class="rating-badge tabelog">食べログ 3.42</span><span class="rating-badge gmap">Google 4.2</span></div><div class="bi-desc">備長炭で焼く本格ひつまぶし。エスカ直結。3,000円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23014923/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%B2%E3%81%A4%E3%81%BE%E3%81%B6%E3%81%97%E5%82%99%E9%95%B7+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
     </div>
 
     <div class="backup-cat">
-      <h3>🍺 ディナー・居酒屋</h3>
-      <div class="backup-item" data-backup-id="yamachan"><div class="bi-info"><div class="bi-name">世界の山ちゃん（手羽先）</div><div class="bi-desc">名古屋名物「幻のコショウ」手羽先。3,000〜5,000円/人。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23081170/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="furaibo"><div class="bi-info"><div class="bi-name">風来坊（元祖手羽先唐揚）</div><div class="bi-desc">元祖手羽先。山ちゃんと双璧。3,000〜5,000円/人。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23036994/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
-      <div class="backup-item" data-backup-id="yabaton-hon"><div class="bi-info"><div class="bi-name">矢場とん 矢場町本店（味噌カツ）</div><div class="bi-desc">本店ならではの雰囲気。1,650円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000125/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <h3>🍺 ディナー・居酒屋（食べログ3.4+ / Gマップ3.8+）</h3>
+      <div class="backup-item" data-backup-id="daijin"><div class="bi-info"><div class="bi-name">大甚 本店（明治創業の老舗居酒屋）<span class="rating-badge tabelog">食べログ 3.67</span><span class="rating-badge gmap">Google 4.1</span></div><div class="bi-desc">百名店選出。小皿料理をセルフで選ぶスタイル。伏見駅1分。2,000〜3,000円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230102/23000102/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%94%9A+%E6%9C%AC%E5%BA%97+%E4%BC%8F%E8%A6%8B" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="shimamasa"><div class="bi-info"><div class="bi-name">島正（味噌おでん・どて焼き）<span class="rating-badge tabelog">食べログ 3.56</span><span class="rating-badge gmap">Google 4.2</span></div><div class="bi-desc">昭和24年創業。味噌おでんの名店。伏見駅5分。2,000〜3,000円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230102/23001853/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%B3%B6%E6%AD%A3+%E4%BC%8F%E8%A6%8B+%E5%91%B3%E5%99%8C%E3%81%8A%E3%81%A7%E3%82%93" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yabaton-hon"><div class="bi-info"><div class="bi-name">矢場とん 矢場町本店（味噌カツ）<span class="rating-badge tabelog">食べログ 3.47</span><span class="rating-badge gmap">Google 4.1</span></div><div class="bi-desc">本店ならではの雰囲気。1,650円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000134/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93+%E7%9F%A2%E5%A0%B4%E7%94%BA%E6%9C%AC%E5%BA%97" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="atsuta-d"><div class="bi-info"><div class="bi-name">あつた蓬莱軒 松坂屋店（ひつまぶし）<span class="rating-badge tabelog">食べログ 3.70</span><span class="rating-badge gmap">Google 4.2</span></div><div class="bi-desc">夜も営業。ひつまぶし4,600円〜。百名店選出。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000108/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%82%E3%81%A4%E3%81%9F%E8%93%AC%E8%8E%B1%E8%BB%92+%E6%9D%BE%E5%9D%82%E5%B1%8B" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yamamoto-d"><div class="bi-info"><div class="bi-name">山本屋本店 エスカ店（味噌煮込みうどん）<span class="rating-badge tabelog">食べログ 3.55</span><span class="rating-badge gmap">Google 4.0</span></div><div class="bi-desc">夜も営業。味噌煮込みうどん1,000〜2,000円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23000123/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E6%9C%AC%E5%B1%8B%E6%9C%AC%E5%BA%97+%E3%82%A8%E3%82%B9%E3%82%AB" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="yokoi-d"><div class="bi-info"><div class="bi-name">ヨコイ 錦店（元祖あんかけスパ）<span class="rating-badge tabelog">食べログ 3.49</span><span class="rating-badge gmap">Google 3.9</span></div><div class="bi-desc">夜も営業。あんかけスパ発祥。900〜1,200円。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230103/23000487/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%83%A8%E3%82%B3%E3%82%A4+%E9%8C%A6%E5%BA%97" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
+      <div class="backup-item" data-backup-id="hanabi-d"><div class="bi-info"><div class="bi-name">はなび 名駅西口店（台湾まぜそば）<span class="rating-badge tabelog">食べログ 3.47</span><span class="rating-badge gmap">Google 3.9</span></div><div class="bi-desc">台湾まぜそば発祥。夜も営業。900円〜。</div></div><div class="bi-actions"><div class="links"><a href="https://tabelog.com/aichi/A2301/A230101/23086111/" target="_blank" class="link-btn tabelog" style="font-size:.7rem">食べログ</a><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%AF%E3%81%AA%E3%81%B3+%E5%90%8D%E9%A7%85%E8%A5%BF%E5%8F%A3" target="_blank" class="link-btn gmap" style="font-size:.7rem">Gマップ</a></div><button class="add-btn" onclick="showDayPicker(this)">＋</button><div class="day-picker"><button onclick="addToTimeline(this,'day1')">D1</button><button onclick="addToTimeline(this,'day2')">D2</button><button onclick="addToTimeline(this,'day3')">D3</button></div></div></div>
     </div>
 
     <div class="backup-cat">
@@ -853,7 +867,11 @@ function restoreUI() {
     if (!val) return;
     const [dayNum, idx] = key.split('-');
     const item = document.querySelector(`[data-chain="day${dayNum}"][data-idx="${idx}"]`);
-    if (item) item.classList.add('disabled');
+    if (item) {
+      item.classList.add('disabled');
+      const btn = item.querySelector('.puzzle-remove');
+      if (btn) { btn.textContent = '↩'; btn.title = '復活'; }
+    }
   });
   // Restore added items
   state.addedItems.forEach(a => {
@@ -933,56 +951,53 @@ function onTimeChange(input) {
   saveState();
 }
 
-// ===== Remove Item =====
+// ===== Toggle Item =====
 function removeItem(btn) {
   const item = btn.closest('.tl-item');
   const chain = item.dataset.chain, idx = item.dataset.idx;
   const dayNum = chain.replace('day', '');
-  item.classList.add('disabled');
-  state.disabled[dayNum + '-' + idx] = true;
+  const isDisabled = item.classList.toggle('disabled');
+  state.disabled[dayNum + '-' + idx] = isDisabled;
+  btn.textContent = isDisabled ? '↩' : '✕';
+  btn.title = isDisabled ? '復活' : '除外';
+  saveState();
+  recalcTimes(chain);
+}
+
+// ===== Move Item Up/Down =====
+function moveItem(btn, direction) {
+  const item = btn.closest('.tl-item');
+  const timeline = item.closest('.timeline');
+  const items = [...timeline.querySelectorAll('.tl-item')];
+  const idx = items.indexOf(item);
+  const targetIdx = idx + direction;
+  if (targetIdx < 0 || targetIdx >= items.length) return;
+  if (direction === -1) item.previousElementSibling?.before(item) || timeline.prepend(item);
+  else item.nextElementSibling?.after(item);
+  // Reindex
+  timeline.querySelectorAll('.tl-item').forEach((el, i) => { el.dataset.idx = i; });
+  // Swap times between moved item and swapped item
+  const newItems = [...timeline.querySelectorAll('.tl-item')];
+  const swappedIdx = idx; // the item that was displaced
+  const movedItem = newItems[targetIdx];
+  const swappedItem = newItems[swappedIdx];
+  const movedInput = movedItem.querySelector('.time-shift-input');
+  const swappedInput = swappedItem.querySelector('.time-shift-input');
+  if (movedInput && swappedInput) {
+    const tmpTime = movedInput.value;
+    movedInput.value = swappedInput.value;
+    swappedInput.value = tmpTime;
+    movedItem.dataset.baseTime = movedInput.value;
+    swappedItem.dataset.baseTime = swappedInput.value;
+  }
+  item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   saveState();
 }
 
-// ===== Drag and Drop =====
-let draggedItem = null;
-document.addEventListener('dragstart', e => {
-  const item = e.target.closest('.tl-item');
-  if (!item) return;
-  draggedItem = item;
-  item.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
-});
-document.addEventListener('dragend', e => {
-  if (draggedItem) draggedItem.classList.remove('dragging');
-  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
-  draggedItem = null;
-});
-document.addEventListener('dragover', e => {
-  e.preventDefault();
-  const item = e.target.closest('.tl-item');
-  if (!item || item === draggedItem) return;
-  if (draggedItem && item.dataset.chain === draggedItem.dataset.chain) {
-    e.dataTransfer.dropEffect = 'move';
-    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
-    item.classList.add('drag-over');
-  }
-});
-document.addEventListener('drop', e => {
-  e.preventDefault();
-  const target = e.target.closest('.tl-item');
-  if (!target || !draggedItem || target === draggedItem) return;
-  if (target.dataset.chain !== draggedItem.dataset.chain) return;
-  const timeline = target.closest('.timeline');
-  const items = [...timeline.querySelectorAll('.tl-item')];
-  const dragIdx = items.indexOf(draggedItem);
-  const targetIdx = items.indexOf(target);
-  if (dragIdx < targetIdx) target.after(draggedItem);
-  else target.before(draggedItem);
-  // Reindex
-  timeline.querySelectorAll('.tl-item').forEach((item, i) => { item.dataset.idx = i; });
-  target.classList.remove('drag-over');
-  saveState();
-});
+// ===== Recalculate Times (skip disabled) =====
+function recalcTimes(chain) {
+  // No-op for now; time slots are swapped during moveItem
+}
 
 // ===== Backup → Timeline =====
 function showDayPicker(btn) {
@@ -1007,7 +1022,7 @@ function addToTimeline(btn, dayId) {
   newItem.dataset.addedFrom = backupId;
   newItem.innerHTML = `
     <div class="tl-time">
-      <span class="drag-handle">☰</span>
+      <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
       <input type="time" class="time-shift-input" value="00:00" onchange="onTimeChange(this)">
       <span class="tl-label">${name}</span>
       <button class="puzzle-remove" onclick="removeItem(this)">✕</button>
@@ -1029,6 +1044,35 @@ document.addEventListener('click', e => {
     document.querySelectorAll('.day-picker.show').forEach(p => p.classList.remove('show'));
   }
 });
+
+// ===== Hero Image Upload =====
+function uploadHeroImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    applyHeroImage(dataUrl);
+    try { localStorage.setItem('nagoya-trip-hero', dataUrl); } catch(err) {
+      // If too large for localStorage, use object URL instead
+      const objUrl = URL.createObjectURL(file);
+      applyHeroImage(objUrl);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+function applyHeroImage(url) {
+  const hero = document.querySelector('.hero');
+  hero.style.backgroundImage = `url(${url})`;
+  hero.classList.add('has-image');
+}
+function restoreHeroImage() {
+  try {
+    const saved = localStorage.getItem('nagoya-trip-hero');
+    if (saved) applyHeroImage(saved);
+  } catch(e) {}
+}
+restoreHeroImage();
 
 // ===== Init =====
 loadState();
