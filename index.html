@@ -59,6 +59,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .day3 .day-badge{background:var(--day3)}
 .day-header-text h2{font-size:1.3rem;font-weight:900}
 .day-header-text p{font-size:.85rem;color:var(--text-light)}
+.day-reset{margin-left:auto;padding:6px 14px;border:1.5px solid rgba(61,64,91,.15);border-radius:10px;background:#fff;font-size:.75rem;font-weight:600;color:var(--text-light);cursor:pointer;transition:all .15s;flex-shrink:0}
+.day-reset:hover{border-color:var(--accent-warm);color:var(--accent-warm)}
 
 /* Timeline - Travel Route Style */
 .timeline{position:relative;padding-left:28px}
@@ -308,10 +310,11 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <h2>3/23（月）大須商店街 + 桑名</h2>
       <p>品川 → 名古屋 → 大須商店街 → 桑名（はまぐり）</p>
     </div>
+    <button class="day-reset" onclick="resetDay('day1')">🔄 リセット</button>
   </div>
   <div class="timeline" data-day="day1">
 
-    <div class="tl-item" data-chain="day1" data-base-time="10:01" data-idx="0">
+    <div class="tl-item" data-chain="day1" data-base-time="10:01" data-duration="99" data-idx="0">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="10:01" onchange="onTimeChange(this)">
@@ -331,7 +334,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="11:40" data-idx="1">
+    <div class="tl-item" data-chain="day1" data-base-time="11:40" data-duration="80" data-idx="1">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="11:40" onchange="onTimeChange(this)">
@@ -366,7 +369,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="13:00" data-idx="2">
+    <div class="tl-item" data-chain="day1" data-base-time="13:00" data-duration="30" data-idx="2">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)">
@@ -382,7 +385,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="13:30" data-idx="3">
+    <div class="tl-item" data-chain="day1" data-base-time="13:30" data-duration="150" data-idx="3">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="13:30" onchange="onTimeChange(this)">
@@ -406,7 +409,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="16:00" data-idx="4">
+    <div class="tl-item" data-chain="day1" data-base-time="16:00" data-duration="60" data-idx="4">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)">
@@ -424,7 +427,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="17:00" data-idx="5">
+    <div class="tl-item" data-chain="day1" data-base-time="17:00" data-duration="120" data-idx="5">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)">
@@ -463,7 +466,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day1" data-base-time="19:00" data-idx="6">
+    <div class="tl-item" data-chain="day1" data-base-time="19:00" data-duration="0" data-idx="6">
       <div class="tl-time">
         <span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span>
         <input type="time" class="time-shift-input" value="19:00" onchange="onTimeChange(this)">
@@ -529,10 +532,11 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <h2>3/24（火）スパーランド + ヒルトン名古屋</h2>
       <p>桑名 → ナガシマスパーランド → ヒルトン名古屋</p>
     </div>
+    <button class="day-reset" onclick="resetDay('day2')">🔄 リセット</button>
   </div>
   <div class="timeline" data-day="day2">
 
-    <div class="tl-item" data-chain="day2" data-base-time="08:00" data-idx="0">
+    <div class="tl-item" data-chain="day2" data-base-time="08:00" data-duration="65" data-idx="0">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">桑名ホテルC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🧳</span> 桑名ホテル チェックアウト</h3>
@@ -540,7 +544,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="09:05" data-idx="1">
+    <div class="tl-item" data-chain="day2" data-base-time="09:05" data-duration="25" data-idx="1">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="09:05" onchange="onTimeChange(this)"><span class="tl-label">桑名駅前発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 三重交通バス → 長島温泉</h3>
@@ -548,13 +552,14 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         <div class="info-row"><span class="label">料金</span><span class="value">650円/人</span></div>
         <div class="highlight success">開園9:30に間に合う！朝イチが最も空いている。</div>
         <div class="links">
-          <a href="https://mitsui-shopping-park.com/mop/nagashima/access/" target="_blank" class="link-btn transport">バス時刻表</a>
+          <a href="https://www.sanco.co.jp/krs/dep_time_table.php?week=1&dep=1018&arr=1051" target="_blank" class="link-btn transport">三重交通 時刻表</a>
+          <a href="https://www.navitime.co.jp/bus/diagram/timelist?departure=00080655&arrival=00098657&line=00024504" target="_blank" class="link-btn transport">NAVITIME</a>
           <a href="https://www.google.com/maps/dir/%E6%A1%91%E5%90%8D%E9%A7%85/%E9%95%B7%E5%B3%B6%E6%B8%A9%E6%B3%89" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="09:30" data-idx="2">
+    <div class="tl-item" data-chain="day2" data-base-time="09:30" data-duration="450" data-idx="2">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="09:30" onchange="onTimeChange(this)"><span class="tl-label">- 17:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🎢</span> ナガシマスパーランド</h3>
@@ -579,20 +584,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="17:00" data-idx="3">
+    <div class="tl-item" data-chain="day2" data-base-time="17:00" data-duration="60" data-idx="3">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="17:00" onchange="onTimeChange(this)"><span class="tl-label">長島温泉発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚌</span> 名鉄バス → 名古屋直行</h3>
         <div class="info-row"><span class="label">到着</span><span class="value">17:55頃 名鉄バスセンター着</span></div>
         <div class="info-row"><span class="label">料金</span><span class="value">1,400円/人</span></div>
         <div class="links">
-          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス時刻表</a>
+          <a href="https://www.meitetsu-bus.co.jp/express/nagashimaonsen/" target="_blank" class="link-btn transport">名鉄バス 公式</a>
+          <a href="https://www.navitime.co.jp/bus/diagram/timelist?departure=00098657&arrival=00098600&line=00024540" target="_blank" class="link-btn transport">NAVITIME 時刻表</a>
+          <a href="https://www.sanco.co.jp/krs/dep_time_table.php?week=1&dep=1051&arr=1041" target="_blank" class="link-btn transport">三重交通 時刻表</a>
           <a href="https://www.google.com/maps/dir/%E9%95%B7%E5%B3%B6%E6%B8%A9%E6%B3%89/%E5%90%8D%E9%89%84%E3%83%90%E3%82%B9%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" class="link-btn gmap">Googleマップ</a>
         </div>
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="18:00" data-idx="4">
+    <div class="tl-item" data-chain="day2" data-base-time="18:00" data-duration="30" data-idx="4">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトン名古屋CI</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏨</span> ヒルトン名古屋 チェックイン</h3>
@@ -624,7 +631,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="18:30" data-idx="5">
+    <div class="tl-item" data-chain="day2" data-base-time="18:30" data-duration="60" data-idx="5">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:30" onchange="onTimeChange(this)"><span class="tl-label">プール＆サウナ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏊</span> プール(15m温水) + 大浴場 + サウナ</h3>
@@ -633,7 +640,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="19:30" data-idx="6">
+    <div class="tl-item" data-chain="day2" data-base-time="19:30" data-duration="90" data-idx="6">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="19:30" onchange="onTimeChange(this)"><span class="tl-label">- 20:00</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🍸</span> エグゼクティブラウンジ カクテルタイム</h3>
@@ -642,7 +649,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day2" data-base-time="21:00" data-idx="7">
+    <div class="tl-item" data-chain="day2" data-base-time="21:00" data-duration="0" data-idx="7">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="21:00" onchange="onTimeChange(this)"><span class="tl-label">大浴場ナイト</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">♨️</span> 大浴場＆サウナ（ナイト）</h3>
@@ -661,30 +668,31 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <h2>3/25（水）ヒルトン朝活 → 水族館 → 帰京</h2>
       <p>ヒルトン名古屋 → 名古屋港水族館 → 名古屋駅 → 品川</p>
     </div>
+    <button class="day-reset" onclick="resetDay('day3')">🔄 リセット</button>
   </div>
   <div class="timeline" data-day="day3">
 
-    <div class="tl-item" data-chain="day3" data-base-time="06:30" data-idx="0">
+    <div class="tl-item" data-chain="day3" data-base-time="06:30" data-duration="90" data-idx="0">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="06:30" onchange="onTimeChange(this)"><span class="tl-label">朝食</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🍳</span> 朝食（ラウンジ or レストラン）</h3><p>エグゼクティブラウンジ(2F) 7:00〜10:00 or インプレイス3-3(1F) 6:30〜10:00。</p><div class="highlight success">ダイヤモンド会員はレストラン朝食2名無料。80品目以上の豪華ビュッフェ。</div></div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="08:00" data-idx="1">
+    <div class="tl-item" data-chain="day3" data-base-time="08:00" data-duration="120" data-idx="1">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="08:00" onchange="onTimeChange(this)"><span class="tl-label">プール/ジム</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🏊</span> プール / ジム / サウナ</h3><p>7F フィットネス。朝イチで空いてる。</p></div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="10:00" data-idx="2">
+    <div class="tl-item" data-chain="day3" data-base-time="10:00" data-duration="120" data-idx="2">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="10:00" onchange="onTimeChange(this)"><span class="tl-label">ラウンジ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">☕</span> ラウンジ リフレッシュメント</h3><p>2F ラウンジ。軽食・ドリンク・スイーツ（10:00-17:00）。</p></div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="12:00" data-idx="3">
+    <div class="tl-item" data-chain="day3" data-base-time="12:00" data-duration="30" data-idx="3">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="12:00" onchange="onTimeChange(this)"><span class="tl-label">ヒルトンC/O</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card"><h3><span class="icon">🧳</span> ヒルトン名古屋 チェックアウト</h3><p>ダイヤモンド会員はレイトC/O〜15:00可。荷物はベルデスクに預けて身軽に。</p></div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="12:30" data-idx="4">
+    <div class="tl-item" data-chain="day3" data-base-time="12:30" data-duration="30" data-idx="4">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="12:30" onchange="onTimeChange(this)"><span class="tl-label">地下鉄で名古屋港へ</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚇</span> 伏見 → 名古屋港</h3>
@@ -694,7 +702,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="13:00" data-idx="5">
+    <div class="tl-item" data-chain="day3" data-base-time="13:00" data-duration="180" data-idx="5">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="13:00" onchange="onTimeChange(this)"><span class="tl-label">- 15:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🐬</span> 名古屋港水族館</h3>
@@ -713,7 +721,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="16:00" data-idx="6">
+    <div class="tl-item" data-chain="day3" data-base-time="16:00" data-duration="126" data-idx="6">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="16:00" onchange="onTimeChange(this)"><span class="tl-label">- 17:30</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🏙️</span> 名古屋駅周辺（お土産・最後の名古屋めし）</h3>
@@ -727,7 +735,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div class="tl-item" data-chain="day3" data-base-time="18:06" data-idx="7">
+    <div class="tl-item" data-chain="day3" data-base-time="18:06" data-duration="0" data-idx="7">
       <div class="tl-time"><span class="move-btns"><button class="move-btn" onclick="moveItem(this,-1)">▲</button><button class="move-btn" onclick="moveItem(this,1)">▼</button></span><input type="time" class="time-shift-input" value="18:06" onchange="onTimeChange(this)"><span class="tl-label">名古屋発</span><button class="puzzle-remove" onclick="removeItem(this)">✕</button></div>
       <div class="card">
         <h3><span class="icon">🚅</span> のぞみ → 品川</h3>
@@ -976,28 +984,31 @@ function moveItem(btn, direction) {
   else item.nextElementSibling?.after(item);
   // Reindex
   timeline.querySelectorAll('.tl-item').forEach((el, i) => { el.dataset.idx = i; });
-  // Swap times between moved item and swapped item
-  const newItems = [...timeline.querySelectorAll('.tl-item')];
-  const swappedIdx = idx; // the item that was displaced
-  const movedItem = newItems[targetIdx];
-  const swappedItem = newItems[swappedIdx];
-  const movedInput = movedItem.querySelector('.time-shift-input');
-  const swappedInput = swappedItem.querySelector('.time-shift-input');
-  if (movedInput && swappedInput) {
-    const tmpTime = movedInput.value;
-    movedInput.value = swappedInput.value;
-    swappedInput.value = tmpTime;
-    movedItem.dataset.baseTime = movedInput.value;
-    swappedItem.dataset.baseTime = swappedInput.value;
-  }
+  recalcTimes(item.dataset.chain);
   item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   saveState();
 }
 
-// ===== Recalculate Times (skip disabled) =====
+// ===== Recalculate Times =====
 function recalcTimes(chain) {
-  // No-op for now; time slots are swapped during moveItem
+  const timeline = document.querySelector(`.timeline[data-day="${chain}"]`);
+  if (!timeline) return;
+  const items = [...timeline.querySelectorAll('.tl-item')];
+  // Find first non-disabled item to use its time as anchor
+  const firstActive = items.find(el => !el.classList.contains('disabled'));
+  if (!firstActive) return;
+  let currentMinutes = timeToMinutes(firstActive.querySelector('.time-shift-input')?.value || firstActive.dataset.baseTime);
+  items.forEach((el, i) => {
+    const input = el.querySelector('.time-shift-input');
+    if (!input) return;
+    if (el.classList.contains('disabled')) return;
+    input.value = minutesToTime(currentMinutes);
+    const dur = parseInt(el.dataset.duration) || 0;
+    currentMinutes += dur;
+  });
 }
+function timeToMinutes(t) { const [h,m] = t.split(':').map(Number); return h*60+m; }
+function minutesToTime(m) { m = ((m%1440)+1440)%1440; return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
 
 // ===== Backup → Timeline =====
 function showDayPicker(btn) {
@@ -1073,6 +1084,28 @@ function restoreHeroImage() {
   } catch(e) {}
 }
 restoreHeroImage();
+
+// ===== Day Reset =====
+const initialDayHTML = {};
+document.querySelectorAll('.timeline').forEach(tl => {
+  initialDayHTML[tl.dataset.day] = tl.innerHTML;
+});
+function resetDay(dayId) {
+  const tl = document.querySelector(`.timeline[data-day="${dayId}"]`);
+  if (!tl) return;
+  tl.innerHTML = initialDayHTML[dayId];
+  // Clear state for this day
+  const dayNum = dayId.replace('day', '');
+  Object.keys(state.disabled).forEach(k => { if (k.startsWith(dayNum + '-')) delete state.disabled[k]; });
+  Object.keys(state.timeShifts).forEach(k => { if (k === dayId) delete state.timeShifts[k]; });
+  // Remove added items for this day
+  state.addedItems = state.addedItems.filter(a => a.day !== dayId);
+  document.querySelectorAll('.backup-item.added').forEach(bi => {
+    const id = bi.dataset.backupId;
+    if (!state.addedItems.some(a => a.id === id)) bi.classList.remove('added');
+  });
+  saveState();
+}
 
 // ===== Init =====
 loadState();
